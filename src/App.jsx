@@ -3,6 +3,7 @@ import SearchBar from './components/SearchBar.jsx'
 import Chips from './components/Chips.jsx'
 import Ranking from './components/Ranking.jsx'
 import WeightControls from './components/WeightControls.jsx'
+import Catalog from './components/Catalog.jsx'
 import { products, subcategories, brands } from './data/products.js'
 import { rankProducts } from './lib/score.js'
 
@@ -25,6 +26,13 @@ export default function App() {
       (activeBrand === 'Todas' || p.brand === activeBrand)
     )
   }, [selected, activeSubcategory, activeBrand])
+
+  const catalogFiltered = useMemo(() => {
+    return products.filter(p =>
+      (activeSubcategory === 'Todos' || p.subcategory === activeSubcategory) &&
+      (activeBrand === 'Todas' || p.brand === activeBrand)
+    )
+  }, [activeSubcategory, activeBrand])
 
   const ranked = useMemo(() => rankProducts(filtered, weights), [filtered, weights])
 
@@ -127,7 +135,7 @@ export default function App() {
           <div className="howto" id="cómo">
             <h3>Cómo funciona</h3>
             <ol>
-              <li>Buscá productos en la barra superior.</li>
+              <li>Explorá el catálogo y agregá productos a comparar.</li>
               <li>Ajustá las prioridades (calificación, reseñas, precio).</li>
               <li>Mirá el ranking ordenado por tu criterio.</li>
             </ol>
@@ -136,6 +144,12 @@ export default function App() {
 
         <section className="content">
           <Ranking items={ranked} />
+          <Catalog
+            products={catalogFiltered}
+            selectedIds={selectedIds}
+            onAdd={add}
+            onRemove={remove}
+          />
         </section>
       </main>
 
