@@ -52,8 +52,11 @@ export default function App() {
       <header className="site-header">
         <div className="container header-row">
           <a href="/" className="brand">
-            <span className="brand-mark">t</span>
-            <span className="brand-name">tubelleza</span>
+            <span className="brand-mark">R</span>
+            <span className="brand-name">
+              <span className="brand-name-mark">ROMA</span>
+              <span className="brand-name-italic">beauty</span>
+            </span>
           </a>
           {selectedIds.length > 0 && (
             <a href="#comparar" className="nav-cta">
@@ -65,9 +68,9 @@ export default function App() {
 
       <section className="hero">
         <div className="container hero-inner">
-          <div className="hero-eyebrow">{products.length} productos · 3 marcas argentinas</div>
+          <div className="hero-eyebrow">Cuidado capilar profesional · {products.length} productos seleccionados</div>
           <h1 className="hero-title">
-            Productos para tu pelo,<br /><em>elegidos</em> con criterio.
+            La belleza, en su forma <em>más cuidada</em>.
           </h1>
 
           <div className="search-shell">
@@ -167,13 +170,18 @@ export default function App() {
         <div className="container footer-inner">
           <div>
             <div className="brand">
-              <span className="brand-mark">t</span>
-              <span className="brand-name">tubelleza</span>
+              <span className="brand-mark">R</span>
+              <span className="brand-name">
+                <span className="brand-name-mark">ROMA</span>
+                <span className="brand-name-italic">beauty</span>
+              </span>
             </div>
-            <p className="footer-tag">Productos profesionales para el pelo · Argentina</p>
+            <p className="footer-tag">Belleza capilar profesional · Argentina</p>
           </div>
           <p className="footer-meta">
-            © {new Date().getFullYear()} tubelleza · Imágenes oficiales de lapuissance.com.ar, fidelite.com.ar y opcionsalon.com.ar · Precios mayo 2026
+            © {new Date().getFullYear()} ROMAbeauty<br />
+            Imágenes oficiales de lapuissance.com.ar, fidelite.com.ar y opcionsalon.com.ar<br />
+            Precios actualizados mayo 2026
           </p>
         </div>
       </footer>
