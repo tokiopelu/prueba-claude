@@ -4,6 +4,7 @@ import Chips from './components/Chips.jsx'
 import Ranking from './components/Ranking.jsx'
 import WeightControls from './components/WeightControls.jsx'
 import Catalog from './components/Catalog.jsx'
+import Cursor from './components/Cursor.jsx'
 import { products, subcategories, brands } from './data/products.js'
 import { rankProducts } from './lib/score.js'
 
@@ -48,6 +49,7 @@ export default function App() {
 
   return (
     <div className="app">
+      <Cursor />
       <header className="site-header">
         <div className="container header-row">
           <a href="/" className="brand">

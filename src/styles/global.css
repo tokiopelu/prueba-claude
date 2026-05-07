@@ -28,6 +28,51 @@ ul, ol { list-style: none; }
 
 ::selection { background: var(--accent); color: var(--accent-ink); }
 
+/* ---------- Reveal on scroll ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.45s ease-out, transform 0.45s ease-out;
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* ---------- Custom cursor ---------- */
+.cursor-dot {
+  position: fixed;
+  top: 0; left: 0;
+  width: 18px;
+  height: 18px;
+  margin: -9px 0 0 -9px;
+  background: #fff;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transition: width 0.18s ease, height 0.18s ease, margin 0.18s ease;
+  display: none;
+}
+.cursor-dot.is-hover {
+  width: 42px;
+  height: 42px;
+  margin: -21px 0 0 -21px;
+}
+@media (hover: hover) and (pointer: fine) {
+  body.has-custom-cursor { cursor: none; }
+  body.has-custom-cursor a,
+  body.has-custom-cursor button,
+  body.has-custom-cursor input,
+  body.has-custom-cursor label,
+  body.has-custom-cursor [role="button"] { cursor: none; }
+  .cursor-dot { display: block; }
+}
+
 .container {
   max-width: 1280px;
   margin: 0 auto;
@@ -806,6 +851,20 @@ ul, ol { list-style: none; }
   flex-direction: column;
   transition: none;
   position: relative;
+}
+.cat-index {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  color: var(--ink);
+  background: var(--bg);
+  padding: 2px 6px;
+  border: 1px solid var(--ink);
 }
 .cat-card:hover { background: #fafafa; }
 .cat-card.is-selected { background: var(--accent); }
