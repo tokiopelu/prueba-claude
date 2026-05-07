@@ -51,7 +51,13 @@
       "Bash(curl -sI -H \"Referer: https://tubelleza.vercel.app/\" \"https://lapuissance.com.ar/cdn/shop/files/01_BondingMask_ExtraCellPlex_Step3.jpg?v=1774896161&width=1500\")",
       "Bash(git commit -m 'Add 31 La Puissance products from official lapuissance.com.ar *)",
       "Bash(git commit -m 'Lead with La Puissance and simplify the page for a sales-first feel *)",
-      "Bash(git commit -m 'Rebrand to ROMAbeauty with elegant Italian-luxury palette *)"
+      "Bash(git commit -m 'Rebrand to ROMAbeauty with elegant Italian-luxury palette *)",
+      "Bash(vercel domains *)",
+      "Bash(vercel project *)",
+      "Bash(git commit -m 'Add rotating offers top bar and rebuild footer as a four-column system *)",
+      "WebFetch(domain:www.tomassa.com.ar)",
+      "Bash(curl -sL -A \"Mozilla/5.0\" \"https://www.tomassa.com.ar/\" -o /tmp/tom.html)",
+      "Bash(git commit -m 'Adopt Tomassa-style sales mechanics on top of the elegant ROMAbeauty wordmark *)"
     ]
   }
 }

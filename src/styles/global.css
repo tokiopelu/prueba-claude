@@ -35,8 +35,15 @@
   --shadow-lg: 0 4px 12px rgba(26, 22, 20, 0.05), 0 24px 48px rgba(26, 22, 20, 0.08);
 
   --serif: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
-  --sans: 'Geist', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --sans: 'Onest', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --mono: 'Geist Mono', 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* shop accents (Tomassa-inspired) */
+  --sale: #ef6777;
+  --sale-deep: #c43d4f;
+  --sale-soft: #fde2e6;
+  --offer-green: #4ab25a;
+  --offer-green-soft: #e3f2e6;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -86,65 +93,47 @@ ul, ol { list-style: none; }
 /* Cursor component remains in JSX but we hide it; system cursor is back. */
 .cursor-dot { display: none !important; }
 
-/* ---------- Top offers bar ---------- */
+/* ---------- Top offers marquee ---------- */
 .top-bar {
   background: var(--wine);
   color: var(--bg);
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  position: relative;
+}
+.top-bar-track {
+  display: flex;
+  width: max-content;
+  animation: tomassa-marquee 60s linear infinite;
+  padding: 11px 0;
+}
+.top-bar:hover .top-bar-track { animation-play-state: paused; }
+.top-bar-msg {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--sans);
+  font-weight: 500;
   font-size: 13px;
   letter-spacing: 0.01em;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-.top-bar-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  height: 38px;
-}
-.top-bar-arrow {
-  width: 28px; height: 28px;
-  background: transparent;
   color: var(--bg);
-  font-family: var(--serif);
-  font-size: 22px;
-  line-height: 1;
-  border-radius: 50%;
-  opacity: 0.6;
-  transition: opacity 0.15s, background 0.15s;
-}
-.top-bar-arrow:hover { opacity: 1; background: rgba(255, 255, 255, 0.08); }
-.top-bar-stage {
-  position: relative;
-  flex: 1;
-  max-width: 720px;
-  height: 22px;
-  text-align: center;
-}
-.top-bar-msg {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 14px;
-  color: var(--bg);
-  opacity: 0;
-  transform: translateY(4px);
-  transition: opacity 0.45s ease, transform 0.45s ease;
-  pointer-events: none;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding: 0 8px;
+  padding: 0 22px;
 }
-.top-bar-msg.is-active {
-  opacity: 1;
-  transform: none;
+.top-bar-sep {
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.55);
+}
+@keyframes tomassa-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .top-bar-track { animation: none; }
 }
 @media (max-width: 640px) {
-  .top-bar-row { height: 34px; gap: 6px; }
-  .top-bar-msg { font-size: 12px; }
+  .top-bar-track { animation-duration: 45s; padding: 9px 0; }
+  .top-bar-msg { font-size: 12px; padding: 0 16px; }
 }
 
 /* ---------- Header ---------- */
@@ -1029,6 +1018,43 @@ ul, ol { list-style: none; }
   padding: 3px 8px;
   border-radius: 999px;
 }
+.cat-discount {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 3;
+  background: var(--sale);
+  color: #fff;
+  font-family: var(--sans);
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: -0.01em;
+  padding: 5px 11px;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(239, 103, 119, 0.32);
+  animation: discount-pulse 2.4s ease-in-out infinite;
+}
+@keyframes discount-pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.04); }
+}
+.cat-urgency {
+  position: absolute;
+  top: 50px;
+  left: 12px;
+  z-index: 3;
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 4px 10px;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+.cat-card:not(.is-selected) .cat-urgency { background: var(--ink); }
+.cat-discount + .cat-urgency { top: 50px; }
+.cat-card:not(.is-selected):not(:has(.cat-discount)) .cat-urgency { top: 12px; }
 .cat-img {
   position: relative;
   aspect-ratio: 1 / 1;
@@ -1086,46 +1112,70 @@ ul, ol { list-style: none; }
   color: var(--ink);
   min-height: 40px;
 }
+.cat-pricing {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: 4px;
+}
+.cat-price {
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+.cat-price-was {
+  font-size: 13px;
+  color: var(--ink-mute);
+  text-decoration: line-through;
+  font-variant-numeric: tabular-nums;
+}
+.cat-installments {
+  font-size: 12px;
+  color: var(--offer-green);
+  font-weight: 600;
+  margin-top: 2px;
+}
 .cat-meta {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   font-size: 12px;
   color: var(--ink-soft);
+  margin-top: 4px;
 }
 .cat-rating { color: var(--gold); font-weight: 600; }
+.cat-rating-count { color: var(--ink-mute); font-weight: 400; margin-left: 2px; }
 .cat-foot {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-top: auto;
+  justify-content: stretch;
+  margin-top: 12px;
   padding-top: 12px;
   border-top: 1px solid var(--line-soft);
   gap: 8px;
 }
-.cat-price {
-  font-weight: 700;
-  font-size: 18px;
-  color: var(--ink);
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -0.015em;
-}
 .cat-btn {
+  flex: 1;
   border: 0;
   background: var(--ink);
   color: var(--bg-card);
-  padding: 8px 14px;
+  padding: 10px 16px;
   border-radius: 999px;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0;
-  transition: background 0.15s, color 0.15s;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  transition: background 0.15s, color 0.15s, transform 0.1s;
 }
 .cat-btn:hover { background: var(--accent); color: #fff; }
+.cat-btn:active { transform: scale(0.97); }
 .cat-btn--remove {
-  background: var(--sage-soft);
-  color: var(--sage);
+  background: var(--accent-tint);
+  color: var(--accent-deep);
 }
-.cat-btn--remove:hover { background: var(--sage); color: #fff; }
+.cat-btn--remove:hover { background: var(--accent); color: #fff; }
 
 /* ---------- Footer ---------- */
 .site-footer {

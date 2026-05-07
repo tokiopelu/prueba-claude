@@ -1,7 +1,13 @@
 import { useReveal } from '../lib/reveal.js'
+import { productMeta } from '../lib/meta.js'
+
+function formatARS(n) {
+  return n.toLocaleString('es-AR')
+}
 
 function CatalogCard({ p, index, total, isSelected, onAdd, onRemove }) {
   const ref = useReveal()
+  const meta = productMeta(p)
   const indexLabel = String(index + 1).padStart(2, '0')
   const totalLabel = String(total).padStart(2, '0')
   return (
@@ -10,6 +16,12 @@ function CatalogCard({ p, index, total, isSelected, onAdd, onRemove }) {
       className={'cat-card reveal' + (isSelected ? ' is-selected' : '')}
     >
       <span className="cat-index">{indexLabel} / {totalLabel}</span>
+      {meta.discount > 0 && (
+        <span className="cat-discount">−{meta.discount}%</span>
+      )}
+      {meta.urgency && (
+        <span className="cat-urgency">{meta.urgency}</span>
+      )}
       <div className="cat-img">
         {p.imageUrl
           ? <img src={p.imageUrl} alt={p.name} loading="lazy" />
@@ -19,19 +31,40 @@ function CatalogCard({ p, index, total, isSelected, onAdd, onRemove }) {
       <div className="cat-body">
         <div className="cat-line">{p.line} · {p.subcategory}</div>
         <h3 className="cat-name">{p.name}</h3>
+
+        <div className="cat-pricing">
+          {meta.discount > 0 ? (
+            <>
+              <span className="cat-price-was">${formatARS(p.price)}</span>
+              <span className="cat-price">${formatARS(meta.finalPrice)}</span>
+            </>
+          ) : (
+            <span className="cat-price">${formatARS(p.price)}</span>
+          )}
+        </div>
+        <div className="cat-installments">
+          {meta.installmentMonths}× ${formatARS(meta.installmentValue)} sin interés
+        </div>
+
         <div className="cat-meta">
-          <span className="cat-rating">★ {p.rating.toFixed(1)}</span>
+          <span className="cat-rating">★ {p.rating.toFixed(1)} <span className="cat-rating-count">({p.reviews.toLocaleString('es-AR')})</span></span>
           <span className="cat-size">{p.characteristics?.size}</span>
         </div>
+
         <div className="cat-foot">
-          <span className="cat-price">${p.price.toLocaleString('es-AR')}</span>
           {isSelected ? (
-            <button className="cat-btn cat-btn--remove" onClick={() => onRemove(p.id)}>
-              ✓ Agregado
+            <button
+              className="cat-btn cat-btn--remove"
+              onClick={() => onRemove(p.id)}
+            >
+              ✓ En comparación
             </button>
           ) : (
-            <button className="cat-btn" onClick={() => onAdd(p.id)}>
-              Agregar
+            <button
+              className="cat-btn"
+              onClick={() => onAdd(p.id)}
+            >
+              Comprar
             </button>
           )}
         </div>
@@ -40,7 +73,7 @@ function CatalogCard({ p, index, total, isSelected, onAdd, onRemove }) {
   )
 }
 
-export default function Catalog({ products, selectedIds, onAdd, onRemove }) {
+export default function Catalog({ products, selectedIds, onAdd, onRemove, title, subtitle }) {
   if (products.length === 0) {
     return (
       <div className="catalog-empty">
@@ -52,9 +85,11 @@ export default function Catalog({ products, selectedIds, onAdd, onRemove }) {
   return (
     <div className="catalog">
       <div className="catalog-head">
-        <h2>Catálogo · {products.length} productos</h2>
+        <h2>{title || `Catálogo · ${products.length} productos`}</h2>
         <p className="catalog-sub">
-          Tocá <strong>Agregar</strong> para sumarlo a tu comparación.
+          {subtitle || (
+            <>Tocá <strong>Comprar</strong> para sumarlo a tu comparación.</>
+          )}
         </p>
       </div>
 

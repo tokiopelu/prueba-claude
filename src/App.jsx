@@ -7,6 +7,7 @@ import Catalog from './components/Catalog.jsx'
 import TopBar from './components/TopBar.jsx'
 import { products, subcategories, brands } from './data/products.js'
 import { rankProducts } from './lib/score.js'
+import { productMeta } from './lib/meta.js'
 
 export default function App() {
   const [selectedIds, setSelectedIds] = useState([])
@@ -33,6 +34,15 @@ export default function App() {
       (activeBrand === 'Todas' || p.brand === activeBrand)
     )
   }, [activeSubcategory, activeBrand])
+
+  const offersFeed = useMemo(() => {
+    return catalogFiltered
+      .map(p => ({ p, m: productMeta(p) }))
+      .filter(x => x.m.discount > 0)
+      .sort((a, b) => b.m.discount - a.m.discount)
+      .slice(0, 8)
+      .map(x => x.p)
+  }, [catalogFiltered])
 
   const ranked = useMemo(() => rankProducts(filtered, weights), [filtered, weights])
 
@@ -126,11 +136,23 @@ export default function App() {
       </section>
 
       <main className="container main-stack">
+        {offersFeed.length > 0 && (
+          <Catalog
+            products={offersFeed}
+            selectedIds={selectedIds}
+            onAdd={add}
+            onRemove={remove}
+            title={`🔥 Ofertas · ${offersFeed.length} productos en promo`}
+            subtitle={<>Promos por tiempo limitado. <strong>¡No te lo pierdas!</strong></>}
+          />
+        )}
+
         <Catalog
           products={catalogFiltered}
           selectedIds={selectedIds}
           onAdd={add}
           onRemove={remove}
+          title={`🛍️ Catálogo · ${catalogFiltered.length} productos`}
         />
 
         {showRanking && (
