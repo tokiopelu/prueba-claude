@@ -25,9 +25,26 @@ function getObserver() {
 export function useReveal() {
   const ref = useRef(null)
   useEffect(() => {
-    const obs = getObserver()
     const node = ref.current
-    if (!obs || !node) return
+    if (!node) return
+
+    // Already in viewport at mount → reveal immediately so filter changes don't
+    // re-fade the visible row. The IntersectionObserver fires async (next frame),
+    // which causes a 1-frame flash for re-mounted in-view elements.
+    const rect = node.getBoundingClientRect()
+    const inViewport =
+      rect.top < window.innerHeight && rect.bottom > 0 &&
+      rect.left < window.innerWidth && rect.right > 0
+    if (inViewport) {
+      node.classList.add('is-visible')
+      return
+    }
+
+    const obs = getObserver()
+    if (!obs) {
+      node.classList.add('is-visible')
+      return
+    }
     obs.observe(node)
     return () => obs.unobserve(node)
   }, [])

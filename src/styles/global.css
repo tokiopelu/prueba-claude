@@ -63,13 +63,26 @@ ul, ol { list-style: none; }
   height: 42px;
   margin: -21px 0 0 -21px;
 }
+.cursor-dot.is-text {
+  width: 4px;
+  height: 4px;
+  margin: -2px 0 0 -2px;
+  opacity: 0.5;
+}
 @media (hover: hover) and (pointer: fine) {
   body.has-custom-cursor { cursor: none; }
   body.has-custom-cursor a,
   body.has-custom-cursor button,
-  body.has-custom-cursor input,
   body.has-custom-cursor label,
   body.has-custom-cursor [role="button"] { cursor: none; }
+  body.has-custom-cursor input,
+  body.has-custom-cursor textarea,
+  body.has-custom-cursor [contenteditable="true"] { cursor: text; }
+  body.has-custom-cursor input[type="checkbox"],
+  body.has-custom-cursor input[type="radio"],
+  body.has-custom-cursor input[type="button"],
+  body.has-custom-cursor input[type="submit"],
+  body.has-custom-cursor input[type="range"] { cursor: none; }
   .cursor-dot { display: block; }
 }
 
