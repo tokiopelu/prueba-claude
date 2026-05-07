@@ -1,11 +1,15 @@
-// Hair-only catalog: Fidelité + Opción + La Puissance (Argentine pro hair brands)
+// Hair-only catalog: La Puissance + Fidelité + Opción (Argentine pro hair brands)
 // Images from each brand's official site / Shopify CDN.
 // Prices in ARS sourced (May 2026):
+//   La Puissance → official lapuissance.com.ar (Shopify retail prices)
 //   Fidelité     → BM Distribuidora (bmdistribuidora.com.ar), Stylist Factory, VM Cosmética
 //   Opción       → Simple Insumos (simpleinsumos.mitiendanube.com), Burbujas Perfumerías, Casa Roma
-//   La Puissance → official lapuissance.com.ar (Shopify retail prices)
 
-export const products = [
+// Display order. Lower = first.
+const BRAND_ORDER = { 'La Puissance': 0, 'Fidelité': 1, 'Opción': 2 }
+const brandRank = b => (BRAND_ORDER[b] ?? 99)
+
+const rawProducts = [
   // ---------------- FIDELITÉ — LÍNEA ARGÁN ----------------
   {
     id: 'fa01',
@@ -2416,6 +2420,11 @@ export const products = [
     cons: ['Hay que probar dosis']
   }
 ]
+
+// Sort by brand priority so La Puissance leads the catalog and the brand filter.
+export const products = [...rawProducts].sort(
+  (a, b) => brandRank(a.brand) - brandRank(b.brand)
+)
 
 export const subcategories = [...new Set(products.map(p => p.subcategory))]
 export const brands = [...new Set(products.map(p => p.brand))]

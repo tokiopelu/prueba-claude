@@ -7,13 +7,12 @@ import Catalog from './components/Catalog.jsx'
 import { products, subcategories, brands } from './data/products.js'
 import { rankProducts } from './lib/score.js'
 
-const STARTERS = ['fc05', 'op02', 'fa05']
-
 export default function App() {
-  const [selectedIds, setSelectedIds] = useState(STARTERS)
+  const [selectedIds, setSelectedIds] = useState([])
   const [activeSubcategory, setActiveSubcategory] = useState('Todos')
   const [activeBrand, setActiveBrand] = useState('Todas')
   const [weights, setWeights] = useState({ rating: 50, reviews: 30, price: 20 })
+  const [showWeights, setShowWeights] = useState(false)
 
   const selected = useMemo(
     () => selectedIds.map(id => products.find(p => p.id === id)).filter(Boolean),
@@ -46,6 +45,8 @@ export default function App() {
     setSelectedIds([])
   }
 
+  const showRanking = ranked.length > 0
+
   return (
     <div className="app">
       <header className="site-header">
@@ -54,27 +55,22 @@ export default function App() {
             <span className="brand-mark">t</span>
             <span className="brand-name">tubelleza</span>
           </a>
-          <nav className="nav">
-            <a href="#comparador">Comparador</a>
-            <a href="#cómo">Cómo funciona</a>
-            <a href="#categorías">Categorías</a>
-          </nav>
+          {selectedIds.length > 0 && (
+            <a href="#comparar" className="nav-cta">
+              Ver comparación · {selectedIds.length}
+            </a>
+          )}
         </div>
       </header>
 
       <section className="hero">
         <div className="container hero-inner">
-          <div className="hero-eyebrow">Fidelité × Opción · 49 productos</div>
+          <div className="hero-eyebrow">{products.length} productos · 3 marcas argentinas</div>
           <h1 className="hero-title">
-            El cuidado <em>ideal</em> para tu&nbsp;pelo.
+            Productos para tu pelo,<br /><em>elegidos</em> con criterio.
           </h1>
-          <p className="hero-sub">
-            Catálogo curado con productos reales de <strong>Fidelité</strong> y{' '}
-            <strong>Opción</strong>. Compará características, precios y rating —
-            armá tu ranking según tus prioridades.
-          </p>
 
-          <div id="comparador" className="search-shell">
+          <div className="search-shell">
             <SearchBar
               products={products}
               selectedIds={selectedIds}
@@ -82,16 +78,13 @@ export default function App() {
             />
           </div>
 
-          <Chips items={selected} onRemove={remove} onClear={clear} />
-
           <div className="filter-section">
-            <div className="filter-label">Marca</div>
             <div className="filter-bar">
               <button
                 className={'pill pill--brand' + (activeBrand === 'Todas' ? ' is-on' : '')}
                 onClick={() => setActiveBrand('Todas')}
               >
-                Todas
+                Todas las marcas
               </button>
               {brands.map(b => (
                 <button
@@ -105,8 +98,7 @@ export default function App() {
             </div>
           </div>
 
-          <div className="filter-section">
-            <div className="filter-label">Tipo de producto</div>
+          <div className="filter-section filter-section--types">
             <div className="filter-bar">
               <button
                 className={'pill' + (activeSubcategory === 'Todos' ? ' is-on' : '')}
@@ -128,30 +120,48 @@ export default function App() {
         </div>
       </section>
 
-      <main className="container main-grid">
-        <aside className="sidebar">
-          <WeightControls weights={weights} onChange={setWeights} />
+      <main className="container main-stack">
+        <Catalog
+          products={catalogFiltered}
+          selectedIds={selectedIds}
+          onAdd={add}
+          onRemove={remove}
+        />
 
-          <div className="howto" id="cómo">
-            <h3>Cómo funciona</h3>
-            <ol>
-              <li>Explorá el catálogo y agregá productos a comparar.</li>
-              <li>Ajustá las prioridades (calificación, reseñas, precio).</li>
-              <li>Mirá el ranking ordenado por tu criterio.</li>
-            </ol>
-          </div>
-        </aside>
+        {showRanking && (
+          <section id="comparar" className="ranking-section">
+            <div className="ranking-section-head">
+              <div>
+                <Chips items={selected} onRemove={remove} onClear={clear} />
+              </div>
+              <button
+                className="link-btn"
+                onClick={() => setShowWeights(s => !s)}
+              >
+                {showWeights ? '✕ Cerrar prioridades' : '⚙ Ajustar prioridades'}
+              </button>
+            </div>
 
-        <section className="content">
-          <Ranking items={ranked} />
-          <Catalog
-            products={catalogFiltered}
-            selectedIds={selectedIds}
-            onAdd={add}
-            onRemove={remove}
-          />
-        </section>
+            {showWeights && (
+              <div className="weights-inline">
+                <WeightControls weights={weights} onChange={setWeights} />
+              </div>
+            )}
+
+            <Ranking items={ranked} />
+          </section>
+        )}
       </main>
+
+      {selectedIds.length > 0 && (
+        <a href="#comparar" className="compare-bar">
+          <span className="compare-bar-count">{selectedIds.length}</span>
+          <span className="compare-bar-text">
+            {selectedIds.length === 1 ? 'producto seleccionado' : 'productos seleccionados'}
+          </span>
+          <span className="compare-bar-action">Ver comparación →</span>
+        </a>
+      )}
 
       <footer className="site-footer">
         <div className="container footer-inner">
@@ -160,10 +170,10 @@ export default function App() {
               <span className="brand-mark">t</span>
               <span className="brand-name">tubelleza</span>
             </div>
-            <p className="footer-tag">Tu comparador de productos para el pelo.</p>
+            <p className="footer-tag">Productos profesionales para el pelo · Argentina</p>
           </div>
           <p className="footer-meta">
-            © {new Date().getFullYear()} tubelleza · Imágenes y fichas: fidelite.com.ar y opcionsalon.com.ar · Precios actualizados (mayo 2026) desde BM Distribuidora, Simple Insumos y otros retailers AR
+            © {new Date().getFullYear()} tubelleza · Imágenes oficiales de lapuissance.com.ar, fidelite.com.ar y opcionsalon.com.ar · Precios mayo 2026
           </p>
         </div>
       </footer>
