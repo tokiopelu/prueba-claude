@@ -191,6 +191,15 @@ ul, ol { margin: 0; padding: 0; }
   display: grid;
   place-items: center;
   font-size: 22px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.search-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #fff;
+  padding: 2px;
 }
 .search-name {
   font-weight: 500;
@@ -251,6 +260,13 @@ ul, ol { margin: 0; padding: 0; }
   display: grid;
   place-items: center;
   font-size: 13px;
+  overflow: hidden;
+}
+.chip-dot img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #fff;
 }
 .chip-x {
   width: 20px; height: 20px;
@@ -274,12 +290,33 @@ ul, ol { margin: 0; padding: 0; }
 }
 
 /* ---------- Filter pills ---------- */
+.filter-section {
+  margin-top: 18px;
+}
+.filter-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-bottom: 8px;
+  text-align: center;
+}
 .filter-bar {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 8px;
-  margin-top: 20px;
+}
+.pill--brand {
+  background: #fff;
+  border-color: var(--rose);
+  color: var(--rose-deep);
+}
+.pill--brand.is-on {
+  background: var(--rose-deep);
+  border-color: var(--rose-deep);
+  color: #fff;
 }
 .pill {
   border: 1px solid var(--line);
@@ -453,6 +490,15 @@ ul, ol { margin: 0; padding: 0; }
   place-items: center;
   font-size: 56px;
   aspect-ratio: 1;
+  overflow: hidden;
+  position: relative;
+}
+.rank-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #fff;
+  padding: 8px;
 }
 
 .rank-body { display: grid; gap: 10px; }

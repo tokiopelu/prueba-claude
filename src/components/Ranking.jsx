@@ -90,7 +90,9 @@ export default function Ranking({ items }) {
               {i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `#${i + 1}`}
             </div>
             <div className="rank-img" style={{ background: p.color }}>
-              <span>{p.image}</span>
+              {p.imageUrl
+                ? <img src={p.imageUrl} alt={p.name} loading="lazy" />
+                : <span>{p.image}</span>}
             </div>
             <div className="rank-body">
               <div className="rank-top">

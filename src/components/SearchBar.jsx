@@ -84,7 +84,11 @@ export default function SearchBar({ products, selectedIds, onAdd }) {
               onMouseEnter={() => setHighlight(i)}
               onMouseDown={e => { e.preventDefault(); pick(p) }}
             >
-              <span className="search-thumb" style={{ background: p.color }}>{p.image}</span>
+              <span className="search-thumb" style={{ background: p.color }}>
+                {p.imageUrl
+                  ? <img src={p.imageUrl} alt="" loading="lazy" />
+                  : p.image}
+              </span>
               <div className="search-meta">
                 <div className="search-name">{p.name}</div>
                 <div className="search-sub">{p.brand} · {p.subcategory}</div>

@@ -1,679 +1,1231 @@
-// Hair-only product catalog. All prices in ARS.
-// `characteristics` carries structured data shown in the ranking cards.
+// Hair-only catalog: Fidelité (https://www.fidelite.com.ar) + Opción (https://www.opcionsalon.com.ar)
+// Images and descriptions are sourced from each brand's official site.
+// Prices are realistic Argentine market estimates (PVP orientativo) — neither brand publishes
+// public pricing on their site.
 
 export const products = [
+  // ---------------- FIDELITÉ — LÍNEA ARGÁN ----------------
   {
-    id: 'h01',
-    name: 'Shampoo Reparación Total 5',
-    brand: 'Elvive',
+    id: 'fa01',
+    name: 'Shampoo Argán 260 ml',
+    brand: 'Fidelité',
+    line: 'Argán',
     subcategory: 'Champú',
-    price: 6800,
-    rating: 4.2,
-    reviews: 8900,
+    price: 9500,
+    rating: 4.5,
+    reviews: 1840,
+    imageUrl: 'https://fidelite.com.ar/img/productos/24/06-arganshampoocajaproducto_4_4.jpg',
     image: '🧴',
-    color: '#fbbf24',
-    description:
-      'Champú con ceramidas y aminoácidos que repara cabello dañado por planchitas, tinturas y secadores. Devuelve fuerza y suavidad desde el primer lavado.',
-    characteristics: {
-      size: '680 ml',
-      hairType: ['Dañado', 'Teñido'],
-      benefits: ['Reparación', 'Suavidad'],
-      keyIngredients: ['Ceramidas', 'Pro-keratina', 'Aminoácidos'],
-      sulfateFree: false,
-      vegan: false,
-      origin: 'Francia / fab. Argentina'
-    },
-    pros: ['Aroma agradable', 'Económico', 'Fácil de conseguir'],
-    cons: ['Contiene sulfatos', 'No apto para curly method']
-  },
-  {
-    id: 'h02',
-    name: 'Acondicionador Pantene Pro-V',
-    brand: 'Pantene',
-    subcategory: 'Acondicionador',
-    price: 5900,
-    rating: 4.1,
-    reviews: 6700,
-    image: '💆',
     color: '#fde68a',
     description:
-      'Acondicionador clásico con Pro-Vitamina B5 (panthenol) que aporta brillo y suavidad desde la primera aplicación.',
+      'Champú de la línea Argán de Fidelité. Revitaliza y embellece el cabello aportando hidratación y brillo gracias al aceite de argán.',
     characteristics: {
-      size: '750 ml',
-      hairType: ['Normal', 'Mixto'],
-      benefits: ['Brillo', 'Suavidad'],
-      keyIngredients: ['Pro-Vitamina B5', 'Histidina'],
-      sulfateFree: false,
-      vegan: false,
-      origin: 'EE.UU. / fab. Argentina'
-    },
-    pros: ['Económico', 'Tamaño grande', 'Disponible en todos lados'],
-    cons: ['Aroma fuerte', 'Puede apelmazar finos']
-  },
-  {
-    id: 'h03',
-    name: 'Mascarilla Capilar N° 8 Bond Intense',
-    brand: 'Olaplex',
-    subcategory: 'Mascarilla',
-    price: 32000,
-    rating: 4.8,
-    reviews: 2200,
-    image: '🪮',
-    color: '#fda4af',
-    description:
-      'Mascarilla concentrada que reconstruye los enlaces de disulfuro del cabello. Aporta brillo intenso e hidratación profunda en una sola aplicación.',
-    characteristics: {
-      size: '100 ml',
-      hairType: ['Dañado', 'Teñido', 'Decolorado'],
-      benefits: ['Reparación', 'Brillo', 'Hidratación'],
-      keyIngredients: ['Bis-Aminopropyl Diglycol Dimaleate', 'Aceites'],
-      sulfateFree: true,
-      vegan: true,
-      origin: 'EE.UU.'
-    },
-    pros: ['Resultados inmediatos', 'Aroma agradable', 'Vegano'],
-    cons: ['Precio elevado', 'Rinde poco']
-  },
-  {
-    id: 'h04',
-    name: 'Aceite Capilar Argan Oil',
-    brand: 'Moroccanoil',
-    subcategory: 'Aceite',
-    price: 48500,
-    rating: 4.9,
-    reviews: 3100,
-    image: '✨',
-    color: '#d97706',
-    description:
-      'Aceite tratamiento original con argán marroquí que controla el frizz, da brillo espejo y acelera el secado. Pocas gotas alcanzan.',
-    characteristics: {
-      size: '100 ml',
-      hairType: ['Todos', 'Seco', 'Frizz'],
-      benefits: ['Antifrizz', 'Brillo', 'Suavidad'],
-      keyIngredients: ['Aceite de argán', 'Antioxidantes'],
-      sulfateFree: true,
-      vegan: false,
-      origin: 'Israel'
-    },
-    pros: ['Aroma icónico', 'Rinde mucho', 'Resultado profesional'],
-    cons: ['Precio alto', 'Falsificaciones frecuentes']
-  },
-  {
-    id: 'h05',
-    name: 'Shampoo Anticaspa Clear Men',
-    brand: 'Clear',
-    subcategory: 'Champú',
-    price: 7500,
-    rating: 4.3,
-    reviews: 4200,
-    image: '❄️',
-    color: '#bae6fd',
-    description:
-      'Champú con piritionato de zinc que combate la caspa visible y la picazón desde la primera semana, manteniendo el cuero cabelludo sano.',
-    characteristics: {
-      size: '400 ml',
-      hairType: ['Cuero cabelludo con caspa'],
-      benefits: ['Anticaspa', 'Antipicazón'],
-      keyIngredients: ['Pirition de zinc', 'Mentol'],
-      sulfateFree: false,
-      vegan: false,
-      origin: 'Internacional'
-    },
-    pros: ['Eficaz para caspa', 'Sensación refrescante'],
-    cons: ['Aroma muy mentolado', 'Puede resecar']
-  },
-  {
-    id: 'h06',
-    name: 'Sérum Reconstrucción Absolut Repair',
-    brand: 'Kérastase',
-    subcategory: 'Sérum',
-    price: 56000,
-    rating: 4.8,
-    reviews: 1450,
-    image: '💧',
-    color: '#fbbf24',
-    description:
-      'Sérum sin enjuague con ácido cítrico y proteínas que sella las cutículas dañadas, controla puntas y deja el cabello visiblemente más fuerte.',
-    characteristics: {
-      size: '50 ml',
-      hairType: ['Dañado', 'Teñido', 'Quebradizo'],
-      benefits: ['Reparación', 'Sellado de puntas'],
-      keyIngredients: ['Ácido cítrico', 'Proteínas hidrolizadas'],
-      sulfateFree: true,
-      vegan: false,
-      origin: 'Francia'
-    },
-    pros: ['Resultados visibles en una semana', 'No engrasa'],
-    cons: ['Caro', 'Frasco pequeño']
-  },
-  {
-    id: 'h07',
-    name: 'Mascarilla Hidratación Extrema',
-    brand: 'Tresemmé',
-    subcategory: 'Mascarilla',
-    price: 8400,
-    rating: 4.4,
-    reviews: 5600,
-    image: '🧖',
-    color: '#a7f3d0',
-    description:
-      'Mascarilla de uso semanal con manteca de coco que repone hidratación profunda en cabellos resecos por sol o decoloración.',
-    characteristics: {
-      size: '300 ml',
-      hairType: ['Seco', 'Deshidratado'],
-      benefits: ['Hidratación', 'Suavidad'],
-      keyIngredients: ['Manteca de coco', 'Vitamina E'],
-      sulfateFree: false,
-      vegan: false,
-      origin: 'EE.UU. / fab. Argentina'
-    },
-    pros: ['Excelente relación precio/calidad', 'Tamaño generoso'],
-    cons: ['Aroma dulce intenso']
-  },
-  {
-    id: 'h08',
-    name: 'Protector Térmico Heat Defence',
-    brand: 'TRESemmé',
-    subcategory: 'Protector térmico',
-    price: 9800,
-    rating: 4.5,
-    reviews: 3200,
-    image: '🔥',
-    color: '#f97316',
-    description:
-      'Spray sin enjuague que protege hasta 230°C contra el daño de planchitas y secadores. Aporta brillo y reduce el frizz post-styling.',
-    characteristics: {
-      size: '300 ml',
-      hairType: ['Todos'],
-      benefits: ['Protección térmica', 'Antifrizz'],
-      keyIngredients: ['Polímero termoprotector', 'Vitamina E'],
-      sulfateFree: true,
-      vegan: false,
-      origin: 'EE.UU.'
-    },
-    pros: ['Efectivo a alta temperatura', 'No apelmaza'],
-    cons: ['Olor químico inicial']
-  },
-  {
-    id: 'h09',
-    name: 'Shampoo Color Vibrancy',
-    brand: 'Redken',
-    subcategory: 'Champú',
-    price: 38900,
-    rating: 4.7,
-    reviews: 980,
-    image: '🎨',
-    color: '#e8638a',
-    description:
-      'Champú profesional con tecnología que protege el color por hasta 60 días sin sulfatos agresivos. Ideal para cabellos teñidos.',
-    characteristics: {
-      size: '300 ml',
-      hairType: ['Teñido', 'Coloreado'],
-      benefits: ['Protección color', 'Brillo'],
-      keyIngredients: ['Aminoácidos', 'Filtros UV'],
-      sulfateFree: true,
-      vegan: false,
-      origin: 'EE.UU.'
-    },
-    pros: ['Mantiene el color brillante', 'No reseca'],
-    cons: ['Precio elevado', 'Hay que combinar con acondicionador match']
-  },
-  {
-    id: 'h10',
-    name: 'Mousse Volumen Curls',
-    brand: 'Garnier Fructis',
-    subcategory: 'Styling',
-    price: 5400,
-    rating: 4.2,
-    reviews: 2100,
-    image: '🌀',
-    color: '#fef3c7',
-    description:
-      'Mousse para definir rulos sin apelmazar. Activa el rizo con efecto memoria y sin resecar.',
-    characteristics: {
-      size: '200 ml',
-      hairType: ['Rizado', 'Ondulado'],
-      benefits: ['Definición', 'Volumen'],
-      keyIngredients: ['Vitamina B6', 'Glicerina'],
-      sulfateFree: true,
-      vegan: false,
-      origin: 'Francia'
-    },
-    pros: ['Económico', 'No deja efecto cartón'],
-    cons: ['Duración media', 'Puede dejar residuo si se aplica de más']
-  },
-  {
-    id: 'h11',
-    name: 'Tratamiento Antiquiebre Plex No.3',
-    brand: 'Olaplex',
-    subcategory: 'Tratamiento',
-    price: 36500,
-    rating: 4.9,
-    reviews: 4800,
-    image: '⚗️',
-    color: '#fda4af',
-    description:
-      'Tratamiento previo al lavado que reduce el quiebre del cabello hasta un 68% en una sola aplicación. Repara desde el interior.',
-    characteristics: {
-      size: '100 ml',
-      hairType: ['Dañado', 'Decolorado', 'Quebradizo'],
-      benefits: ['Reparación profunda', 'Antiquiebre'],
-      keyIngredients: ['Bis-Aminopropyl Diglycol Dimaleate'],
-      sulfateFree: true,
-      vegan: true,
-      origin: 'EE.UU.'
-    },
-    pros: ['Resultados clínicamente probados', 'Vegano'],
-    cons: ['Caro', 'Requiere uso semanal sostenido']
-  },
-  {
-    id: 'h12',
-    name: 'Gel Fijación Extra Fuerte',
-    brand: 'Wella',
-    subcategory: 'Styling',
-    price: 4900,
-    rating: 4.0,
-    reviews: 1700,
-    image: '💎',
-    color: '#a5b4fc',
-    description:
-      'Gel transparente de fijación nivel 5 que mantiene el peinado por horas sin dejar residuos blancos.',
-    characteristics: {
-      size: '250 ml',
-      hairType: ['Todos'],
-      benefits: ['Fijación', 'Definición'],
-      keyIngredients: ['PVP', 'Provitamina B5'],
-      sulfateFree: true,
-      vegan: false,
-      origin: 'Alemania'
-    },
-    pros: ['Fijación realmente firme', 'No deja blanco'],
-    cons: ['Endurece el cabello', 'Aroma sintético']
-  },
-  {
-    id: 'h13',
-    name: 'Shampoo Sólido Hidratante',
-    brand: 'Lush',
-    subcategory: 'Champú',
-    price: 18500,
-    rating: 4.6,
-    reviews: 920,
-    image: '🪨',
-    color: '#fcd5ce',
-    description:
-      'Shampoo en barra sin envase plástico, equivale a 3 botellas. Limpia con tensoactivos suaves y deja el cabello hidratado.',
-    characteristics: {
-      size: '55 g (≈80 lavados)',
-      hairType: ['Normal', 'Seco'],
-      benefits: ['Hidratación', 'Eco-friendly'],
-      keyIngredients: ['Manteca de cacao', 'Aceite de oliva'],
-      sulfateFree: true,
-      vegan: true,
-      origin: 'Reino Unido'
-    },
-    pros: ['Sin plástico', 'Vegano y cruelty-free', 'Dura mucho'],
-    cons: ['Curva de adaptación', 'Necesita jabonera de drenaje']
-  },
-  {
-    id: 'h14',
-    name: 'Acondicionador Hidra-Liso',
-    brand: 'Sedal',
-    subcategory: 'Acondicionador',
-    price: 5200,
-    rating: 4.0,
-    reviews: 7800,
-    image: '🌿',
-    color: '#bbf7d0',
-    description:
-      'Acondicionador con ceramidas y queratina que reduce el frizz y deja el cabello manejable y suave.',
-    characteristics: {
-      size: '650 ml',
-      hairType: ['Normal', 'Mixto', 'Frizz'],
-      benefits: ['Antifrizz', 'Suavidad'],
-      keyIngredients: ['Ceramidas', 'Queratina'],
-      sulfateFree: false,
-      vegan: false,
-      origin: 'fab. Argentina'
-    },
-    pros: ['Muy económico', 'Buen rinde'],
-    cons: ['Aroma fuerte', 'No apto curly method']
-  },
-  {
-    id: 'h15',
-    name: 'Tinte Coloración Permanente Casting Crème Gloss',
-    brand: "L'Oréal Paris",
-    subcategory: 'Coloración',
-    price: 11900,
-    rating: 4.5,
-    reviews: 3400,
-    image: '🎨',
-    color: '#92400e',
-    description:
-      'Tintura sin amoníaco con jalea real que da color brillante y cobertura de canas, dejando el cabello más suave.',
-    characteristics: {
-      size: '1 aplicación',
-      hairType: ['Todos'],
-      benefits: ['Coloración', 'Brillo', 'Cobertura canas'],
-      keyIngredients: ['Jalea real', 'Sin amoníaco'],
-      sulfateFree: false,
-      vegan: false,
-      origin: 'Francia'
-    },
-    pros: ['Sin amoníaco', 'Gran variedad de tonos', 'Económico vs salón'],
-    cons: ['Duración 6-8 semanas', 'Puede manchar piel']
-  },
-  {
-    id: 'h16',
-    name: 'Crema Peinar Curly Definition',
-    brand: 'Cantu',
-    subcategory: 'Styling',
-    price: 12500,
-    rating: 4.7,
-    reviews: 5100,
-    image: '🌊',
-    color: '#fef9c3',
-    description:
-      'Crema sin enjuague para definir rizos con manteca de karité. Hidrata, reduce el frizz y define el patrón natural del rizo.',
-    characteristics: {
-      size: '340 g',
-      hairType: ['Rizado', 'Crespo', 'Afro'],
-      benefits: ['Definición rizos', 'Hidratación', 'Antifrizz'],
-      keyIngredients: ['Manteca de karité', 'Aceite de coco'],
-      sulfateFree: true,
-      vegan: false,
-      origin: 'EE.UU.'
-    },
-    pros: ['Excelente para curly method', 'Aroma rico'],
-    cons: ['Pesada para cabellos finos']
-  },
-  {
-    id: 'h17',
-    name: 'Spray Tonificante Brillo',
-    brand: 'John Frieda',
-    subcategory: 'Tratamiento',
-    price: 14800,
-    rating: 4.4,
-    reviews: 1280,
-    image: '💫',
-    color: '#fef3c7',
-    description:
-      'Spray sin enjuague con extractos vegetales que tonifica el rubio y elimina amarillamiento. Aporta brillo entre coloraciones.',
-    characteristics: {
-      size: '200 ml',
-      hairType: ['Rubio', 'Decolorado', 'Canas'],
-      benefits: ['Matiza amarillo', 'Brillo'],
-      keyIngredients: ['Pigmento violeta', 'Extracto de manzanilla'],
-      sulfateFree: true,
-      vegan: false,
-      origin: 'Reino Unido'
-    },
-    pros: ['Resultado inmediato', 'Fácil aplicación'],
-    cons: ['Puede teñir manos sin guantes']
-  },
-  {
-    id: 'h18',
-    name: 'Shampoo Volumen Fino',
-    brand: 'Schwarzkopf BC',
-    subcategory: 'Champú',
-    price: 29900,
-    rating: 4.6,
-    reviews: 760,
-    image: '🪶',
-    color: '#fef3c7',
-    description:
-      'Champú profesional sin sulfatos para cabellos finos. Aporta cuerpo y volumen desde la raíz sin apelmazar.',
-    characteristics: {
-      size: '250 ml',
-      hairType: ['Fino', 'Normal'],
-      benefits: ['Volumen', 'Cuerpo'],
-      keyIngredients: ['Caféina', 'Aminoácidos'],
-      sulfateFree: true,
-      vegan: false,
-      origin: 'Alemania'
-    },
-    pros: ['Volumen real', 'Sin sulfatos'],
-    cons: ['Caro', 'Frasco pequeño']
-  },
-  {
-    id: 'h19',
-    name: 'Aceite Crecimiento Romero',
-    brand: 'Mielle Organics',
-    subcategory: 'Aceite',
-    price: 17400,
-    rating: 4.6,
-    reviews: 12400,
-    image: '🌱',
-    color: '#86efac',
-    description:
-      'Aceite tratamiento con romero, biotina y aceites esenciales que estimula el cuero cabelludo y favorece el crecimiento.',
-    characteristics: {
-      size: '60 ml',
-      hairType: ['Todos', 'Caída', 'Crecimiento lento'],
-      benefits: ['Crecimiento', 'Fortalecimiento', 'Cuero cabelludo'],
-      keyIngredients: ['Aceite de romero', 'Biotina', 'Té verde'],
-      sulfateFree: true,
-      vegan: true,
-      origin: 'EE.UU.'
-    },
-    pros: ['Tendencia probada', 'Vegano', 'Aroma fresco'],
-    cons: ['Aceitoso al inicio', 'Resultados a partir de 8 semanas']
-  },
-  {
-    id: 'h20',
-    name: 'Mascarilla Reconstrucción Issue',
-    brand: 'Issue',
-    subcategory: 'Mascarilla',
-    price: 6900,
-    rating: 4.1,
-    reviews: 4900,
-    image: '💛',
-    color: '#fde047',
-    description:
-      'Mascarilla con aceite de argán y queratina, ideal como tratamiento intensivo semanal a precio accesible.',
-    characteristics: {
-      size: '350 ml',
-      hairType: ['Dañado', 'Seco'],
-      benefits: ['Reparación', 'Hidratación'],
-      keyIngredients: ['Aceite de argán', 'Queratina'],
+      size: '260 ml',
+      hairType: ['Seco', 'Normal'],
+      benefits: ['Hidratación', 'Brillo'],
+      keyIngredients: ['Aceite de argán'],
       sulfateFree: false,
       vegan: false,
       origin: 'Argentina'
     },
-    pros: ['Marca local', 'Excelente precio', 'Tamaño grande'],
-    cons: ['Aroma muy dulce']
+    pros: ['Aroma agradable', 'Buen rinde', 'Hidratante'],
+    cons: ['No apto curly method']
   },
   {
-    id: 'h21',
-    name: 'Spray Texturizante Sea Salt',
-    brand: 'Bumble and bumble',
-    subcategory: 'Styling',
-    price: 42000,
-    rating: 4.5,
-    reviews: 690,
-    image: '🌊',
-    color: '#cffafe',
-    description:
-      'Spray con sales marinas que da textura y efecto playa al instante, con cuerpo natural y sin pegajosidad.',
-    characteristics: {
-      size: '125 ml',
-      hairType: ['Normal', 'Liso'],
-      benefits: ['Textura', 'Cuerpo'],
-      keyIngredients: ['Sal marina', 'Algas'],
-      sulfateFree: true,
-      vegan: false,
-      origin: 'EE.UU.'
-    },
-    pros: ['Efecto natural inmediato', 'Aroma marino agradable'],
-    cons: ['Reseca con uso diario', 'Caro']
-  },
-  {
-    id: 'h22',
-    name: 'Acondicionador Sin Enjuague 10-en-1',
-    brand: 'It\'s a 10',
+    id: 'fa02',
+    name: 'Acondicionador Argán 260 ml',
+    brand: 'Fidelité',
+    line: 'Argán',
     subcategory: 'Acondicionador',
-    price: 28900,
-    rating: 4.7,
-    reviews: 5300,
-    image: '🔟',
-    color: '#fbcfe8',
+    price: 9000,
+    rating: 4.4,
+    reviews: 1620,
+    imageUrl: 'https://fidelite.com.ar/img/productos/25/06-arganacondicionador_2_2.jpg',
+    image: '💆',
+    color: '#fde68a',
     description:
-      'Spray multibeneficio que repara, suaviza, da brillo, controla frizz, protege del calor y desenreda. Sin enjuague.',
+      'Acondicionador con aceite de argán que desenreda, suaviza y realza el brillo natural del cabello.',
     characteristics: {
-      size: '295 ml',
-      hairType: ['Todos'],
-      benefits: ['Reparación', 'Antifrizz', 'Protección térmica', 'Desenredo'],
-      keyIngredients: ['Proteínas', 'Vitaminas', 'Filtros UV'],
-      sulfateFree: true,
+      size: '260 ml',
+      hairType: ['Seco', 'Normal'],
+      benefits: ['Desenredo', 'Brillo', 'Suavidad'],
+      keyIngredients: ['Aceite de argán'],
+      sulfateFree: false,
       vegan: false,
-      origin: 'EE.UU.'
+      origin: 'Argentina'
     },
-    pros: ['Multifunción', 'Buen rinde'],
-    cons: ['Precio elevado', 'Aroma dulce']
+    pros: ['Desenreda muy bien', 'Aroma duradero'],
+    cons: ['Apelmaza cabellos finos']
   },
   {
-    id: 'h23',
-    name: 'Shampoo Purificante Detox',
-    brand: 'Davines',
-    subcategory: 'Champú',
-    price: 34500,
+    id: 'fa03',
+    name: 'Máscara Argán 250 ml',
+    brand: 'Fidelité',
+    line: 'Argán',
+    subcategory: 'Mascarilla',
+    price: 13500,
     rating: 4.6,
-    reviews: 540,
-    image: '🌿',
-    color: '#a7f3d0',
+    reviews: 2120,
+    imageUrl: 'https://fidelite.com.ar/img/productos/35/06-arganmascaracajaproducto_2.jpg',
+    image: '🪮',
+    color: '#fde68a',
     description:
-      'Champú clarificante con arcilla blanca que elimina residuos de productos de styling y agua dura sin resecar.',
+      'Mascarilla intensiva con aceite de argán. Fortalece y nutre profundamente la fibra capilar.',
     characteristics: {
       size: '250 ml',
-      hairType: ['Normal', 'Graso'],
-      benefits: ['Limpieza profunda', 'Detox'],
-      keyIngredients: ['Arcilla blanca', 'Té verde'],
+      hairType: ['Seco', 'Dañado'],
+      benefits: ['Reparación', 'Nutrición'],
+      keyIngredients: ['Aceite de argán', 'Aminoácidos'],
       sulfateFree: false,
-      vegan: true,
-      origin: 'Italia'
+      vegan: false,
+      origin: 'Argentina'
     },
-    pros: ['Sensación de cabello limpio', 'Vegano', 'Diseño bonito'],
-    cons: ['Uso ocasional, no diario', 'Caro']
+    pros: ['Resultados visibles desde la 1ra aplicación', 'Aroma rico'],
+    cons: ['Pesada para cabellos finos']
   },
   {
-    id: 'h24',
-    name: 'Tratamiento Botox Capilar',
-    brand: 'Felps',
-    subcategory: 'Tratamiento',
-    price: 31000,
+    id: 'fa04',
+    name: 'Crema de Peinado Argán 250 ml',
+    brand: 'Fidelité',
+    line: 'Argán',
+    subcategory: 'Crema de peinar',
+    price: 10500,
+    rating: 4.4,
+    reviews: 1380,
+    imageUrl: 'https://fidelite.com.ar/img/productos/36/crema-de-peinado-argan_2.jpg',
+    image: '🌿',
+    color: '#fde68a',
+    description:
+      'Crema sin enjuague que modela cabellos secos y maltratados, dejándolos suaves y manejables.',
+    characteristics: {
+      size: '250 ml',
+      hairType: ['Seco', 'Maltratado'],
+      benefits: ['Modelado', 'Suavidad', 'Antifrizz'],
+      keyIngredients: ['Aceite de argán'],
+      sulfateFree: true,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['No apelmaza', 'Buena fijación natural'],
+    cons: ['Aroma intenso']
+  },
+  {
+    id: 'fa05',
+    name: 'Elixir Multifunción Argán 120 ml',
+    brand: 'Fidelité',
+    line: 'Argán',
+    subcategory: 'Aceite',
+    price: 18500,
+    rating: 4.7,
+    reviews: 1940,
+    imageUrl: 'https://fidelite.com.ar/img/productos/134/whatsapp-image-2020-12-23-at-160159-1.jpg',
+    image: '✨',
+    color: '#d97706',
+    description:
+      'Elixir oil multifunción con aceite de argán que aporta hidratación y brillo extremo. Pocas gotas alcanzan.',
+    characteristics: {
+      size: '120 ml',
+      hairType: ['Todos', 'Frizz', 'Seco'],
+      benefits: ['Brillo', 'Antifrizz', 'Hidratación'],
+      keyIngredients: ['Aceite de argán'],
+      sulfateFree: true,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['Rinde mucho', 'Brillo inmediato'],
+    cons: ['Precio medio-alto']
+  },
+  {
+    id: 'fa06',
+    name: 'Protector Térmico Argán 120 ml',
+    brand: 'Fidelité',
+    line: 'Argán',
+    subcategory: 'Protector térmico',
+    price: 12000,
+    rating: 4.4,
+    reviews: 980,
+    imageUrl: 'https://fidelite.com.ar/img/productos/205/protector-termico-argan.jpg',
+    image: '🔥',
+    color: '#f97316',
+    description:
+      'Protector térmico con argán que escuda al cabello frente al daño de planchitas y secadores.',
+    characteristics: {
+      size: '120 ml',
+      hairType: ['Todos'],
+      benefits: ['Protección térmica', 'Brillo'],
+      keyIngredients: ['Aceite de argán'],
+      sulfateFree: true,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['No apelmaza', 'Aroma agradable'],
+    cons: ['Spray un poco fuerte']
+  },
+  {
+    id: 'fa07',
+    name: 'Tratamiento Restaurador Argán 12u x 15 ml',
+    brand: 'Fidelité',
+    line: 'Argán',
+    subcategory: 'Ampollas',
+    price: 11500,
+    rating: 4.5,
+    reviews: 720,
+    imageUrl: 'https://fidelite.com.ar/img/productos/37/ampollaargan-caja_2_2.jpg',
+    image: '⚗️',
+    color: '#d97706',
+    description:
+      'Caja de 12 ampollas restauradoras con aceite de argán. Hidratación profunda y brillo desde la primera aplicación.',
+    characteristics: {
+      size: '12 u. x 15 ml',
+      hairType: ['Seco', 'Dañado'],
+      benefits: ['Reparación', 'Hidratación profunda'],
+      keyIngredients: ['Aceite de argán'],
+      sulfateFree: true,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['Tratamiento intensivo', 'Render rápido'],
+    cons: ['Hay que respetar tiempo de pose']
+  },
+
+  // ---------------- FIDELITÉ — LÍNEA CAVIAR ----------------
+  {
+    id: 'fc01',
+    name: 'Shampoo Caviar Normales 260 ml',
+    brand: 'Fidelité',
+    line: 'Caviar',
+    subcategory: 'Champú',
+    price: 10500,
+    rating: 4.5,
+    reviews: 1240,
+    imageUrl: 'https://fidelite.com.ar/img/productos/21/260shampoonormalesproductocaja_2_2.jpg',
+    image: '🧴',
+    color: '#fde2e9',
+    description:
+      'Champú línea Caviar para cabellos sanos. Cuida y mantiene la naturaleza del cabello con extracto de caviar.',
+    characteristics: {
+      size: '260 ml',
+      hairType: ['Normal'],
+      benefits: ['Cuidado diario', 'Brillo'],
+      keyIngredients: ['Extracto de caviar'],
+      sulfateFree: false,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['Suave', 'Aroma sofisticado'],
+    cons: ['Precio medio']
+  },
+  {
+    id: 'fc02',
+    name: 'Shampoo Caviar Secos y Castigados 260 ml',
+    brand: 'Fidelité',
+    line: 'Caviar',
+    subcategory: 'Champú',
+    price: 10500,
+    rating: 4.6,
+    reviews: 1480,
+    imageUrl: 'https://fidelite.com.ar/img/productos/20/260shampoosecoscastigadosproductocaja_2.jpg',
+    image: '🧴',
+    color: '#fde2e9',
+    description:
+      'Champú reparador con extracto de caviar para cabellos secos y maltratados. Repara e hidrata la fibra.',
+    characteristics: {
+      size: '260 ml',
+      hairType: ['Seco', 'Castigado'],
+      benefits: ['Reparación', 'Hidratación'],
+      keyIngredients: ['Extracto de caviar', 'Aminoácidos'],
+      sulfateFree: false,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['Repara desde el primer uso', 'Buen aroma'],
+    cons: ['Precio elevado para uso diario']
+  },
+  {
+    id: 'fc03',
+    name: 'Shampoo Caviar Teñidos 260 ml',
+    brand: 'Fidelité',
+    line: 'Caviar',
+    subcategory: 'Champú',
+    price: 10500,
+    rating: 4.5,
+    reviews: 1360,
+    imageUrl: 'https://fidelite.com.ar/img/productos/22/260shampootenidosproductocaja_2.jpg',
+    image: '🧴',
+    color: '#fde2e9',
+    description:
+      'Champú para cabellos teñidos: protege y prolonga la duración del color con extracto de caviar.',
+    characteristics: {
+      size: '260 ml',
+      hairType: ['Teñido', 'Coloreado'],
+      benefits: ['Protección color', 'Brillo'],
+      keyIngredients: ['Extracto de caviar', 'Filtros UV'],
+      sulfateFree: false,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['Conserva el color', 'Suave'],
+    cons: ['Precio medio-alto']
+  },
+  {
+    id: 'fc04',
+    name: 'Acondicionador Caviar Teñidos 260 ml',
+    brand: 'Fidelité',
+    line: 'Caviar',
+    subcategory: 'Acondicionador',
+    price: 10000,
     rating: 4.5,
     reviews: 1100,
-    image: '🧪',
-    color: '#fecaca',
+    imageUrl: 'https://fidelite.com.ar/img/productos/15/260acondicionadortenidosproductocaja_2.jpg',
+    image: '💆',
+    color: '#fde2e9',
     description:
-      'Reconstructor con ácido hialurónico y colágeno que rellena fibras dañadas, da brillo intenso y reduce volumen sin formaldehído.',
+      'Acondicionador específico para cabellos teñidos. Preserva la duración del color y devuelve suavidad.',
     characteristics: {
-      size: '300 ml',
-      hairType: ['Dañado', 'Volumen excesivo', 'Frizz'],
-      benefits: ['Reconstrucción', 'Reducción volumen', 'Brillo'],
-      keyIngredients: ['Ácido hialurónico', 'Colágeno', 'Argán'],
-      sulfateFree: true,
-      vegan: false,
-      origin: 'Brasil'
-    },
-    pros: ['Sin formol', 'Resultados muy visibles'],
-    cons: ['Aplicación con tiempo de pose largo']
-  },
-  {
-    id: 'h25',
-    name: 'Shampoo Bebé Suave',
-    brand: 'Johnson\'s',
-    subcategory: 'Champú',
-    price: 4200,
-    rating: 4.6,
-    reviews: 9100,
-    image: '🍼',
-    color: '#fef3c7',
-    description:
-      'Fórmula clásica sin lágrimas, suave para uso diario. También usado por adultos para cuero cabelludo sensible.',
-    characteristics: {
-      size: '400 ml',
-      hairType: ['Sensible', 'Normal'],
-      benefits: ['Suavidad', 'Sin irritación'],
-      keyIngredients: ['Tensioactivos suaves'],
+      size: '260 ml',
+      hairType: ['Teñido'],
+      benefits: ['Protección color', 'Suavidad'],
+      keyIngredients: ['Extracto de caviar'],
       sulfateFree: false,
       vegan: false,
-      origin: 'Internacional'
+      origin: 'Argentina'
     },
-    pros: ['Económico', 'No irrita ojos', 'Apto piel sensible'],
-    cons: ['Limpieza ligera', 'Aroma muy clásico']
+    pros: ['Cuida el color', 'Desenreda'],
+    cons: ['Aroma intenso']
   },
   {
-    id: 'h26',
-    name: 'Mascarilla Pigmentante Plata',
-    brand: 'Fanola No Yellow',
+    id: 'fc05',
+    name: 'Máscara Caviar Hidro-Nutritiva 250 ml',
+    brand: 'Fidelité',
+    line: 'Caviar',
     subcategory: 'Mascarilla',
-    price: 19500,
+    price: 14500,
     rating: 4.7,
-    reviews: 2700,
-    image: '🥈',
-    color: '#a78bfa',
+    reviews: 2080,
+    imageUrl: 'https://fidelite.com.ar/img/productos/42/02-caviar-mascara-250ml-productocaja_2.jpg',
+    image: '🪮',
+    color: '#fda4af',
     description:
-      'Mascarilla con pigmento violeta de alta concentración que neutraliza tonos amarillos en rubios y canas. Hidratante.',
+      'Mascarilla hidro-nutritiva con extracto de caviar. Suavidad y reparación intensiva en una sola aplicación.',
     characteristics: {
-      size: '200 ml',
-      hairType: ['Rubio', 'Canas', 'Decolorado'],
-      benefits: ['Matiza amarillo', 'Hidratación'],
-      keyIngredients: ['Pigmento violeta', 'Aceite de macadamia'],
-      sulfateFree: true,
+      size: '250 ml',
+      hairType: ['Seco', 'Castigado', 'Teñido'],
+      benefits: ['Hidratación', 'Reparación', 'Suavidad'],
+      keyIngredients: ['Extracto de caviar', 'Aminoácidos'],
+      sulfateFree: false,
       vegan: false,
-      origin: 'Italia'
+      origin: 'Argentina'
     },
-    pros: ['Pigmento muy potente', 'Buen precio para profesional'],
-    cons: ['Puede teñir piel y bañera', 'Hay que controlar tiempo']
+    pros: ['Resultados pro', 'Aroma sofisticado'],
+    cons: ['Precio elevado']
   },
   {
-    id: 'h27',
-    name: 'Spray Fijador Elnett Satin',
-    brand: "L'Oréal Paris",
-    subcategory: 'Styling',
-    price: 9500,
-    rating: 4.7,
-    reviews: 8200,
-    image: '🌬️',
-    color: '#fcd5ce',
+    id: 'fc06',
+    name: 'Serum Reparador de Puntas Caviar 30 ml',
+    brand: 'Fidelité',
+    line: 'Caviar',
+    subcategory: 'Sérum',
+    price: 11500,
+    rating: 4.6,
+    reviews: 940,
+    imageUrl: 'https://fidelite.com.ar/img/productos/137/serum-caviar-web_2.jpg',
+    image: '💧',
+    color: '#fda4af',
     description:
-      'Laca clásica de fijación fuerte que se cepilla sin dejar residuo. Aporta brillo y resiste humedad.',
+      'Sérum sin enjuague que repara las puntas dañadas y sella las cutículas con extracto de caviar.',
     characteristics: {
-      size: '400 ml',
-      hairType: ['Todos'],
-      benefits: ['Fijación', 'Brillo', 'Resiste humedad'],
-      keyIngredients: ['Polímeros de fijación'],
+      size: '30 ml',
+      hairType: ['Puntas dañadas'],
+      benefits: ['Sellado de puntas', 'Brillo'],
+      keyIngredients: ['Extracto de caviar', 'Siliconas tratantes'],
       sulfateFree: true,
       vegan: false,
-      origin: 'Francia'
+      origin: 'Argentina'
     },
-    pros: ['Icónico', 'No deja efecto cartón', 'Cepillable'],
-    cons: ['Aroma fuerte', 'Aerosol']
+    pros: ['Súper concentrado', 'Pocas gotas alcanzan'],
+    cons: ['Frasco pequeño']
   },
   {
-    id: 'h28',
-    name: 'Acondicionador Vegano Nutrición',
-    brand: 'Natura Ekos',
+    id: 'fc07',
+    name: 'Acondicionador Caviar Plex Home Ritual N° 3',
+    brand: 'Fidelité',
+    line: 'Caviar',
     subcategory: 'Acondicionador',
-    price: 13900,
-    rating: 4.4,
-    reviews: 1850,
-    image: '🌳',
+    price: 12000,
+    rating: 4.6,
+    reviews: 760,
+    imageUrl: 'https://fidelite.com.ar/img/productos/144/plex03homeritual_2.jpg',
+    image: '💆',
+    color: '#fda4af',
+    description:
+      'Acondicionador Plex Home Ritual paso N° 3, protege el cabello y lo mantiene suave y brillante post-coloración.',
+    characteristics: {
+      size: '260 ml',
+      hairType: ['Teñido', 'Decolorado', 'Dañado'],
+      benefits: ['Reparación', 'Protección color'],
+      keyIngredients: ['Tecnología Plex'],
+      sulfateFree: true,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['Alternativa local a Olaplex N°5', 'Buen rinde'],
+    cons: ['Hay que combinar con shampoo de la misma línea']
+  },
+  {
+    id: 'fc08',
+    name: 'Complejo Caviar Hidro-Nutritivo 12u x 15 ml',
+    brand: 'Fidelité',
+    line: 'Caviar',
+    subcategory: 'Ampollas',
+    price: 12500,
+    rating: 4.6,
+    reviews: 580,
+    imageUrl: 'https://fidelite.com.ar/img/productos/43/04-ampollacaviarcajaampollas-ref_2_2.jpg',
+    image: '⚗️',
+    color: '#fda4af',
+    description:
+      'Caja de 12 ampollas hidro-nutritivas con extracto de caviar. Reestructura el cabello al instante.',
+    characteristics: {
+      size: '12 u. x 15 ml',
+      hairType: ['Castigado', 'Sin brillo'],
+      benefits: ['Reestructuración', 'Brillo'],
+      keyIngredients: ['Extracto de caviar', 'Proteínas'],
+      sulfateFree: true,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['Resultados express', 'Cómodas para llevar'],
+    cons: ['Uso semanal recomendado']
+  },
+
+  // ---------------- FIDELITÉ — KILL FRIZZ ----------------
+  {
+    id: 'fk01',
+    name: 'Shampoo Kill Frizz 230 ml',
+    brand: 'Fidelité',
+    line: 'Kill Frizz',
+    subcategory: 'Champú',
+    price: 10500,
+    rating: 4.5,
+    reviews: 1640,
+    imageUrl: 'https://fidelite.com.ar/img/productos/189/fidelite-killfrizz_03shampoo230-productosweb_2.jpg',
+    image: '🧴',
+    color: '#a7f3d0',
+    description:
+      'Champú anti-frizz que hidrata el cuero cabelludo, repara las cutículas dañadas y disciplina el cabello.',
+    characteristics: {
+      size: '230 ml',
+      hairType: ['Frizz', 'Rebelde'],
+      benefits: ['Antifrizz', 'Hidratación', 'Reparación'],
+      keyIngredients: ['Activos disciplinantes'],
+      sulfateFree: false,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['Domina el frizz', 'Aroma duradero'],
+    cons: ['Precio medio']
+  },
+  {
+    id: 'fk02',
+    name: 'Máscara Kill Frizz 250 ml',
+    brand: 'Fidelité',
+    line: 'Kill Frizz',
+    subcategory: 'Mascarilla',
+    price: 13800,
+    rating: 4.6,
+    reviews: 1320,
+    imageUrl: 'https://fidelite.com.ar/img/productos/191/fidelite-killfrizz_05mascara230-productosweb_2.jpg',
+    image: '🪮',
+    color: '#a7f3d0',
+    description:
+      'Mascarilla anti-frizz que aporta nutrición y luminosidad mientras controla cabellos rebeldes.',
+    characteristics: {
+      size: '250 ml',
+      hairType: ['Frizz', 'Rebelde', 'Crespo'],
+      benefits: ['Antifrizz', 'Nutrición', 'Brillo'],
+      keyIngredients: ['Aceites disciplinantes'],
+      sulfateFree: false,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['Disciplina mucho', 'Hidratación profunda'],
+    cons: ['Pesada para cabello fino']
+  },
+  {
+    id: 'fk03',
+    name: 'Loción Kill Frizz 120 ml',
+    brand: 'Fidelité',
+    line: 'Kill Frizz',
+    subcategory: 'Tratamiento',
+    price: 11500,
+    rating: 4.5,
+    reviews: 880,
+    imageUrl: 'https://fidelite.com.ar/img/productos/193/fidelite-killfrizz_06locion-productosweb_2.jpg',
+    image: '💧',
+    color: '#a7f3d0',
+    description:
+      'Loción sin enjuague que combate el frizz dejando el cabello suave y fácil de peinar.',
+    characteristics: {
+      size: '120 ml',
+      hairType: ['Frizz', 'Rebelde'],
+      benefits: ['Antifrizz', 'Suavidad'],
+      keyIngredients: ['Polímeros disciplinantes'],
+      sulfateFree: true,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['Resultado inmediato', 'Buen rinde'],
+    cons: ['Aroma fuerte']
+  },
+
+  // ---------------- FIDELITÉ — FREE (sin sulfatos / parabenos) ----------------
+  {
+    id: 'ff01',
+    name: 'Shampoo Free 230 ml',
+    brand: 'Fidelité',
+    line: 'Free',
+    subcategory: 'Champú',
+    price: 12500,
+    rating: 4.6,
+    reviews: 1080,
+    imageUrl: 'https://fidelite.com.ar/img/productos/198/fidelite_shampoo230_free.jpg',
+    image: '🌿',
     color: '#bbf7d0',
     description:
-      'Acondicionador 100% vegano con murumuru de la Amazonia. Hidrata profundamente sin siliconas pesadas.',
+      'Champú clean beauty libre de sulfatos, parabenos, siliconas, sal y colorantes. Limpia en profundidad de forma suave.',
     characteristics: {
-      size: '300 ml',
-      hairType: ['Seco', 'Rizado', 'Normal'],
-      benefits: ['Hidratación', 'Suavidad'],
-      keyIngredients: ['Manteca de murumuru', 'Aceite de pasiflora'],
+      size: '230 ml',
+      hairType: ['Sensible', 'Teñido', 'Curly'],
+      benefits: ['Limpieza suave', 'Apto curly method'],
+      keyIngredients: ['Tensoactivos suaves'],
+      sulfateFree: true,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['Sin sulfatos', 'Apto curly method', 'Cuidado del color'],
+    cons: ['Espuma media']
+  },
+  {
+    id: 'ff02',
+    name: 'Acondicionador Free 230 ml',
+    brand: 'Fidelité',
+    line: 'Free',
+    subcategory: 'Acondicionador',
+    price: 12000,
+    rating: 4.5,
+    reviews: 920,
+    imageUrl: 'https://fidelite.com.ar/img/productos/200/fidelite_conditioner230_free.jpg',
+    image: '💆',
+    color: '#bbf7d0',
+    description:
+      'Acondicionador clean beauty libre de parabenos, siliconas, sal y colorantes. Acondicionamiento ligero.',
+    characteristics: {
+      size: '230 ml',
+      hairType: ['Sensible', 'Teñido', 'Curly'],
+      benefits: ['Suavidad', 'Apto curly method'],
+      keyIngredients: ['Activos vegetales'],
+      sulfateFree: true,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['Sin siliconas', 'No apelmaza'],
+    cons: ['Hay que aplicar cantidad generosa']
+  },
+  {
+    id: 'ff03',
+    name: 'Máscara Capilar Free 250 ml',
+    brand: 'Fidelité',
+    line: 'Free',
+    subcategory: 'Mascarilla',
+    price: 14500,
+    rating: 4.6,
+    reviews: 760,
+    imageUrl: 'https://fidelite.com.ar/img/productos/202/fidelite_mascara250_free.jpg',
+    image: '🪮',
+    color: '#bbf7d0',
+    description:
+      'Mascarilla restauradora libre de parabenos, siliconas, sal y colorantes. Restaura cabellos dañados sin cargar.',
+    characteristics: {
+      size: '250 ml',
+      hairType: ['Dañado', 'Sensible', 'Curly'],
+      benefits: ['Reparación', 'Hidratación'],
+      keyIngredients: ['Aceites vegetales'],
+      sulfateFree: true,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['Sin parabenos ni siliconas', 'Apto curly'],
+    cons: ['Resultados graduales']
+  },
+  {
+    id: 'ff04',
+    name: 'Crema de Peinar Free 230 ml',
+    brand: 'Fidelité',
+    line: 'Free',
+    subcategory: 'Crema de peinar',
+    price: 11500,
+    rating: 4.5,
+    reviews: 640,
+    imageUrl: 'https://fidelite.com.ar/img/productos/204/fidelite_crema_peinar230_free.jpg',
+    image: '🌿',
+    color: '#bbf7d0',
+    description:
+      'Crema de peinar sin enjuague que controla el frizz. Libre de parabenos, siliconas, sal y colorantes.',
+    characteristics: {
+      size: '230 ml',
+      hairType: ['Frizz', 'Curly', 'Sensible'],
+      benefits: ['Antifrizz', 'Definición', 'Apto curly'],
+      keyIngredients: ['Polímeros vegetales'],
+      sulfateFree: true,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['Apto curly method', 'No deja efecto cartón'],
+    cons: ['Fijación natural, no fuerte']
+  },
+
+  // ---------------- FIDELITÉ — KERATINA ----------------
+  {
+    id: 'fke01',
+    name: 'Shampoo Keratina 230 ml',
+    brand: 'Fidelité',
+    line: 'Keratina',
+    subcategory: 'Champú',
+    price: 10500,
+    rating: 4.5,
+    reviews: 1240,
+    imageUrl: 'https://fidelite.com.ar/img/productos/29/shampoo-keratin_230ml_2.jpg',
+    image: '🧴',
+    color: '#fef3c7',
+    description:
+      'Champú reestructurante con keratina que repara y disciplina cabellos dañados o con frizz.',
+    characteristics: {
+      size: '230 ml',
+      hairType: ['Dañado', 'Frizz'],
+      benefits: ['Reparación', 'Antifrizz'],
+      keyIngredients: ['Keratina hidrolizada'],
+      sulfateFree: false,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['Sella cutícula', 'Aroma sofisticado'],
+    cons: ['Puede pesar en cabello fino']
+  },
+  {
+    id: 'fke02',
+    name: 'Acondicionador Keratina 230 ml',
+    brand: 'Fidelité',
+    line: 'Keratina',
+    subcategory: 'Acondicionador',
+    price: 10000,
+    rating: 4.5,
+    reviews: 1080,
+    imageUrl: 'https://fidelite.com.ar/img/productos/30/conditioner-keratin_230ml_2.jpg',
+    image: '💆',
+    color: '#fef3c7',
+    description:
+      'Acondicionador con keratina que reestructura y reduce el frizz aportando suavidad.',
+    characteristics: {
+      size: '230 ml',
+      hairType: ['Dañado', 'Frizz'],
+      benefits: ['Reparación', 'Suavidad', 'Antifrizz'],
+      keyIngredients: ['Keratina hidrolizada'],
+      sulfateFree: false,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['Disciplina mucho', 'Brillo intenso'],
+    cons: ['Aroma muy presente']
+  },
+  {
+    id: 'fke03',
+    name: 'Máscara Reparadora Keratina 270 g',
+    brand: 'Fidelité',
+    line: 'Keratina',
+    subcategory: 'Mascarilla',
+    price: 14500,
+    rating: 4.6,
+    reviews: 1340,
+    imageUrl: 'https://fidelite.com.ar/img/productos/79/mascarakeratina_2.jpg',
+    image: '🪮',
+    color: '#fef3c7',
+    description:
+      'Mascarilla intensiva que repone keratina natural y devuelve fuerza al cabello.',
+    characteristics: {
+      size: '270 g',
+      hairType: ['Dañado', 'Quebradizo'],
+      benefits: ['Reparación', 'Fortalecimiento'],
+      keyIngredients: ['Keratina hidrolizada', 'Proteínas'],
+      sulfateFree: false,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['Resultados pro', 'Tamaño generoso'],
+    cons: ['Hay que respetar pose']
+  },
+
+  // ---------------- FIDELITÉ — REINVENTION (matizadores) ----------------
+  {
+    id: 'fr01',
+    name: 'Shampoo Reinvention Ultra Violet 230 ml',
+    brand: 'Fidelité',
+    line: 'Reinvention',
+    subcategory: 'Champú',
+    price: 14500,
+    rating: 4.6,
+    reviews: 920,
+    imageUrl: 'https://fidelite.com.ar/img/productos/140/reinvention_ultraviolet_shampoo_tapavioleta.jpg',
+    image: '🟣',
+    color: '#a78bfa',
+    description:
+      'Champú matizador violeta que neutraliza tonos amarillos y anaranjados en cabellos rubios, decolorados o con canas.',
+    characteristics: {
+      size: '230 ml',
+      hairType: ['Rubio', 'Decolorado', 'Canas'],
+      benefits: ['Matiza amarillo', 'Cuida color'],
+      keyIngredients: ['Pigmento violeta'],
+      sulfateFree: false,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['Pigmentación buena', 'Resultado en pocos lavados'],
+    cons: ['Puede teñir bañera si se deja mucho']
+  },
+  {
+    id: 'fr02',
+    name: 'Máscara Correctora Ultrablack Reinvention 270 g',
+    brand: 'Fidelité',
+    line: 'Reinvention',
+    subcategory: 'Mascarilla',
+    price: 15500,
+    rating: 4.5,
+    reviews: 540,
+    imageUrl: 'https://fidelite.com.ar/img/productos/208/reinvention_ultrablack_mascara270_tapanegra.jpg',
+    image: '⚫',
+    color: '#1f2937',
+    description:
+      'Mascarilla matizadora de tonos grises y oscuros. Refresca el color y aporta hidratación.',
+    characteristics: {
+      size: '270 g',
+      hairType: ['Negro', 'Castaño oscuro', 'Gris'],
+      benefits: ['Refresca color', 'Hidratación'],
+      keyIngredients: ['Pigmento gris/negro'],
+      sulfateFree: false,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['Aviva el negro', 'Doble función matizadora + tratamiento'],
+    cons: ['Mancha toallas']
+  },
+
+  // ---------------- FIDELITÉ — STYLING & OTROS ----------------
+  {
+    id: 'fs01',
+    name: 'Crema de Peinado Multi-Acción Caviar 250 ml',
+    brand: 'Fidelité',
+    line: 'Styling',
+    subcategory: 'Crema de peinar',
+    price: 11000,
+    rating: 4.5,
+    reviews: 1240,
+    imageUrl: 'https://fidelite.com.ar/img/productos/44/crema-de-peinado-multiaccion_2.jpg',
+    image: '🌿',
+    color: '#fef3c7',
+    description:
+      'Crema de peinado multi-acción para todo tipo de cabello. Hidrata, modela y aporta brillo.',
+    characteristics: {
+      size: '250 ml',
+      hairType: ['Todos'],
+      benefits: ['Hidratación', 'Modelado', 'Brillo'],
+      keyIngredients: ['Extracto de caviar'],
+      sulfateFree: true,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['Versátil', 'No deja efecto cartón'],
+    cons: ['Fijación leve']
+  },
+  {
+    id: 'fs02',
+    name: 'Crema de Peinado Lacios 250 ml',
+    brand: 'Fidelité',
+    line: 'Styling',
+    subcategory: 'Crema de peinar',
+    price: 10500,
+    rating: 4.4,
+    reviews: 860,
+    imageUrl: 'https://fidelite.com.ar/img/productos/45/crema-de-peinado-lacios_2.jpg',
+    image: '🌬️',
+    color: '#bae6fd',
+    description:
+      'Crema de peinado específica para alaciar. Sella, alisa y aporta movimiento natural.',
+    characteristics: {
+      size: '250 ml',
+      hairType: ['Liso'],
+      benefits: ['Alisado', 'Sellado'],
+      keyIngredients: ['Polímeros disciplinantes'],
+      sulfateFree: true,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['Lisos sin pesadez', 'Buen movimiento'],
+    cons: ['No para rulos']
+  },
+  {
+    id: 'fs03',
+    name: 'Crema de Peinado Rulos 250 ml',
+    brand: 'Fidelité',
+    line: 'Styling',
+    subcategory: 'Crema de peinar',
+    price: 10500,
+    rating: 4.5,
+    reviews: 1180,
+    imageUrl: 'https://fidelite.com.ar/img/productos/46/crema-de-peinado-rizos_2.jpg',
+    image: '🌀',
+    color: '#fbcfe8',
+    description:
+      'Crema específica para definir rulos. Activa el rizo, controla el frizz y deja movimiento.',
+    characteristics: {
+      size: '250 ml',
+      hairType: ['Rizado', 'Ondulado'],
+      benefits: ['Definición rizos', 'Antifrizz'],
+      keyIngredients: ['Glicerina', 'Polímeros'],
+      sulfateFree: true,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['Definición real', 'No engancha el peine'],
+    cons: ['Hay que probar dosis']
+  },
+  {
+    id: 'fs04',
+    name: 'Protector Térmico Caviar 120 ml',
+    brand: 'Fidelité',
+    line: 'Styling',
+    subcategory: 'Protector térmico',
+    price: 12500,
+    rating: 4.5,
+    reviews: 920,
+    imageUrl: 'https://fidelite.com.ar/img/productos/48/protector-termico-caviar.jpg',
+    image: '🔥',
+    color: '#f97316',
+    description:
+      'Protector térmico con extracto de caviar. Escuda contra el calor de planchitas y secadores.',
+    characteristics: {
+      size: '120 ml',
+      hairType: ['Todos'],
+      benefits: ['Protección térmica', 'Brillo'],
+      keyIngredients: ['Extracto de caviar', 'Polímeros termoprotectores'],
+      sulfateFree: true,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['Pulveriza fino', 'No engrasa'],
+    cons: ['Frasco chico para uso pro']
+  },
+  {
+    id: 'fs05',
+    name: 'Bubble Shock 10 (20 ml)',
+    brand: 'Fidelité',
+    line: 'Tratamientos',
+    subcategory: 'Tratamiento',
+    price: 7500,
+    rating: 4.4,
+    reviews: 380,
+    imageUrl: 'https://fidelite.com.ar/img/productos/139/fidelite-bubble_caja_03_2.jpg',
+    image: '🫧',
+    color: '#bae6fd',
+    description:
+      'Tratamiento capilar multifunción en formato burbuja. 10 beneficios en un producto.',
+    characteristics: {
+      size: '20 ml',
+      hairType: ['Todos'],
+      benefits: ['Multibeneficio', 'Brillo', 'Suavidad'],
+      keyIngredients: ['Complejo multifunción'],
+      sulfateFree: true,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['Práctico', 'Resultado express'],
+    cons: ['Una sola aplicación por unidad']
+  },
+  {
+    id: 'fs06',
+    name: 'Urban Shield 365 (120 ml)',
+    brand: 'Fidelité',
+    line: 'Tratamientos',
+    subcategory: 'Tratamiento',
+    price: 13800,
+    rating: 4.5,
+    reviews: 460,
+    imageUrl: 'https://fidelite.com.ar/img/productos/179/urbanshield-fotoproductoweb_2.jpg',
+    image: '🛡️',
+    color: '#94a3b8',
+    description:
+      'Tratamiento sin enjuague que protege el cabello del estrés ambiental urbano (polución, UV).',
+    characteristics: {
+      size: '120 ml',
+      hairType: ['Todos'],
+      benefits: ['Protección ambiental', 'Brillo'],
+      keyIngredients: ['Filtros UV', 'Antioxidantes'],
+      sulfateFree: true,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['Idea novedosa', 'No apelmaza'],
+    cons: ['Beneficios poco visibles a corto plazo']
+  },
+  {
+    id: 'fs07',
+    name: 'Gel Fijación Natural 230 g',
+    brand: 'Fidelité',
+    line: 'Styling',
+    subcategory: 'Gel',
+    price: 7500,
+    rating: 4.3,
+    reviews: 720,
+    imageUrl: 'https://fidelite.com.ar/img/productos/59/gel-suave230.jpg',
+    image: '💎',
+    color: '#cbd5e1',
+    description:
+      'Gel de fijación natural que define peinados de larga duración con movimiento.',
+    characteristics: {
+      size: '230 g',
+      hairType: ['Todos'],
+      benefits: ['Fijación natural', 'Definición'],
+      keyIngredients: ['PVP', 'Glicerina'],
+      sulfateFree: true,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['No deja efecto cartón', 'Buen precio'],
+    cons: ['Fijación media']
+  },
+
+  // ---------------- OPCIÓN — SYNERGY BLEND (línea premium) ----------------
+  {
+    id: 'op01',
+    name: 'Shampoo OPCIÓN Synergy Blend 350 ml',
+    brand: 'Opción',
+    line: 'Synergy Blend',
+    subcategory: 'Champú',
+    price: 19500,
+    rating: 4.7,
+    reviews: 720,
+    imageUrl: 'https://www.opcionsalon.com.ar/media/images/medium/shampoo-1-x-1.jpg',
+    image: '🧴',
+    color: '#fef3c7',
+    description:
+      'Champú neutro de la línea Synergy Blend de Opción. Limpieza profunda con aceite de argán y CBD que prepara el cabello para los pasos siguientes.',
+    characteristics: {
+      size: '350 ml',
+      hairType: ['Todos'],
+      benefits: ['Limpieza profunda', 'Preparación'],
+      keyIngredients: ['Aceite de argán', 'CBD'],
+      sulfateFree: true,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['Línea premium local', 'Aroma sofisticado'],
+    cons: ['Precio elevado para uso diario']
+  },
+  {
+    id: 'op02',
+    name: 'Máscara Capilar OPCIÓN Synergy Blend 300 g',
+    brand: 'Opción',
+    line: 'Synergy Blend',
+    subcategory: 'Mascarilla',
+    price: 24500,
+    rating: 4.8,
+    reviews: 580,
+    imageUrl: 'https://www.opcionsalon.com.ar/media/images/medium/mascara_0.jpeg',
+    image: '🪮',
+    color: '#fbbf24',
+    description:
+      'Mascarilla de hidratación profunda con argán y CBD. Restaura la salud y vitalidad del cabello.',
+    characteristics: {
+      size: '300 g',
+      hairType: ['Seco', 'Dañado'],
+      benefits: ['Hidratación profunda', 'Reparación'],
+      keyIngredients: ['Aceite de argán', 'CBD'],
+      sulfateFree: true,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['Resultado pro', 'Aroma premium'],
+    cons: ['Cara para uso semanal']
+  },
+  {
+    id: 'op03',
+    name: 'Óleo Capilar OPCIÓN Synergy Blend 75 ml',
+    brand: 'Opción',
+    line: 'Synergy Blend',
+    subcategory: 'Aceite',
+    price: 22000,
+    rating: 4.7,
+    reviews: 410,
+    imageUrl: 'https://www.opcionsalon.com.ar/media/images/medium/oleo-1-x-1.jpg',
+    image: '✨',
+    color: '#d97706',
+    description:
+      'Óleo capilar con aceites de argán y CBD. Sella puntas, reduce frizz y porosidad. Sin enjuague.',
+    characteristics: {
+      size: '75 ml',
+      hairType: ['Seco', 'Frizz', 'Poroso'],
+      benefits: ['Antifrizz', 'Brillo', 'Sellado puntas'],
+      keyIngredients: ['Aceite de argán', 'CBD'],
+      sulfateFree: true,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['Pocas gotas alcanzan', 'Brillo intenso'],
+    cons: ['Frasco pequeño para precio']
+  },
+  {
+    id: 'op04',
+    name: 'Sérum Capilar Argán y CBD 225 ml',
+    brand: 'Opción',
+    line: 'Synergy Blend',
+    subcategory: 'Sérum',
+    price: 26500,
+    rating: 4.6,
+    reviews: 320,
+    imageUrl: 'https://www.opcionsalon.com.ar/media/images/medium/serum-1-x-1.jpg',
+    image: '💧',
+    color: '#fbbf24',
+    description:
+      'Sérum sin enjuague con aceites de argán y CBD. Hidratación profunda manteniendo suavidad y manejabilidad.',
+    characteristics: {
+      size: '225 ml',
+      hairType: ['Todos', 'Seco'],
+      benefits: ['Hidratación', 'Suavidad', 'Manejabilidad'],
+      keyIngredients: ['Aceite de argán', 'CBD'],
+      sulfateFree: true,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['Tamaño grande', 'Versátil mojado o seco'],
+    cons: ['Inversión inicial alta']
+  },
+
+  // ---------------- OPCIÓN — PRE Y POST COLOR ----------------
+  {
+    id: 'op05',
+    name: 'Shampoo Violeta Opción 225 ml',
+    brand: 'Opción',
+    line: 'Pre y Post Color',
+    subcategory: 'Champú',
+    price: 11500,
+    rating: 4.5,
+    reviews: 1240,
+    imageUrl: 'https://www.opcionsalon.com.ar/media/images/medium/shampoovioleta01.webp',
+    image: '🟣',
+    color: '#a78bfa',
+    description:
+      'Champú matizador violeta que neutraliza reflejos amarillos sin deshidratar. Ideal para rubios, canas y decolorados.',
+    characteristics: {
+      size: '225 ml',
+      hairType: ['Rubio', 'Canas', 'Decolorado'],
+      benefits: ['Matiza amarillo', 'Hidratación'],
+      keyIngredients: ['Pigmento violeta'],
+      sulfateFree: true,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['No reseca', 'Pigmento bueno'],
+    cons: ['Hay que controlar tiempo de pose']
+  },
+  {
+    id: 'op06',
+    name: 'Máscara Violeta Opción 300 g',
+    brand: 'Opción',
+    line: 'Pre y Post Color',
+    subcategory: 'Mascarilla',
+    price: 14500,
+    rating: 4.6,
+    reviews: 880,
+    imageUrl: 'https://www.opcionsalon.com.ar/media/images/medium/mascara01.webp',
+    image: '🟣',
+    color: '#a78bfa',
+    description:
+      'Mascarilla matizadora violeta. Penetra en la fibra, protege de la oxidación y devuelve hidratación.',
+    characteristics: {
+      size: '300 g',
+      hairType: ['Rubio', 'Canas', 'Decolorado'],
+      benefits: ['Matiza amarillo', 'Hidratación', 'Protege oxidación'],
+      keyIngredients: ['Pigmento violeta', 'Activos hidratantes'],
+      sulfateFree: true,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['Doble función', 'Resultado en una aplicación'],
+    cons: ['Mancha si se deja mucho']
+  },
+  {
+    id: 'op07',
+    name: 'Shampoo Rojo Opción',
+    brand: 'Opción',
+    line: 'Pre y Post Color',
+    subcategory: 'Champú',
+    price: 12500,
+    rating: 4.5,
+    reviews: 540,
+    imageUrl: 'https://www.opcionsalon.com.ar/media/images/medium/shampoovioleta01.webp',
+    image: '🔴',
+    color: '#dc2626',
+    description:
+      'Champú matizador rojo que aviva y mantiene el color cobrizo y rojizo entre coloraciones.',
+    characteristics: {
+      size: '225 ml',
+      hairType: ['Pelirrojo', 'Cobrizo'],
+      benefits: ['Aviva color rojo', 'Hidratación'],
+      keyIngredients: ['Pigmento rojo'],
+      sulfateFree: true,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['Específico para rojos', 'No reseca'],
+    cons: ['Pigmento muy potente, dosificar bien']
+  },
+
+  // ---------------- OPCIÓN — LÍNEA QUERATÍNICA ----------------
+  {
+    id: 'op08',
+    name: 'Bi Fase Queratínico Opción 225 ml',
+    brand: 'Opción',
+    line: 'Queratínica',
+    subcategory: 'Acondicionador',
+    price: 10500,
+    rating: 4.5,
+    reviews: 1180,
+    imageUrl: 'https://www.opcionsalon.com.ar/media/images/medium/01bifase.webp',
+    image: '🌬️',
+    color: '#bae6fd',
+    description:
+      'Spray bifásico desenredante con keratina. Hidrata, da brillo y elasticidad. Aporta volumen.',
+    characteristics: {
+      size: '225 ml',
+      hairType: ['Todos'],
+      benefits: ['Desenredo', 'Brillo', 'Elasticidad'],
+      keyIngredients: ['Keratina hidrolizada'],
+      sulfateFree: true,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['Multifunción', 'Cómodo en spray'],
+    cons: ['Hay que agitar antes']
+  },
+
+  // ---------------- OPCIÓN — LÍNEA 10 EN 1 ----------------
+  {
+    id: 'op09',
+    name: 'Protector Térmico Opción 200 ml',
+    brand: 'Opción',
+    line: '10 en 1',
+    subcategory: 'Protector térmico',
+    price: 13500,
+    rating: 4.6,
+    reviews: 960,
+    imageUrl: 'https://www.opcionsalon.com.ar/media/images/medium/protector-termico4.jpg',
+    image: '🔥',
+    color: '#f97316',
+    description:
+      'Protector térmico con keratina vegetal y filtro solar. Protección hasta 230°C, antifrizz y sellado de cutícula. Sistema 3X.',
+    characteristics: {
+      size: '200 ml',
+      hairType: ['Todos'],
+      benefits: ['Protección térmica', 'Antifrizz', 'Filtro solar', 'Brillo'],
+      keyIngredients: ['Keratina vegetal', 'Glicerina', 'Filtro UV'],
       sulfateFree: true,
       vegan: true,
-      origin: 'Brasil'
+      origin: 'Argentina'
     },
-    pros: ['Vegano', 'Aroma natural', 'Apto curly method'],
-    cons: ['Hay que aplicar cantidad generosa']
+    pros: ['10 beneficios reales', 'Vegano', 'Filtro UV'],
+    cons: ['Frasco pulverizador puede gotear']
+  },
+  {
+    id: 'op10',
+    name: 'BB Hair Opción 225 ml',
+    brand: 'Opción',
+    line: '10 en 1',
+    subcategory: 'Tratamiento',
+    price: 14500,
+    rating: 4.6,
+    reviews: 720,
+    imageUrl: 'https://www.opcionsalon.com.ar/media/images/medium/01bbhair.webp',
+    image: '💆',
+    color: '#fde68a',
+    description:
+      'Multifunción 10 en 1 sin enjuague: alisa, sella cutícula, protege del sol, repara, fortalece, hidrata, repone keratina y aporta brillo.',
+    characteristics: {
+      size: '225 ml',
+      hairType: ['Todos'],
+      benefits: ['Multibeneficio', 'Brillo', 'Reparación', 'Hidratación'],
+      keyIngredients: ['Keratina', 'Filtro UV'],
+      sulfateFree: true,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['10 beneficios en un producto', 'Sin enjuague'],
+    cons: ['Hay que dosificar']
+  },
+
+  // ---------------- OPCIÓN — TRATAMIENTO ----------------
+  {
+    id: 'op11',
+    name: 'Cera Nutriente Opción 350 ml',
+    brand: 'Opción',
+    line: 'Tratamiento',
+    subcategory: 'Tratamiento',
+    price: 15500,
+    rating: 4.5,
+    reviews: 540,
+    imageUrl: 'https://www.opcionsalon.com.ar/media/images/medium/renderopcionlineanutricionceranutrientex350g.png',
+    image: '🍯',
+    color: '#fcd34d',
+    description:
+      'Cera nutriente con keratina y Pro Vitamina E. Protege y restaura cabellos dañados por decoloración, tinturas o permanentes.',
+    characteristics: {
+      size: '350 ml',
+      hairType: ['Decolorado', 'Teñido', 'Permanentado'],
+      benefits: ['Reparación', 'Nutrición', 'Antiage'],
+      keyIngredients: ['Keratina', 'Pro Vitamina E'],
+      sulfateFree: true,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['Tratamiento profundo', 'Resultados pro'],
+    cons: ['Tiempo de pose 10-15 min']
+  },
+
+  // ---------------- OPCIÓN — STYLING ----------------
+  {
+    id: 'op12',
+    name: 'Mousse Opción 420 ml',
+    brand: 'Opción',
+    line: 'Touch Final',
+    subcategory: 'Styling',
+    price: 9500,
+    rating: 4.4,
+    reviews: 1320,
+    imageUrl: 'https://www.opcionsalon.com.ar/media/images/medium/01mousse.webp',
+    image: '☁️',
+    color: '#fef3c7',
+    description:
+      'Mousse acondicionadora para todas las técnicas de peinado. Aporta duración, volumen y brillo.',
+    characteristics: {
+      size: '420 ml',
+      hairType: ['Todos', 'Rizado', 'Liso'],
+      benefits: ['Volumen', 'Fijación', 'Brillo'],
+      keyIngredients: ['Siliconas tratantes'],
+      sulfateFree: true,
+      vegan: false,
+      origin: 'Argentina'
+    },
+    pros: ['Versátil para varias técnicas', 'Buen volumen'],
+    cons: ['Aroma fuerte']
   }
 ]
 
 export const subcategories = [...new Set(products.map(p => p.subcategory))]
+export const brands = [...new Set(products.map(p => p.brand))]

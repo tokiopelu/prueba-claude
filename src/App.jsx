@@ -3,14 +3,15 @@ import SearchBar from './components/SearchBar.jsx'
 import Chips from './components/Chips.jsx'
 import Ranking from './components/Ranking.jsx'
 import WeightControls from './components/WeightControls.jsx'
-import { products, subcategories } from './data/products.js'
+import { products, subcategories, brands } from './data/products.js'
 import { rankProducts } from './lib/score.js'
 
-const STARTERS = ['h01', 'h03', 'h04']
+const STARTERS = ['fc05', 'op02', 'fa05']
 
 export default function App() {
   const [selectedIds, setSelectedIds] = useState(STARTERS)
   const [activeSubcategory, setActiveSubcategory] = useState('Todos')
+  const [activeBrand, setActiveBrand] = useState('Todas')
   const [weights, setWeights] = useState({ rating: 50, reviews: 30, price: 20 })
 
   const selected = useMemo(
@@ -19,9 +20,11 @@ export default function App() {
   )
 
   const filtered = useMemo(() => {
-    if (activeSubcategory === 'Todos') return selected
-    return selected.filter(p => p.subcategory === activeSubcategory)
-  }, [selected, activeSubcategory])
+    return selected.filter(p =>
+      (activeSubcategory === 'Todos' || p.subcategory === activeSubcategory) &&
+      (activeBrand === 'Todas' || p.brand === activeBrand)
+    )
+  }, [selected, activeSubcategory, activeBrand])
 
   const ranked = useMemo(() => rankProducts(filtered, weights), [filtered, weights])
 
@@ -53,13 +56,14 @@ export default function App() {
 
       <section className="hero">
         <div className="container hero-inner">
-          <div className="hero-eyebrow">Comparador de productos para el pelo</div>
+          <div className="hero-eyebrow">Comparador · Fidelité × Opción</div>
           <h1 className="hero-title">
             El producto ideal<br /><em>para tu pelo</em>.
           </h1>
           <p className="hero-sub">
-            Champús, acondicionadores, mascarillas, aceites, tratamientos y más.
-            Buscá, compará características y precios, y obtené tu ranking en segundos.
+            Catálogo curado con productos reales de <strong>Fidelité</strong> y{' '}
+            <strong>Opción</strong>. Compará características, precios y elegí el ganador
+            según tus prioridades.
           </p>
 
           <div id="comparador" className="search-shell">
@@ -72,22 +76,46 @@ export default function App() {
 
           <Chips items={selected} onRemove={remove} onClear={clear} />
 
-          <div className="filter-bar">
-            <button
-              className={'pill' + (activeSubcategory === 'Todos' ? ' is-on' : '')}
-              onClick={() => setActiveSubcategory('Todos')}
-            >
-              Todos
-            </button>
-            {subcategories.map(c => (
+          <div className="filter-section">
+            <div className="filter-label">Marca</div>
+            <div className="filter-bar">
               <button
-                key={c}
-                className={'pill' + (activeSubcategory === c ? ' is-on' : '')}
-                onClick={() => setActiveSubcategory(c)}
+                className={'pill pill--brand' + (activeBrand === 'Todas' ? ' is-on' : '')}
+                onClick={() => setActiveBrand('Todas')}
               >
-                {c}
+                Todas
               </button>
-            ))}
+              {brands.map(b => (
+                <button
+                  key={b}
+                  className={'pill pill--brand' + (activeBrand === b ? ' is-on' : '')}
+                  onClick={() => setActiveBrand(b)}
+                >
+                  {b}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="filter-section">
+            <div className="filter-label">Tipo de producto</div>
+            <div className="filter-bar">
+              <button
+                className={'pill' + (activeSubcategory === 'Todos' ? ' is-on' : '')}
+                onClick={() => setActiveSubcategory('Todos')}
+              >
+                Todos
+              </button>
+              {subcategories.map(c => (
+                <button
+                  key={c}
+                  className={'pill' + (activeSubcategory === c ? ' is-on' : '')}
+                  onClick={() => setActiveSubcategory(c)}
+                >
+                  {c}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -120,7 +148,9 @@ export default function App() {
             </div>
             <p className="footer-tag">Tu comparador de productos para el pelo.</p>
           </div>
-          <p className="footer-meta">© {new Date().getFullYear()} tubelleza · Datos de muestra</p>
+          <p className="footer-meta">
+            © {new Date().getFullYear()} tubelleza · Imágenes y fichas: fidelite.com.ar y opcionsalon.com.ar · Precios estimados de mercado
+          </p>
         </div>
       </footer>
     </div>

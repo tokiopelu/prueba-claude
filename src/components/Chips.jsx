@@ -4,7 +4,11 @@ export default function Chips({ items, onRemove, onClear }) {
     <div className="chips-row">
       {items.map(p => (
         <span key={p.id} className="chip" style={{ '--chip-color': p.color }}>
-          <span className="chip-dot" aria-hidden>{p.image}</span>
+          <span className="chip-dot" aria-hidden>
+            {p.imageUrl
+              ? <img src={p.imageUrl} alt="" loading="lazy" />
+              : p.image}
+          </span>
           {p.name}
           <button
             className="chip-x"
