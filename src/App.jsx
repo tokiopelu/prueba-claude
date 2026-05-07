@@ -4,6 +4,7 @@ import Chips from './components/Chips.jsx'
 import Ranking from './components/Ranking.jsx'
 import WeightControls from './components/WeightControls.jsx'
 import Catalog from './components/Catalog.jsx'
+import TopBar from './components/TopBar.jsx'
 import { products, subcategories, brands } from './data/products.js'
 import { rankProducts } from './lib/score.js'
 
@@ -49,6 +50,7 @@ export default function App() {
 
   return (
     <div className="app">
+      <TopBar />
       <header className="site-header">
         <div className="container header-row">
           <a href="/" className="brand">
@@ -167,22 +169,95 @@ export default function App() {
       )}
 
       <footer className="site-footer">
-        <div className="container footer-inner">
-          <div>
-            <div className="brand">
-              <span className="brand-mark">R</span>
-              <span className="brand-name">
-                <span className="brand-name-mark">ROMA</span>
-                <span className="brand-name-italic">beauty</span>
-              </span>
+        <div className="container">
+          <div className="footer-grid">
+            <div className="footer-col footer-col--brand">
+              <div className="brand">
+                <span className="brand-mark">R</span>
+                <span className="brand-name">
+                  <span className="brand-name-mark">ROMA</span>
+                  <span className="brand-name-italic">beauty</span>
+                </span>
+              </div>
+              <p className="footer-tag">
+                Una curaduría de productos profesionales para el pelo.<br />
+                Hecho con cuidado en Argentina.
+              </p>
+              <div className="footer-social">
+                <a href="#" aria-label="Instagram">Instagram</a>
+                <span className="footer-dot">·</span>
+                <a href="#" aria-label="TikTok">TikTok</a>
+                <span className="footer-dot">·</span>
+                <a href="#" aria-label="WhatsApp">WhatsApp</a>
+              </div>
             </div>
-            <p className="footer-tag">Belleza capilar profesional · Argentina</p>
+
+            <div className="footer-col">
+              <h4 className="footer-h">Marcas</h4>
+              <ul className="footer-list">
+                {brands.map(b => {
+                  const count = products.filter(p => p.brand === b).length
+                  return (
+                    <li key={b}>
+                      <button
+                        className="footer-link"
+                        onClick={() => { setActiveBrand(b); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
+                      >
+                        {b} <span className="footer-count">{count}</span>
+                      </button>
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
+
+            <div className="footer-col">
+              <h4 className="footer-h">Categorías</h4>
+              <ul className="footer-list">
+                {subcategories.slice(0, 7).map(c => (
+                  <li key={c}>
+                    <button
+                      className="footer-link"
+                      onClick={() => { setActiveSubcategory(c); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
+                    >
+                      {c}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="footer-col footer-col--news">
+              <h4 className="footer-h">Recibí ofertas</h4>
+              <p className="footer-news-sub">
+                10% off en tu primera compra y novedades semanales de las tres marcas.
+              </p>
+              <form
+                className="footer-news"
+                onSubmit={e => { e.preventDefault(); alert('¡Gracias! Te vamos a escribir pronto.') }}
+              >
+                <input
+                  type="email"
+                  required
+                  placeholder="Tu email"
+                  className="footer-news-input"
+                />
+                <button type="submit" className="footer-news-btn">Suscribirme</button>
+              </form>
+              <ul className="footer-perks">
+                <li>· Envío gratis +$80.000</li>
+                <li>· 3 cuotas sin interés</li>
+                <li>· Cambios sin costo en 30 días</li>
+              </ul>
+            </div>
           </div>
-          <p className="footer-meta">
-            © {new Date().getFullYear()} ROMAbeauty<br />
-            Imágenes oficiales de lapuissance.com.ar, fidelite.com.ar y opcionsalon.com.ar<br />
-            Precios actualizados mayo 2026
-          </p>
+
+          <div className="footer-bottom">
+            <p>© {new Date().getFullYear()} ROMAbeauty · Todos los derechos reservados.</p>
+            <p className="footer-credit">
+              Imágenes oficiales: lapuissance.com.ar · fidelite.com.ar · opcionsalon.com.ar — Precios mayo 2026
+            </p>
+          </div>
         </div>
       </footer>
     </div>
