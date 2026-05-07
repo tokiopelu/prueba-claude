@@ -3,14 +3,14 @@ import SearchBar from './components/SearchBar.jsx'
 import Chips from './components/Chips.jsx'
 import Ranking from './components/Ranking.jsx'
 import WeightControls from './components/WeightControls.jsx'
-import { products, categories } from './data/products.js'
+import { products, subcategories } from './data/products.js'
 import { rankProducts } from './lib/score.js'
 
-const STARTERS = ['p01', 'p14', 'p13']
+const STARTERS = ['h01', 'h03', 'h04']
 
 export default function App() {
   const [selectedIds, setSelectedIds] = useState(STARTERS)
-  const [activeCategory, setActiveCategory] = useState('Todos')
+  const [activeSubcategory, setActiveSubcategory] = useState('Todos')
   const [weights, setWeights] = useState({ rating: 50, reviews: 30, price: 20 })
 
   const selected = useMemo(
@@ -19,9 +19,9 @@ export default function App() {
   )
 
   const filtered = useMemo(() => {
-    if (activeCategory === 'Todos') return selected
-    return selected.filter(p => p.category === activeCategory)
-  }, [selected, activeCategory])
+    if (activeSubcategory === 'Todos') return selected
+    return selected.filter(p => p.subcategory === activeSubcategory)
+  }, [selected, activeSubcategory])
 
   const ranked = useMemo(() => rankProducts(filtered, weights), [filtered, weights])
 
@@ -53,13 +53,13 @@ export default function App() {
 
       <section className="hero">
         <div className="container hero-inner">
-          <div className="hero-eyebrow">Comparador de productos de belleza</div>
+          <div className="hero-eyebrow">Comparador de productos para el pelo</div>
           <h1 className="hero-title">
-            Encontrá <em>el mejor</em> producto<br />para tu rutina.
+            El producto ideal<br /><em>para tu pelo</em>.
           </h1>
           <p className="hero-sub">
-            Buscá los productos que te interesan, ajustá tus prioridades y
-            obtené un ranking personalizado al instante.
+            Champús, acondicionadores, mascarillas, aceites, tratamientos y más.
+            Buscá, compará características y precios, y obtené tu ranking en segundos.
           </p>
 
           <div id="comparador" className="search-shell">
@@ -74,16 +74,16 @@ export default function App() {
 
           <div className="filter-bar">
             <button
-              className={'pill' + (activeCategory === 'Todos' ? ' is-on' : '')}
-              onClick={() => setActiveCategory('Todos')}
+              className={'pill' + (activeSubcategory === 'Todos' ? ' is-on' : '')}
+              onClick={() => setActiveSubcategory('Todos')}
             >
               Todos
             </button>
-            {categories.map(c => (
+            {subcategories.map(c => (
               <button
                 key={c}
-                className={'pill' + (activeCategory === c ? ' is-on' : '')}
-                onClick={() => setActiveCategory(c)}
+                className={'pill' + (activeSubcategory === c ? ' is-on' : '')}
+                onClick={() => setActiveSubcategory(c)}
               >
                 {c}
               </button>
@@ -118,7 +118,7 @@ export default function App() {
               <span className="brand-mark">t</span>
               <span className="brand-name">tubelleza</span>
             </div>
-            <p className="footer-tag">Tu comparador de belleza, sin vueltas.</p>
+            <p className="footer-tag">Tu comparador de productos para el pelo.</p>
           </div>
           <p className="footer-meta">© {new Date().getFullYear()} tubelleza · Datos de muestra</p>
         </div>

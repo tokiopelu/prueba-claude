@@ -11,11 +11,19 @@ export default function SearchBar({ products, selectedIds, onAdd }) {
     if (!q) return []
     return products
       .filter(p => !selectedIds.includes(p.id))
-      .filter(p =>
-        p.name.toLowerCase().includes(q) ||
-        p.brand.toLowerCase().includes(q) ||
-        p.category.toLowerCase().includes(q)
-      )
+      .filter(p => {
+        const haystack = [
+          p.name,
+          p.brand,
+          p.subcategory,
+          ...(p.characteristics?.benefits ?? []),
+          ...(p.characteristics?.hairType ?? []),
+          ...(p.characteristics?.keyIngredients ?? [])
+        ]
+          .join(' ')
+          .toLowerCase()
+        return haystack.includes(q)
+      })
       .slice(0, 8)
   }, [query, products, selectedIds])
 
@@ -57,7 +65,7 @@ export default function SearchBar({ products, selectedIds, onAdd }) {
         <input
           type="text"
           className="search-input"
-          placeholder="Buscá un producto, marca o categoría…"
+          placeholder="Buscá un producto, marca, ingrediente o beneficio…"
           value={query}
           onChange={e => { setQuery(e.target.value); setOpen(true); setHighlight(0) }}
           onFocus={() => setOpen(true)}
@@ -79,7 +87,7 @@ export default function SearchBar({ products, selectedIds, onAdd }) {
               <span className="search-thumb" style={{ background: p.color }}>{p.image}</span>
               <div className="search-meta">
                 <div className="search-name">{p.name}</div>
-                <div className="search-sub">{p.brand} · {p.category}</div>
+                <div className="search-sub">{p.brand} · {p.subcategory}</div>
               </div>
               <span className="search-price">${p.price.toLocaleString('es-AR')}</span>
             </li>

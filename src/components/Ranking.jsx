@@ -10,13 +10,57 @@ function Stars({ value }) {
   )
 }
 
+function Specs({ characteristics }) {
+  if (!characteristics) return null
+  const c = characteristics
+  return (
+    <div className="specs">
+      {c.size && (
+        <div className="spec">
+          <div className="spec-label">Tamaño</div>
+          <div className="spec-value">{c.size}</div>
+        </div>
+      )}
+      {c.hairType?.length > 0 && (
+        <div className="spec">
+          <div className="spec-label">Tipo de cabello</div>
+          <div className="spec-tags">
+            {c.hairType.map(t => <span key={t} className="tag">{t}</span>)}
+          </div>
+        </div>
+      )}
+      {c.benefits?.length > 0 && (
+        <div className="spec">
+          <div className="spec-label">Beneficios</div>
+          <div className="spec-tags">
+            {c.benefits.map(b => <span key={b} className="tag tag--benefit">{b}</span>)}
+          </div>
+        </div>
+      )}
+      {c.keyIngredients?.length > 0 && (
+        <div className="spec">
+          <div className="spec-label">Ingredientes clave</div>
+          <div className="spec-value spec-ingredients">{c.keyIngredients.join(', ')}</div>
+        </div>
+      )}
+      {(c.sulfateFree || c.vegan || c.origin) && (
+        <div className="spec spec-flags">
+          {c.sulfateFree && <span className="flag">✓ Sin sulfatos</span>}
+          {c.vegan && <span className="flag flag--vegan">✓ Vegano</span>}
+          {c.origin && <span className="flag flag--origin">📍 {c.origin}</span>}
+        </div>
+      )}
+    </div>
+  )
+}
+
 export default function Ranking({ items }) {
   if (items.length === 0) {
     return (
       <div className="empty-state">
-        <div className="empty-emoji" aria-hidden>🌷</div>
+        <div className="empty-emoji" aria-hidden>💁‍♀️</div>
         <h2>Empezá agregando productos</h2>
-        <p>Buscalos arriba y armá tu ranking personalizado.</p>
+        <p>Buscá champús, mascarillas, aceites y más en la barra de arriba.</p>
       </div>
     )
   }
@@ -53,7 +97,7 @@ export default function Ranking({ items }) {
                 <div>
                   <div className="rank-brand">{p.brand}</div>
                   <h3 className="rank-name">{p.name}</h3>
-                  <div className="rank-cat">{p.category}</div>
+                  <div className="rank-cat">{p.subcategory}</div>
                 </div>
                 <div className="rank-score">
                   <div className="score-num">{p.score}</div>
@@ -68,6 +112,8 @@ export default function Ranking({ items }) {
                 <span className="stat">{p.reviews.toLocaleString('es-AR')} reseñas</span>
                 <span className="stat price">${p.price.toLocaleString('es-AR')}</span>
               </div>
+
+              <Specs characteristics={p.characteristics} />
 
               <div className="rank-proscons">
                 <div>

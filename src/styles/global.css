@@ -537,6 +537,77 @@ ul, ol { margin: 0; padding: 0; }
 .star.is-on { color: var(--gold); }
 .stars-num { margin-left: 6px; font-weight: 600; color: var(--ink); }
 
+/* ---------- Specs ---------- */
+.specs {
+  display: grid;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+}
+.spec {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 10px;
+  align-items: start;
+  font-size: 13px;
+}
+.spec-label {
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-size: 11px;
+  font-weight: 600;
+  padding-top: 3px;
+}
+.spec-value {
+  color: var(--ink);
+  font-weight: 500;
+}
+.spec-ingredients { font-style: italic; font-weight: 400; color: var(--ink-soft); }
+.spec-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.tag {
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+}
+.tag--benefit {
+  background: var(--rose-soft);
+  border-color: transparent;
+  color: var(--rose-deep);
+}
+.spec-flags {
+  grid-template-columns: 1fr;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 4px;
+  border-top: 1px dashed var(--line);
+  margin-top: 4px;
+}
+.flag {
+  font-size: 12px;
+  background: #ecfdf5;
+  color: #047857;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: 500;
+}
+.flag--vegan { background: #f0fdf4; color: #15803d; }
+.flag--origin { background: var(--bg-soft); color: var(--ink-soft); }
+@media (max-width: 640px) {
+  .spec { grid-template-columns: 1fr; gap: 4px; }
+}
+
 .rank-proscons {
   display: grid;
   grid-template-columns: 1fr 1fr;
