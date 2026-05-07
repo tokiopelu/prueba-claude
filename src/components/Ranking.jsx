@@ -58,9 +58,9 @@ export default function Ranking({ items }) {
   if (items.length === 0) {
     return (
       <div className="empty-state">
-        <div className="empty-emoji" aria-hidden>💁‍♀️</div>
-        <h2>Empezá agregando productos</h2>
-        <p>Buscá champús, mascarillas, aceites y más en la barra de arriba.</p>
+        <div className="empty-emoji" aria-hidden>— · —</div>
+        <h2>Empezá agregando productos.</h2>
+        <p>Bajá al catálogo o usá el buscador para sumarlos a tu comparación.</p>
       </div>
     )
   }
@@ -87,7 +87,7 @@ export default function Ranking({ items }) {
         {items.map((p, i) => (
           <li key={p.id} className={'rank-card' + (i === 0 ? ' is-winner' : '')}>
             <div className="rank-pos">
-              {i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `#${i + 1}`}
+              {String(i + 1).padStart(2, '0')}
             </div>
             <div className="rank-img" style={{ background: p.color }}>
               {p.imageUrl

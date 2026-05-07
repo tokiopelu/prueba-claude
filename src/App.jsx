@@ -64,14 +64,14 @@ export default function App() {
 
       <section className="hero">
         <div className="container hero-inner">
-          <div className="hero-eyebrow">Comparador · Fidelité × Opción</div>
+          <div className="hero-eyebrow">Issue 01 · Fidelité × Opción</div>
           <h1 className="hero-title">
-            El producto ideal<br /><em>para tu pelo</em>.
+            El producto<br />ideal para <em>tu&nbsp;pelo</em>.
           </h1>
           <p className="hero-sub">
             Catálogo curado con productos reales de <strong>Fidelité</strong> y{' '}
-            <strong>Opción</strong>. Compará características, precios y elegí el ganador
-            según tus prioridades.
+            <strong>Opción</strong>. Compará características, precios y rating —
+            elegí el ganador según tus prioridades.
           </p>
 
           <div id="comparador" className="search-shell">
