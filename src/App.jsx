@@ -149,7 +149,7 @@ export default function App() {
             <p className="footer-tag">Tu comparador de productos para el pelo.</p>
           </div>
           <p className="footer-meta">
-            © {new Date().getFullYear()} tubelleza · Imágenes y fichas: fidelite.com.ar y opcionsalon.com.ar · Precios estimados de mercado
+            © {new Date().getFullYear()} tubelleza · Imágenes y fichas: fidelite.com.ar y opcionsalon.com.ar · Precios actualizados (mayo 2026) desde BM Distribuidora, Simple Insumos y otros retailers AR
           </p>
         </div>
       </footer>
