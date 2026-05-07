@@ -61,11 +61,11 @@ export default function SearchBar({ products, selectedIds, onAdd }) {
   return (
     <div className="search" ref={wrapRef}>
       <div className="search-input-wrap">
-        <span className="search-icon" aria-hidden>↳</span>
+        <span className="search-icon" aria-hidden>🔍</span>
         <input
           type="text"
           className="search-input"
-          placeholder="BUSCAR · PRODUCTO · MARCA · INGREDIENTE"
+          placeholder="Buscá producto, marca o ingrediente…"
           value={query}
           onChange={e => { setQuery(e.target.value); setOpen(true); setHighlight(0) }}
           onFocus={() => setOpen(true)}

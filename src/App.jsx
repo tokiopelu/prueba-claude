@@ -4,7 +4,6 @@ import Chips from './components/Chips.jsx'
 import Ranking from './components/Ranking.jsx'
 import WeightControls from './components/WeightControls.jsx'
 import Catalog from './components/Catalog.jsx'
-import Cursor from './components/Cursor.jsx'
 import { products, subcategories, brands } from './data/products.js'
 import { rankProducts } from './lib/score.js'
 
@@ -49,7 +48,6 @@ export default function App() {
 
   return (
     <div className="app">
-      <Cursor />
       <header className="site-header">
         <div className="container header-row">
           <a href="/" className="brand">
@@ -66,14 +64,14 @@ export default function App() {
 
       <section className="hero">
         <div className="container hero-inner">
-          <div className="hero-eyebrow">Issue 01 · Fidelité × Opción</div>
+          <div className="hero-eyebrow">Fidelité × Opción · 49 productos</div>
           <h1 className="hero-title">
-            El producto<br />ideal para <em>tu&nbsp;pelo</em>.
+            El cuidado <em>ideal</em> para tu&nbsp;pelo.
           </h1>
           <p className="hero-sub">
             Catálogo curado con productos reales de <strong>Fidelité</strong> y{' '}
             <strong>Opción</strong>. Compará características, precios y rating —
-            elegí el ganador según tus prioridades.
+            armá tu ranking según tus prioridades.
           </p>
 
           <div id="comparador" className="search-shell">

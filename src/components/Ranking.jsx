@@ -58,9 +58,9 @@ export default function Ranking({ items }) {
   if (items.length === 0) {
     return (
       <div className="empty-state">
-        <div className="empty-emoji" aria-hidden>— · —</div>
-        <h2>Empezá agregando productos.</h2>
-        <p>Bajá al catálogo o usá el buscador para sumarlos a tu comparación.</p>
+        <div className="empty-emoji" aria-hidden>· · ·</div>
+        <h2>Empezá tu comparación</h2>
+        <p>Agregá productos del catálogo de abajo o buscalos arriba.</p>
       </div>
     )
   }
