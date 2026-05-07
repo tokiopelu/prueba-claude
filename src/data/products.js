@@ -1,8 +1,9 @@
-// Hair-only catalog: Fidelité (https://www.fidelite.com.ar) + Opción (https://www.opcionsalon.com.ar)
-// Images from each brand's official site.
-// Prices in ARS sourced (May 2026) from real retailers:
-//   Fidelité → BM Distribuidora (bmdistribuidora.com.ar), Stylist Factory, VM Cosmética, Siempre Farmacias
-//   Opción  → Simple Insumos (simpleinsumos.mitiendanube.com), Burbujas Perfumerías, Casa Roma
+// Hair-only catalog: Fidelité + Opción + La Puissance (Argentine pro hair brands)
+// Images from each brand's official site / Shopify CDN.
+// Prices in ARS sourced (May 2026):
+//   Fidelité     → BM Distribuidora (bmdistribuidora.com.ar), Stylist Factory, VM Cosmética
+//   Opción       → Simple Insumos (simpleinsumos.mitiendanube.com), Burbujas Perfumerías, Casa Roma
+//   La Puissance → official lapuissance.com.ar (Shopify retail prices)
 
 export const products = [
   // ---------------- FIDELITÉ — LÍNEA ARGÁN ----------------
@@ -1591,6 +1592,828 @@ export const products = [
     },
     pros: ['Acondicionante', 'Económico'],
     cons: ['Solo para tintura sin amoníaco']
+  },
+
+  // =========================================================================
+  // LA PUISSANCE
+  // =========================================================================
+
+  // ---------------- LA PUISSANCE — EXTRA CELL PLEX (sistema 7 pasos) ----
+  {
+    id: 'lp01',
+    name: 'Extra Cell Plex · Paso 0 Pre-Shampoo',
+    brand: 'La Puissance',
+    line: 'Extra Cell Plex',
+    subcategory: 'Tratamiento',
+    price: 26900,
+    rating: 4.7,
+    reviews: 420,
+    imageUrl: 'https://lapuissance.com.ar/cdn/shop/files/01_Shampoo___Extra_Cell_Plex_Step_0___Pre-Wash.jpg?v=1774614486&width=1500',
+    image: '🧪',
+    color: '#fbeee4',
+    description:
+      'Pre-shampoo del sistema Extra Cell Plex. Prepara la fibra capilar antes del lavado para potenciar la reconstrucción de los enlaces.',
+    characteristics: {
+      size: '300 ml',
+      hairType: ['Dañado', 'Decolorado', 'Teñido'],
+      benefits: ['Pre-tratamiento', 'Reconstrucción'],
+      keyIngredients: ['Plex bonding technology'],
+      sulfateFree: true,
+      vegan: true,
+      origin: 'Argentina'
+    },
+    pros: ['Inicio del sistema bonding', 'Vegano'],
+    cons: ['Línea profesional, precio alto']
+  },
+  {
+    id: 'lp02',
+    name: 'Extra Cell Plex · Paso 1 Shampoo 300 ml',
+    brand: 'La Puissance',
+    line: 'Extra Cell Plex',
+    subcategory: 'Champú',
+    price: 35700,
+    rating: 4.8,
+    reviews: 1240,
+    imageUrl: 'https://lapuissance.com.ar/cdn/shop/files/01_Shampoo_ExtraCellPlex_Step1.jpg?v=1774896819&width=1500',
+    image: '🧴',
+    color: '#fbeee4',
+    description:
+      'Champú reparador del sistema Extra Cell Plex. Limpia con suavidad mientras refuerza los enlaces capilares dañados.',
+    characteristics: {
+      size: '300 ml',
+      hairType: ['Dañado', 'Decolorado', 'Teñido'],
+      benefits: ['Reparación', 'Bonding'],
+      keyIngredients: ['Plex bonding technology'],
+      sulfateFree: true,
+      vegan: true,
+      origin: 'Argentina'
+    },
+    pros: ['Vegano', 'Sin sulfatos', 'Resultados pro'],
+    cons: ['Precio elevado para uso diario']
+  },
+  {
+    id: 'lp03',
+    name: 'Extra Cell Plex · Paso 2 Bálsamo 300 ml',
+    brand: 'La Puissance',
+    line: 'Extra Cell Plex',
+    subcategory: 'Acondicionador',
+    price: 41400,
+    rating: 4.8,
+    reviews: 940,
+    imageUrl: 'https://lapuissance.com.ar/cdn/shop/files/01_Balsamo_ExtraCellPlex_Step2.jpg?v=1774896024&width=1500',
+    image: '💆',
+    color: '#fbeee4',
+    description:
+      'Bálsamo acondicionador post-shampoo del sistema Extra Cell Plex. Continúa la reconstrucción y desenreda con fluidez.',
+    characteristics: {
+      size: '300 ml',
+      hairType: ['Dañado', 'Decolorado'],
+      benefits: ['Reparación', 'Desenredo'],
+      keyIngredients: ['Plex bonding technology'],
+      sulfateFree: true,
+      vegan: true,
+      origin: 'Argentina'
+    },
+    pros: ['Sella cutícula', 'Vegano'],
+    cons: ['Premium tier de precio']
+  },
+  {
+    id: 'lp04',
+    name: 'Extra Cell Plex · Paso 3 Bonding Mask 250 ml',
+    brand: 'La Puissance',
+    line: 'Extra Cell Plex',
+    subcategory: 'Mascarilla',
+    price: 42600,
+    rating: 4.9,
+    reviews: 2380,
+    imageUrl: 'https://lapuissance.com.ar/cdn/shop/files/01_BondingMask_ExtraCellPlex_Step3.jpg?v=1774896161&width=1500',
+    image: '🪮',
+    color: '#fbeee4',
+    description:
+      'Mascarilla bonding del sistema Extra Cell Plex. Tratamiento intensivo que reconstruye los enlaces internos del cabello dañado.',
+    characteristics: {
+      size: '250 ml',
+      hairType: ['Dañado', 'Decolorado', 'Quebradizo'],
+      benefits: ['Reparación profunda', 'Bonding', 'Brillo'],
+      keyIngredients: ['Plex bonding technology'],
+      sulfateFree: true,
+      vegan: true,
+      origin: 'Argentina'
+    },
+    pros: ['Best seller absoluto', 'Resultados visibles', 'Vegano'],
+    cons: ['Precio elevado']
+  },
+  {
+    id: 'lp05',
+    name: 'Extra Cell Plex · Paso 4 Spray Maintenance 100 ml',
+    brand: 'La Puissance',
+    line: 'Extra Cell Plex',
+    subcategory: 'Tratamiento',
+    price: 13900,
+    rating: 4.7,
+    reviews: 580,
+    imageUrl: 'https://lapuissance.com.ar/cdn/shop/files/01_ExtraCellPlex_Step4_SprayMaintenance_100ml.jpg?v=1774896487&width=1500',
+    image: '💧',
+    color: '#fbeee4',
+    description:
+      'Spray sin enjuague del sistema Extra Cell Plex. Mantenimiento diario del bonding entre lavados.',
+    characteristics: {
+      size: '100 ml',
+      hairType: ['Dañado', 'Teñido'],
+      benefits: ['Mantenimiento bonding', 'Brillo'],
+      keyIngredients: ['Plex bonding technology'],
+      sulfateFree: true,
+      vegan: true,
+      origin: 'Argentina'
+    },
+    pros: ['Práctico, sin enjuague', 'Vegano'],
+    cons: ['Frasco chico']
+  },
+  {
+    id: 'lp06',
+    name: 'Extra Cell Plex · Paso 5 Shock Maintenance 15 ml',
+    brand: 'La Puissance',
+    line: 'Extra Cell Plex',
+    subcategory: 'Ampollas',
+    price: 9900,
+    rating: 4.7,
+    reviews: 320,
+    imageUrl: 'https://lapuissance.com.ar/cdn/shop/files/01_Step5_ShockMaintenance_ExtraCellPlex.jpg?v=1774896416&width=1500',
+    image: '⚗️',
+    color: '#fbeee4',
+    description:
+      'Ampolla shock del sistema Extra Cell Plex. Tratamiento puntual express para refuerzo intensivo.',
+    characteristics: {
+      size: '15 ml',
+      hairType: ['Dañado', 'Decolorado'],
+      benefits: ['Reparación express', 'Bonding'],
+      keyIngredients: ['Plex bonding technology'],
+      sulfateFree: true,
+      vegan: true,
+      origin: 'Argentina'
+    },
+    pros: ['Resultado inmediato', 'Apto post-decoloración'],
+    cons: ['Una aplicación por unidad']
+  },
+  {
+    id: 'lp07',
+    name: 'Extra Cell Plex · Paso 6 Sérum Bonding Oil 55 ml',
+    brand: 'La Puissance',
+    line: 'Extra Cell Plex',
+    subcategory: 'Aceite',
+    price: 33900,
+    rating: 4.8,
+    reviews: 460,
+    imageUrl: 'https://lapuissance.com.ar/cdn/shop/files/01_ExtraCellPlex_Step6_SerumBondingOil_55ml.jpg?v=1774896353&width=1500',
+    image: '✨',
+    color: '#d97757',
+    description:
+      'Sérum bonding oil del sistema Extra Cell Plex. Aceite reparador y de brillo que sella las puntas y termina la rutina.',
+    characteristics: {
+      size: '55 ml',
+      hairType: ['Dañado', 'Frizz', 'Seco'],
+      benefits: ['Brillo', 'Sellado puntas', 'Bonding'],
+      keyIngredients: ['Plex bonding technology', 'Aceites'],
+      sulfateFree: true,
+      vegan: true,
+      origin: 'Argentina'
+    },
+    pros: ['Brillo intenso', 'Vegano'],
+    cons: ['Frasco pequeño']
+  },
+  {
+    id: 'lp08',
+    name: 'Extra Cell Plex · Paso 7 Reviver Boost',
+    brand: 'La Puissance',
+    line: 'Extra Cell Plex',
+    subcategory: 'Tratamiento',
+    price: 24700,
+    rating: 4.7,
+    reviews: 280,
+    imageUrl: 'https://lapuissance.com.ar/cdn/shop/files/01_ExtraCellPlex_Step7_ReviverBoost.jpg?v=1774896535&width=1500',
+    image: '⚡',
+    color: '#fbeee4',
+    description:
+      'Reviver boost final del sistema Extra Cell Plex. Reactivación express del bonding entre tratamientos.',
+    characteristics: {
+      size: '100 ml',
+      hairType: ['Dañado', 'Teñido'],
+      benefits: ['Reactivación bonding', 'Brillo'],
+      keyIngredients: ['Plex bonding technology'],
+      sulfateFree: true,
+      vegan: true,
+      origin: 'Argentina'
+    },
+    pros: ['Cierra la rutina de 7 pasos', 'Vegano'],
+    cons: ['Más útil con el sistema completo']
+  },
+
+  // ---------------- LA PUISSANCE — HYDRASHINE COMPLEX ----------------
+  {
+    id: 'lp09',
+    name: 'Hydrashine Complex · Shampoo',
+    brand: 'La Puissance',
+    line: 'Hydrashine Complex',
+    subcategory: 'Champú',
+    price: 21000,
+    rating: 4.7,
+    reviews: 1620,
+    imageUrl: 'https://lapuissance.com.ar/cdn/shop/files/01_Shampoo_-_Hydrashine.jpg?v=1774614636&width=1500',
+    image: '🧴',
+    color: '#cffafe',
+    description:
+      'Champú con tecnología Hydrashine Complex. Hidratación profunda y brillo extremo desde el primer lavado.',
+    characteristics: {
+      size: '300 ml',
+      hairType: ['Seco', 'Opaco', 'Deshidratado'],
+      benefits: ['Hidratación', 'Brillo extremo'],
+      keyIngredients: ['Hydrashine Complex'],
+      sulfateFree: true,
+      vegan: true,
+      origin: 'Argentina'
+    },
+    pros: ['Brillo notable', 'Vegano', 'Sin sulfatos'],
+    cons: ['Premium para uso diario']
+  },
+  {
+    id: 'lp10',
+    name: 'Hydrashine Complex · Tratamiento',
+    brand: 'La Puissance',
+    line: 'Hydrashine Complex',
+    subcategory: 'Acondicionador',
+    price: 20600,
+    rating: 4.7,
+    reviews: 1380,
+    imageUrl: 'https://lapuissance.com.ar/cdn/shop/files/01_Tratamiento_-_Hydrashine.jpg?v=1774889892&width=1500',
+    image: '💆',
+    color: '#cffafe',
+    description:
+      'Tratamiento acondicionador Hydrashine Complex. Suaviza, desenreda y aporta brillo espejo.',
+    characteristics: {
+      size: '300 ml',
+      hairType: ['Seco', 'Opaco'],
+      benefits: ['Hidratación', 'Brillo', 'Suavidad'],
+      keyIngredients: ['Hydrashine Complex'],
+      sulfateFree: true,
+      vegan: true,
+      origin: 'Argentina'
+    },
+    pros: ['Resultado de salón', 'Vegano'],
+    cons: ['Aroma muy presente']
+  },
+  {
+    id: 'lp11',
+    name: 'Hydrashine Complex · Máscara Intensiva',
+    brand: 'La Puissance',
+    line: 'Hydrashine Complex',
+    subcategory: 'Mascarilla',
+    price: 22000,
+    rating: 4.8,
+    reviews: 980,
+    imageUrl: 'https://lapuissance.com.ar/cdn/shop/files/01_Mascara_intensiva_-_Hydrashine.jpg?v=1774614786&width=1500',
+    image: '🪮',
+    color: '#cffafe',
+    description:
+      'Mascarilla intensiva Hydrashine Complex. Hidratación profunda semanal para cabellos opacos.',
+    characteristics: {
+      size: '250 ml',
+      hairType: ['Seco', 'Opaco', 'Deshidratado'],
+      benefits: ['Hidratación profunda', 'Brillo'],
+      keyIngredients: ['Hydrashine Complex'],
+      sulfateFree: true,
+      vegan: true,
+      origin: 'Argentina'
+    },
+    pros: ['Brillo espejo', 'Vegano'],
+    cons: ['Para uso semanal']
+  },
+  {
+    id: 'lp12',
+    name: 'Hydrashine Complex · Desenredante Bifásico',
+    brand: 'La Puissance',
+    line: 'Hydrashine Complex',
+    subcategory: 'Tratamiento',
+    price: 22500,
+    rating: 4.7,
+    reviews: 740,
+    imageUrl: 'https://lapuissance.com.ar/cdn/shop/files/01_Desenredante_instantaneo_-_Hydrashine.jpg?v=1774614770&width=1500',
+    image: '🌬️',
+    color: '#cffafe',
+    description:
+      'Spray bifásico desenredante con tecnología Hydrashine. Desenreda al instante mientras hidrata.',
+    characteristics: {
+      size: '250 ml',
+      hairType: ['Todos', 'Seco'],
+      benefits: ['Desenredo', 'Hidratación', 'Brillo'],
+      keyIngredients: ['Hydrashine Complex'],
+      sulfateFree: true,
+      vegan: true,
+      origin: 'Argentina'
+    },
+    pros: ['Acción inmediata', 'Cómodo en spray'],
+    cons: ['Hay que agitar antes']
+  },
+  {
+    id: 'lp13',
+    name: 'Hydrashine Complex · Crema de Peinar',
+    brand: 'La Puissance',
+    line: 'Hydrashine Complex',
+    subcategory: 'Crema de peinar',
+    price: 20800,
+    rating: 4.7,
+    reviews: 620,
+    imageUrl: 'https://lapuissance.com.ar/cdn/shop/files/01_Crema_de_peinar_-_Hydrashine.jpg?v=1774614770&width=1500',
+    image: '🌿',
+    color: '#cffafe',
+    description:
+      'Crema de peinar Hydrashine Complex. Modela y aporta brillo extremo sin enjuague.',
+    characteristics: {
+      size: '250 ml',
+      hairType: ['Todos', 'Seco'],
+      benefits: ['Hidratación', 'Brillo', 'Modelado'],
+      keyIngredients: ['Hydrashine Complex'],
+      sulfateFree: true,
+      vegan: true,
+      origin: 'Argentina'
+    },
+    pros: ['Brillo desde la raíz', 'No apelmaza'],
+    cons: ['Aroma intenso']
+  },
+  {
+    id: 'lp14',
+    name: 'Hydrashine Complex · Ampolla Flash',
+    brand: 'La Puissance',
+    line: 'Hydrashine Complex',
+    subcategory: 'Ampollas',
+    price: 8900,
+    rating: 4.6,
+    reviews: 540,
+    imageUrl: 'https://lapuissance.com.ar/cdn/shop/files/01_Ampolla_flash_-_Hydrashine.jpg?v=1774614761&width=1500',
+    image: '⚡',
+    color: '#cffafe',
+    description:
+      'Ampolla flash Hydrashine Complex. Tratamiento express en una aplicación con brillo y suavidad inmediatos.',
+    characteristics: {
+      size: '15 ml',
+      hairType: ['Todos', 'Sin brillo'],
+      benefits: ['Brillo flash', 'Hidratación express'],
+      keyIngredients: ['Hydrashine Complex'],
+      sulfateFree: true,
+      vegan: true,
+      origin: 'Argentina'
+    },
+    pros: ['Resultado en 5 min', 'Vegano'],
+    cons: ['Una sola aplicación']
+  },
+
+  // ---------------- LA PUISSANCE — NUTRITION (argán + ác. hialurónico) ----
+  {
+    id: 'lp15',
+    name: 'Nutrition · Shampoo 300 ml',
+    brand: 'La Puissance',
+    line: 'Nutrition',
+    subcategory: 'Champú',
+    price: 20300,
+    rating: 4.7,
+    reviews: 2140,
+    imageUrl: 'https://lapuissance.com.ar/cdn/shop/files/01_Shampoo___Nutrition_300_ml.jpg?v=1774615297&width=1500',
+    image: '🧴',
+    color: '#fde68a',
+    description:
+      'Champú Nutrition con aceite de argán y ácido hialurónico liposomado. Nutrición intensa para cabellos secos y dañados.',
+    characteristics: {
+      size: '300 ml',
+      hairType: ['Seco', 'Dañado'],
+      benefits: ['Nutrición', 'Hidratación', 'Suavidad'],
+      keyIngredients: ['Aceite de argán', 'Ácido hialurónico liposomado'],
+      sulfateFree: true,
+      vegan: true,
+      origin: 'Argentina'
+    },
+    pros: ['Hidrata sin pesar', 'Vegano', 'Aroma sofisticado'],
+    cons: ['Premium para uso diario']
+  },
+  {
+    id: 'lp16',
+    name: 'Nutrition · Tratamiento 300 ml',
+    brand: 'La Puissance',
+    line: 'Nutrition',
+    subcategory: 'Acondicionador',
+    price: 17600,
+    rating: 4.6,
+    reviews: 1480,
+    imageUrl: 'https://lapuissance.com.ar/cdn/shop/files/01_Tratamiento___Nutrition_300_ml.jpg?v=1774880632&width=1500',
+    image: '💆',
+    color: '#fde68a',
+    description:
+      'Acondicionador Nutrition con argán y ácido hialurónico. Suaviza, desenreda y nutre profundamente.',
+    characteristics: {
+      size: '300 ml',
+      hairType: ['Seco', 'Dañado'],
+      benefits: ['Nutrición', 'Suavidad', 'Desenredo'],
+      keyIngredients: ['Aceite de argán', 'Ácido hialurónico liposomado'],
+      sulfateFree: true,
+      vegan: true,
+      origin: 'Argentina'
+    },
+    pros: ['Vegano', 'Brillo notable'],
+    cons: ['Aroma muy intenso']
+  },
+  {
+    id: 'lp17',
+    name: 'Nutrition · Máscara 250 ml',
+    brand: 'La Puissance',
+    line: 'Nutrition',
+    subcategory: 'Mascarilla',
+    price: 17600,
+    rating: 4.7,
+    reviews: 1660,
+    imageUrl: 'https://lapuissance.com.ar/cdn/shop/files/01.Mascara___Nutrition_250_ml.jpg?v=1774880399&width=1500',
+    image: '🪮',
+    color: '#fde68a',
+    description:
+      'Mascarilla Nutrition con argán y ácido hialurónico liposomado. Restaura cabellos secos en una aplicación.',
+    characteristics: {
+      size: '250 ml',
+      hairType: ['Seco', 'Dañado'],
+      benefits: ['Nutrición profunda', 'Hidratación'],
+      keyIngredients: ['Aceite de argán', 'Ácido hialurónico liposomado'],
+      sulfateFree: true,
+      vegan: true,
+      origin: 'Argentina'
+    },
+    pros: ['Excelente relación precio/efecto', 'Vegano'],
+    cons: ['Pesa en cabello fino']
+  },
+  {
+    id: 'lp18',
+    name: 'Nutrition · Óleo de Argán 30 ml',
+    brand: 'La Puissance',
+    line: 'Nutrition',
+    subcategory: 'Aceite',
+    price: 18000,
+    rating: 4.8,
+    reviews: 980,
+    imageUrl: 'https://lapuissance.com.ar/cdn/shop/files/1_Oleo___Nutrition_30_ml.jpg?v=1774880700&width=1500',
+    image: '✨',
+    color: '#d97757',
+    description:
+      'Óleo Nutrition con aceite de argán. Aporta brillo intenso y sella puntas. Pocas gotas alcanzan.',
+    characteristics: {
+      size: '30 ml',
+      hairType: ['Todos', 'Seco', 'Frizz'],
+      benefits: ['Brillo', 'Sellado puntas', 'Antifrizz'],
+      keyIngredients: ['Aceite de argán'],
+      sulfateFree: true,
+      vegan: true,
+      origin: 'Argentina'
+    },
+    pros: ['Rinde mucho', 'Brillo espejo'],
+    cons: ['Frasco pequeño']
+  },
+  {
+    id: 'lp19',
+    name: 'Nutrition · Crema de Peinar',
+    brand: 'La Puissance',
+    line: 'Nutrition',
+    subcategory: 'Crema de peinar',
+    price: 20200,
+    rating: 4.6,
+    reviews: 720,
+    imageUrl: 'https://lapuissance.com.ar/cdn/shop/files/01_Crema_de_peinar___Nutrition.jpg?v=1774880010&width=1500',
+    image: '🌿',
+    color: '#fde68a',
+    description:
+      'Crema de peinar Nutrition sin enjuague. Modela y nutre con argán y ácido hialurónico.',
+    characteristics: {
+      size: '250 ml',
+      hairType: ['Seco', 'Frizz'],
+      benefits: ['Nutrición', 'Modelado', 'Antifrizz'],
+      keyIngredients: ['Aceite de argán', 'Ácido hialurónico'],
+      sulfateFree: true,
+      vegan: true,
+      origin: 'Argentina'
+    },
+    pros: ['No deja efecto cartón', 'Vegano'],
+    cons: ['Hay que dosificar']
+  },
+  {
+    id: 'lp20',
+    name: 'Nutrition · Spray Final Touch 100 ml',
+    brand: 'La Puissance',
+    line: 'Nutrition',
+    subcategory: 'Tratamiento',
+    price: 13500,
+    rating: 4.6,
+    reviews: 380,
+    imageUrl: 'https://lapuissance.com.ar/cdn/shop/files/01_Spray_Final_Touch___Nutrition.jpg?v=1774880581&width=1500',
+    image: '💫',
+    color: '#fde68a',
+    description:
+      'Niebla de aceite de argán y ácido hialurónico liposomado. Toque final que aporta brillo y disciplina sin engrasar.',
+    characteristics: {
+      size: '100 ml',
+      hairType: ['Todos'],
+      benefits: ['Brillo', 'Toque final'],
+      keyIngredients: ['Aceite de argán', 'Ácido hialurónico'],
+      sulfateFree: true,
+      vegan: true,
+      origin: 'Argentina'
+    },
+    pros: ['Niebla muy fina', 'No engrasa'],
+    cons: ['Acción más cosmética que tratante']
+  },
+  {
+    id: 'lp21',
+    name: 'Nutrition · Ampolla Shock 15 ml',
+    brand: 'La Puissance',
+    line: 'Nutrition',
+    subcategory: 'Ampollas',
+    price: 7900,
+    rating: 4.6,
+    reviews: 460,
+    imageUrl: 'https://lapuissance.com.ar/cdn/shop/files/01_Ampolla_Shock_Nutrition.jpg?v=1774879941&width=1500',
+    image: '⚗️',
+    color: '#fde68a',
+    description:
+      'Ampolla shock Nutrition con argán y ácido hialurónico liposomado. Tratamiento express en monodosis.',
+    characteristics: {
+      size: '15 ml',
+      hairType: ['Seco', 'Dañado'],
+      benefits: ['Nutrición express', 'Brillo'],
+      keyIngredients: ['Aceite de argán', 'Ácido hialurónico'],
+      sulfateFree: true,
+      vegan: true,
+      origin: 'Argentina'
+    },
+    pros: ['Económica para probar la línea', 'Vegana'],
+    cons: ['Una sola aplicación']
+  },
+
+  // ---------------- LA PUISSANCE — KÉRATINE ----------------
+  {
+    id: 'lp22',
+    name: 'Kératine · Shampoo Reparador 300 ml',
+    brand: 'La Puissance',
+    line: 'Kératine',
+    subcategory: 'Champú',
+    price: 16600,
+    rating: 4.6,
+    reviews: 1440,
+    imageUrl: 'https://lapuissance.com.ar/cdn/shop/files/Keratine___Shampoo_Reparador.jpg?v=1774614893&width=1500',
+    image: '🧴',
+    color: '#fef3c7',
+    description:
+      'Champú reparador con queratina hidrolizada. Reestructura cabellos dañados o con frizz.',
+    characteristics: {
+      size: '300 ml',
+      hairType: ['Dañado', 'Frizz'],
+      benefits: ['Reparación', 'Antifrizz'],
+      keyIngredients: ['Queratina hidrolizada'],
+      sulfateFree: true,
+      vegan: true,
+      origin: 'Argentina'
+    },
+    pros: ['Vegano', 'Buen precio para línea pro'],
+    cons: ['Aroma fuerte']
+  },
+  {
+    id: 'lp23',
+    name: 'Kératine · Tratamiento Reparador 300 ml',
+    brand: 'La Puissance',
+    line: 'Kératine',
+    subcategory: 'Acondicionador',
+    price: 16600,
+    rating: 4.6,
+    reviews: 1180,
+    imageUrl: 'https://lapuissance.com.ar/cdn/shop/files/Keratine_TratamientoReparadorx300ML.jpg?v=1774890545&width=1500',
+    image: '💆',
+    color: '#fef3c7',
+    description:
+      'Acondicionador con queratina hidrolizada. Suaviza, sella cutícula y reduce el frizz.',
+    characteristics: {
+      size: '300 ml',
+      hairType: ['Dañado', 'Frizz'],
+      benefits: ['Reparación', 'Antifrizz', 'Suavidad'],
+      keyIngredients: ['Queratina hidrolizada'],
+      sulfateFree: true,
+      vegan: true,
+      origin: 'Argentina'
+    },
+    pros: ['Disciplina mucho', 'Vegano'],
+    cons: ['Aroma intenso']
+  },
+  {
+    id: 'lp24',
+    name: 'Kératine · Máscara Reparadora 250 ml',
+    brand: 'La Puissance',
+    line: 'Kératine',
+    subcategory: 'Mascarilla',
+    price: 16600,
+    rating: 4.7,
+    reviews: 1380,
+    imageUrl: 'https://lapuissance.com.ar/cdn/shop/files/MascaraReparadora_Keratine_250ml.jpg?v=1774890506&width=1500',
+    image: '🪮',
+    color: '#fef3c7',
+    description:
+      'Mascarilla reparadora con queratina hidrolizada. Reestructura la fibra y aporta fuerza.',
+    characteristics: {
+      size: '250 ml',
+      hairType: ['Dañado', 'Quebradizo'],
+      benefits: ['Reparación', 'Fortalecimiento'],
+      keyIngredients: ['Queratina hidrolizada'],
+      sulfateFree: true,
+      vegan: true,
+      origin: 'Argentina'
+    },
+    pros: ['Vegano', 'Excelente relación precio/efecto'],
+    cons: ['Para uso semanal']
+  },
+  {
+    id: 'lp25',
+    name: 'Kératine · Crema de Peinar',
+    brand: 'La Puissance',
+    line: 'Kératine',
+    subcategory: 'Crema de peinar',
+    price: 18200,
+    rating: 4.6,
+    reviews: 540,
+    imageUrl: 'https://lapuissance.com.ar/cdn/shop/files/01_Cremadepeinar_Keratine.jpg?v=1774890477&width=1500',
+    image: '🌿',
+    color: '#fef3c7',
+    description:
+      'Crema de peinar Kératine sin enjuague. Sella la cutícula y disciplina el frizz con keratina.',
+    characteristics: {
+      size: '250 ml',
+      hairType: ['Dañado', 'Frizz'],
+      benefits: ['Antifrizz', 'Modelado'],
+      keyIngredients: ['Queratina hidrolizada'],
+      sulfateFree: true,
+      vegan: true,
+      origin: 'Argentina'
+    },
+    pros: ['Disciplina sin endurecer', 'Vegano'],
+    cons: ['Hay que dosificar']
+  },
+
+  // ---------------- LA PUISSANCE — COLOR (matizadores y color) ----------
+  {
+    id: 'lp26',
+    name: 'Silver · Shampoo Matizador 300 ml',
+    brand: 'La Puissance',
+    line: 'Silver',
+    subcategory: 'Champú',
+    price: 23200,
+    rating: 4.7,
+    reviews: 1820,
+    imageUrl: 'https://lapuissance.com.ar/cdn/shop/files/01.Silver___Shampoo_Matizador_300_ml.jpg?v=1774614824&width=1500',
+    image: '🟣',
+    color: '#a78bfa',
+    description:
+      'Champú matizador violeta Silver. Neutraliza tonos amarillos en rubios, decolorados y canas con alta pigmentación.',
+    characteristics: {
+      size: '300 ml',
+      hairType: ['Rubio', 'Canas', 'Decolorado'],
+      benefits: ['Matiza amarillo', 'Brillo'],
+      keyIngredients: ['Pigmento violeta'],
+      sulfateFree: true,
+      vegan: true,
+      origin: 'Argentina'
+    },
+    pros: ['Pigmento muy potente', 'Vegano'],
+    cons: ['Hay que controlar tiempo de pose']
+  },
+  {
+    id: 'lp27',
+    name: 'Silver · Máscara Matizadora 250 ml',
+    brand: 'La Puissance',
+    line: 'Silver',
+    subcategory: 'Mascarilla',
+    price: 23900,
+    rating: 4.7,
+    reviews: 1340,
+    imageUrl: 'https://lapuissance.com.ar/cdn/shop/files/01.Silver_MascaraMatizadora.jpg?v=1774614824&width=1500',
+    image: '🟣',
+    color: '#a78bfa',
+    description:
+      'Máscara matizadora Silver. Hidrata mientras neutraliza el amarillo. Doble función matizadora + tratamiento.',
+    characteristics: {
+      size: '250 ml',
+      hairType: ['Rubio', 'Canas', 'Decolorado'],
+      benefits: ['Matiza amarillo', 'Hidratación'],
+      keyIngredients: ['Pigmento violeta'],
+      sulfateFree: true,
+      vegan: true,
+      origin: 'Argentina'
+    },
+    pros: ['Doble función', 'Vegano'],
+    cons: ['Mancha si se deja mucho']
+  },
+  {
+    id: 'lp28',
+    name: 'Royal Elixir · Shampoo 300 ml',
+    brand: 'La Puissance',
+    line: 'Royal Elixir',
+    subcategory: 'Champú',
+    price: 24900,
+    rating: 4.8,
+    reviews: 720,
+    imageUrl: 'https://lapuissance.com.ar/cdn/shop/files/Shampoo-RoyalElixir.jpg?v=1774614824&width=1500',
+    image: '👑',
+    color: '#fbbf24',
+    description:
+      'Champú Royal Elixir. Línea premium para cabellos teñidos: protege color y aporta brillo profundo.',
+    characteristics: {
+      size: '300 ml',
+      hairType: ['Teñido', 'Coloreado'],
+      benefits: ['Protección color', 'Brillo'],
+      keyIngredients: ['Royal Elixir complex'],
+      sulfateFree: true,
+      vegan: true,
+      origin: 'Argentina'
+    },
+    pros: ['Línea premium', 'Conserva color'],
+    cons: ['Precio alto']
+  },
+  {
+    id: 'lp29',
+    name: 'Color Protection · Shampoo Fijador 300 ml',
+    brand: 'La Puissance',
+    line: 'Color Protection',
+    subcategory: 'Champú',
+    price: 21200,
+    rating: 4.6,
+    reviews: 940,
+    imageUrl: 'https://lapuissance.com.ar/cdn/shop/files/Formas-ColorFixing-Shampoo.jpg?v=1774614824&width=1500',
+    image: '🎨',
+    color: '#fbcfe8',
+    description:
+      'Champú fijador de color. Prolonga la duración del color y reduce el desvanecimiento entre lavados.',
+    characteristics: {
+      size: '300 ml',
+      hairType: ['Teñido'],
+      benefits: ['Protección color', 'Brillo'],
+      keyIngredients: ['Filtros UV', 'Activos fijadores'],
+      sulfateFree: true,
+      vegan: true,
+      origin: 'Argentina'
+    },
+    pros: ['Mantiene color vivo', 'Vegano'],
+    cons: ['Espuma media']
+  },
+  {
+    id: 'lp30',
+    name: 'Black Platinum · Shampoo 300 ml',
+    brand: 'La Puissance',
+    line: 'Black Platinum',
+    subcategory: 'Champú',
+    price: 25500,
+    rating: 4.7,
+    reviews: 580,
+    imageUrl: 'https://lapuissance.com.ar/cdn/shop/files/01_Shampoo___Black_Platinum_300_ml.jpg?v=1774614824&width=1500',
+    image: '⚫',
+    color: '#1f2937',
+    description:
+      'Champú matizador Black Platinum. Refresca tonos negros y oscuros, neutraliza reflejos cobrizos.',
+    characteristics: {
+      size: '300 ml',
+      hairType: ['Negro', 'Castaño oscuro', 'Gris'],
+      benefits: ['Matiza tono', 'Profundidad'],
+      keyIngredients: ['Pigmento negro/azul'],
+      sulfateFree: true,
+      vegan: true,
+      origin: 'Argentina'
+    },
+    pros: ['Aviva el negro', 'Vegano'],
+    cons: ['Mancha si se deja mucho']
+  },
+
+  // ---------------- LA PUISSANCE — STYLING ----------------
+  {
+    id: 'lp31',
+    name: 'Curl Definition · Crema Modeladora 250 ml',
+    brand: 'La Puissance',
+    line: 'Curl Definition',
+    subcategory: 'Styling',
+    price: 22900,
+    rating: 4.8,
+    reviews: 2240,
+    imageUrl: 'https://lapuissance.com.ar/cdn/shop/files/01.Crema_modeladora___Curl_Definition.jpg?v=1774878421&width=1500',
+    image: '🌀',
+    color: '#fbcfe8',
+    description:
+      'Crema modeladora Curl Definition. Define rizos sin apelmazar, controla el frizz y deja movimiento natural.',
+    characteristics: {
+      size: '250 ml',
+      hairType: ['Rizado', 'Ondulado', 'Crespo'],
+      benefits: ['Definición rizos', 'Antifrizz', 'Modelado'],
+      keyIngredients: ['Polímeros', 'Glicerina'],
+      sulfateFree: true,
+      vegan: true,
+      origin: 'Argentina'
+    },
+    pros: ['Best seller curly', 'Apto curly method', 'Vegano'],
+    cons: ['Hay que probar dosis']
   }
 ]
 
