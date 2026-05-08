@@ -1,32 +1,25 @@
 import { useMemo, useState } from 'react'
 import SearchBar from './components/SearchBar.jsx'
-import Chips from './components/Chips.jsx'
-import Ranking from './components/Ranking.jsx'
-import WeightControls from './components/WeightControls.jsx'
 import Catalog from './components/Catalog.jsx'
 import TopBar from './components/TopBar.jsx'
+import CartDrawer from './components/CartDrawer.jsx'
+import CartBar from './components/CartBar.jsx'
+import Checkout from './pages/Checkout.jsx'
+import CheckoutSuccess from './pages/CheckoutSuccess.jsx'
+import CheckoutError from './pages/CheckoutError.jsx'
+import CheckoutPending from './pages/CheckoutPending.jsx'
 import { products, subcategories, brands } from './data/products.js'
-import { rankProducts } from './lib/score.js'
 import { productMeta } from './lib/meta.js'
+import { useCart, buildCartView } from './lib/cart.js'
+import { useRoute } from './lib/route.js'
 
 export default function App() {
-  const [selectedIds, setSelectedIds] = useState([])
+  const cartHook = useCart()
+  const { cart, add, remove, setQty, clear, qtyOf } = cartHook
+  const { path, navigate } = useRoute()
   const [activeSubcategory, setActiveSubcategory] = useState('Todos')
   const [activeBrand, setActiveBrand] = useState('Todas')
-  const [weights, setWeights] = useState({ rating: 50, reviews: 30, price: 20 })
-  const [showWeights, setShowWeights] = useState(false)
-
-  const selected = useMemo(
-    () => selectedIds.map(id => products.find(p => p.id === id)).filter(Boolean),
-    [selectedIds]
-  )
-
-  const filtered = useMemo(() => {
-    return selected.filter(p =>
-      (activeSubcategory === 'Todos' || p.subcategory === activeSubcategory) &&
-      (activeBrand === 'Todas' || p.brand === activeBrand)
-    )
-  }, [selected, activeSubcategory, activeBrand])
+  const [drawerOpen, setDrawerOpen] = useState(false)
 
   const catalogFiltered = useMemo(() => {
     return products.filter(p =>
@@ -44,39 +37,66 @@ export default function App() {
       .map(x => x.p)
   }, [catalogFiltered])
 
-  const ranked = useMemo(() => rankProducts(filtered, weights), [filtered, weights])
+  const cartView = buildCartView(cart)
 
-  function add(id) {
-    setSelectedIds(prev => (prev.includes(id) ? prev : [...prev, id]))
-  }
-  function remove(id) {
-    setSelectedIds(prev => prev.filter(x => x !== id))
-  }
-  function clear() {
-    setSelectedIds([])
+  function addAndOpen(id) {
+    add(id)
+    setDrawerOpen(true)
   }
 
-  const showRanking = ranked.length > 0
+  function goToCheckout() {
+    setDrawerOpen(false)
+    navigate('/checkout')
+  }
+
+  if (path === '/checkout') {
+    return (
+      <div className="app">
+        <Header onCartOpen={() => setDrawerOpen(true)} cartCount={cartView.itemCount} onLogoClick={() => navigate('/')} />
+        <Checkout cart={cart} onNavigate={navigate} />
+        <Footer onJumpFilter={({ brand, subcategory }) => {
+          if (brand) setActiveBrand(brand)
+          if (subcategory) setActiveSubcategory(subcategory)
+          navigate('/')
+        }} />
+      </div>
+    )
+  }
+
+  if (path === '/checkout/exito') {
+    return (
+      <div className="app">
+        <Header onCartOpen={() => setDrawerOpen(true)} cartCount={cartView.itemCount} onLogoClick={() => navigate('/')} />
+        <CheckoutSuccess onClearCart={clear} onNavigate={navigate} />
+        <Footer />
+      </div>
+    )
+  }
+
+  if (path === '/checkout/error') {
+    return (
+      <div className="app">
+        <Header onCartOpen={() => setDrawerOpen(true)} cartCount={cartView.itemCount} onLogoClick={() => navigate('/')} />
+        <CheckoutError onNavigate={navigate} />
+        <Footer />
+      </div>
+    )
+  }
+
+  if (path === '/checkout/pendiente') {
+    return (
+      <div className="app">
+        <Header onCartOpen={() => setDrawerOpen(true)} cartCount={cartView.itemCount} onLogoClick={() => navigate('/')} />
+        <CheckoutPending onClearCart={clear} onNavigate={navigate} />
+        <Footer />
+      </div>
+    )
+  }
 
   return (
     <div className="app">
       <TopBar />
-      <header className="site-header">
-        <div className="container header-row">
-          <a href="/" className="brand">
-            <span className="brand-mark">R</span>
-            <span className="brand-name">
-              <span className="brand-name-mark">ROMA</span>
-              <span className="brand-name-italic">beauty</span>
-            </span>
-          </a>
-          {selectedIds.length > 0 && (
-            <a href="#comparar" className="nav-cta">
-              Ver comparación · {selectedIds.length}
-            </a>
-          )}
-        </div>
-      </header>
+      <Header onCartOpen={() => setDrawerOpen(true)} cartCount={cartView.itemCount} onLogoClick={() => navigate('/')} />
 
       <section className="hero">
         <div className="container hero-inner">
@@ -88,8 +108,8 @@ export default function App() {
           <div className="search-shell">
             <SearchBar
               products={products}
-              selectedIds={selectedIds}
-              onAdd={add}
+              qtyOf={qtyOf}
+              onAdd={addAndOpen}
             />
           </div>
 
@@ -139,9 +159,9 @@ export default function App() {
         {offersFeed.length > 0 && (
           <Catalog
             products={offersFeed}
-            selectedIds={selectedIds}
-            onAdd={add}
-            onRemove={remove}
+            qtyOf={qtyOf}
+            onAdd={addAndOpen}
+            onSetQty={setQty}
             title={`🔥 Ofertas · ${offersFeed.length} productos en promo`}
             subtitle={<>Promos por tiempo limitado. <strong>¡No te lo pierdas!</strong></>}
           />
@@ -149,139 +169,147 @@ export default function App() {
 
         <Catalog
           products={catalogFiltered}
-          selectedIds={selectedIds}
-          onAdd={add}
-          onRemove={remove}
+          qtyOf={qtyOf}
+          onAdd={addAndOpen}
+          onSetQty={setQty}
           title={`🛍️ Catálogo · ${catalogFiltered.length} productos`}
         />
-
-        {showRanking && (
-          <section id="comparar" className="ranking-section">
-            <div className="ranking-section-head">
-              <div>
-                <Chips items={selected} onRemove={remove} onClear={clear} />
-              </div>
-              <button
-                className="link-btn"
-                onClick={() => setShowWeights(s => !s)}
-              >
-                {showWeights ? '✕ Cerrar prioridades' : '⚙ Ajustar prioridades'}
-              </button>
-            </div>
-
-            {showWeights && (
-              <div className="weights-inline">
-                <WeightControls weights={weights} onChange={setWeights} />
-              </div>
-            )}
-
-            <Ranking items={ranked} />
-          </section>
-        )}
       </main>
 
-      {selectedIds.length > 0 && (
-        <a href="#comparar" className="compare-bar">
-          <span className="compare-bar-count">{selectedIds.length}</span>
-          <span className="compare-bar-text">
-            {selectedIds.length === 1 ? 'producto seleccionado' : 'productos seleccionados'}
+      <CartBar cart={cart} onOpen={() => setDrawerOpen(true)} />
+
+      <CartDrawer
+        cart={cart}
+        onSetQty={setQty}
+        onRemove={remove}
+        isOpen={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        onCheckout={goToCheckout}
+      />
+
+      <Footer onJumpFilter={({ brand, subcategory }) => {
+        if (brand) setActiveBrand(brand)
+        if (subcategory) setActiveSubcategory(subcategory)
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      }} />
+    </div>
+  )
+}
+
+function Header({ onCartOpen, cartCount, onLogoClick }) {
+  return (
+    <header className="site-header">
+      <div className="container header-row">
+        <button className="brand brand--btn" onClick={onLogoClick}>
+          <span className="brand-mark">R</span>
+          <span className="brand-name">
+            <span className="brand-name-mark">ROMA</span>
+            <span className="brand-name-italic">beauty</span>
           </span>
-          <span className="compare-bar-action">Ver comparación →</span>
-        </a>
-      )}
+        </button>
+        <button className="nav-cta" onClick={onCartOpen}>
+          <span className="nav-cta-icon" aria-hidden>🛍</span>
+          <span>Bolsa</span>
+          {cartCount > 0 && <span className="nav-cta-count">{cartCount}</span>}
+        </button>
+      </div>
+    </header>
+  )
+}
 
-      <footer className="site-footer">
-        <div className="container">
-          <div className="footer-grid">
-            <div className="footer-col footer-col--brand">
-              <div className="brand">
-                <span className="brand-mark">R</span>
-                <span className="brand-name">
-                  <span className="brand-name-mark">ROMA</span>
-                  <span className="brand-name-italic">beauty</span>
-                </span>
-              </div>
-              <p className="footer-tag">
-                Una curaduría de productos profesionales para el pelo.<br />
-                Hecho con cuidado en Argentina.
-              </p>
-              <div className="footer-social">
-                <a href="#" aria-label="Instagram">Instagram</a>
-                <span className="footer-dot">·</span>
-                <a href="#" aria-label="TikTok">TikTok</a>
-                <span className="footer-dot">·</span>
-                <a href="#" aria-label="WhatsApp">WhatsApp</a>
-              </div>
+function Footer({ onJumpFilter }) {
+  return (
+    <footer className="site-footer">
+      <div className="container">
+        <div className="footer-grid">
+          <div className="footer-col footer-col--brand">
+            <div className="brand">
+              <span className="brand-mark">R</span>
+              <span className="brand-name">
+                <span className="brand-name-mark">ROMA</span>
+                <span className="brand-name-italic">beauty</span>
+              </span>
             </div>
-
-            <div className="footer-col">
-              <h4 className="footer-h">Marcas</h4>
-              <ul className="footer-list">
-                {brands.map(b => {
-                  const count = products.filter(p => p.brand === b).length
-                  return (
-                    <li key={b}>
-                      <button
-                        className="footer-link"
-                        onClick={() => { setActiveBrand(b); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
-                      >
-                        {b} <span className="footer-count">{count}</span>
-                      </button>
-                    </li>
-                  )
-                })}
-              </ul>
+            <p className="footer-tag">
+              Una curaduría de productos profesionales para el pelo.<br />
+              Hecho con cuidado en Argentina.
+            </p>
+            <div className="footer-social">
+              <a href="#" aria-label="Instagram">Instagram</a>
+              <span className="footer-dot">·</span>
+              <a href="#" aria-label="TikTok">TikTok</a>
+              <span className="footer-dot">·</span>
+              <a href="#" aria-label="WhatsApp">WhatsApp</a>
             </div>
+          </div>
 
-            <div className="footer-col">
-              <h4 className="footer-h">Categorías</h4>
-              <ul className="footer-list">
-                {subcategories.slice(0, 7).map(c => (
-                  <li key={c}>
+          <div className="footer-col">
+            <h4 className="footer-h">Marcas</h4>
+            <ul className="footer-list">
+              {brands.map(b => {
+                const count = products.filter(p => p.brand === b).length
+                return (
+                  <li key={b}>
                     <button
                       className="footer-link"
-                      onClick={() => { setActiveSubcategory(c); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
+                      onClick={() => onJumpFilter?.({ brand: b })}
                     >
-                      {c}
+                      {b} <span className="footer-count">{count}</span>
                     </button>
                   </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="footer-col footer-col--news">
-              <h4 className="footer-h">Recibí ofertas</h4>
-              <p className="footer-news-sub">
-                10% off en tu primera compra y novedades semanales de las tres marcas.
-              </p>
-              <form
-                className="footer-news"
-                onSubmit={e => { e.preventDefault(); alert('¡Gracias! Te vamos a escribir pronto.') }}
-              >
-                <input
-                  type="email"
-                  required
-                  placeholder="Tu email"
-                  className="footer-news-input"
-                />
-                <button type="submit" className="footer-news-btn">Suscribirme</button>
-              </form>
-              <ul className="footer-perks">
-                <li>· Envío gratis +$80.000</li>
-                <li>· 3 cuotas sin interés</li>
-                <li>· Cambios sin costo en 30 días</li>
-              </ul>
-            </div>
+                )
+              })}
+            </ul>
           </div>
 
-          <div className="footer-bottom">
-            <p>© {new Date().getFullYear()} ROMAbeauty · Todos los derechos reservados.</p>
-            <p className="footer-credit">
-              Imágenes oficiales: lapuissance.com.ar · fidelite.com.ar · opcionsalon.com.ar — Precios mayo 2026
+          <div className="footer-col">
+            <h4 className="footer-h">Categorías</h4>
+            <ul className="footer-list">
+              {subcategories.slice(0, 7).map(c => (
+                <li key={c}>
+                  <button
+                    className="footer-link"
+                    onClick={() => onJumpFilter?.({ subcategory: c })}
+                  >
+                    {c}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="footer-col footer-col--news">
+            <h4 className="footer-h">Recibí ofertas</h4>
+            <p className="footer-news-sub">
+              10% off en tu primera compra y novedades semanales de las tres marcas.
             </p>
+            <form
+              className="footer-news"
+              onSubmit={e => { e.preventDefault(); alert('¡Gracias! Te vamos a escribir pronto.') }}
+            >
+              <input
+                type="email"
+                required
+                placeholder="Tu email"
+                className="footer-news-input"
+              />
+              <button type="submit" className="footer-news-btn">Suscribirme</button>
+            </form>
+            <ul className="footer-perks">
+              <li>· Envío gratis +$80.000</li>
+              <li>· 3 cuotas sin interés</li>
+              <li>· Cambios sin costo en 30 días</li>
+            </ul>
           </div>
         </div>
-      </footer>
-    </div>
+
+        <div className="footer-bottom">
+          <p>© {new Date().getFullYear()} ROMAbeauty · Todos los derechos reservados.</p>
+          <p className="footer-credit">
+            Imágenes oficiales: lapuissance.com.ar · fidelite.com.ar · opcionsalon.com.ar — Precios mayo 2026
+          </p>
+        </div>
+      </div>
+    </footer>
   )
 }

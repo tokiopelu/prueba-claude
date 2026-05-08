@@ -5,15 +5,16 @@ function formatARS(n) {
   return n.toLocaleString('es-AR')
 }
 
-function CatalogCard({ p, index, total, isSelected, onAdd, onRemove }) {
+function CatalogCard({ p, index, total, qty, onAdd, onSetQty }) {
   const ref = useReveal()
   const meta = productMeta(p)
   const indexLabel = String(index + 1).padStart(2, '0')
   const totalLabel = String(total).padStart(2, '0')
+  const inCart = qty > 0
   return (
     <article
       ref={ref}
-      className={'cat-card reveal' + (isSelected ? ' is-selected' : '')}
+      className={'cat-card reveal' + (inCart ? ' is-selected' : '')}
     >
       <span className="cat-index">{indexLabel} / {totalLabel}</span>
       {meta.discount > 0 && (
@@ -52,19 +53,28 @@ function CatalogCard({ p, index, total, isSelected, onAdd, onRemove }) {
         </div>
 
         <div className="cat-foot">
-          {isSelected ? (
-            <button
-              className="cat-btn cat-btn--remove"
-              onClick={() => onRemove(p.id)}
-            >
-              ✓ En comparación
-            </button>
+          {inCart ? (
+            <div className="cat-qty" role="group" aria-label={`Cantidad de ${p.name}`}>
+              <button
+                className="cat-qty-btn"
+                onClick={() => onSetQty(p.id, qty - 1)}
+                aria-label="Quitar uno"
+              >−</button>
+              <span className="cat-qty-val" aria-live="polite">
+                {qty} <span className="cat-qty-tag">en bolsa</span>
+              </span>
+              <button
+                className="cat-qty-btn"
+                onClick={() => onSetQty(p.id, qty + 1)}
+                aria-label="Sumar uno"
+              >+</button>
+            </div>
           ) : (
             <button
               className="cat-btn"
               onClick={() => onAdd(p.id)}
             >
-              Comprar
+              Sumar a la bolsa
             </button>
           )}
         </div>
@@ -73,7 +83,7 @@ function CatalogCard({ p, index, total, isSelected, onAdd, onRemove }) {
   )
 }
 
-export default function Catalog({ products, selectedIds, onAdd, onRemove, title, subtitle }) {
+export default function Catalog({ products, qtyOf, onAdd, onSetQty, title, subtitle }) {
   if (products.length === 0) {
     return (
       <div className="catalog-empty">
@@ -88,7 +98,7 @@ export default function Catalog({ products, selectedIds, onAdd, onRemove, title,
         <h2>{title || `Catálogo · ${products.length} productos`}</h2>
         <p className="catalog-sub">
           {subtitle || (
-            <>Tocá <strong>Comprar</strong> para sumarlo a tu comparación.</>
+            <>Tocá <strong>Sumar a la bolsa</strong> para empezar tu pedido.</>
           )}
         </p>
       </div>
@@ -100,9 +110,9 @@ export default function Catalog({ products, selectedIds, onAdd, onRemove, title,
             p={p}
             index={i}
             total={products.length}
-            isSelected={selectedIds.includes(p.id)}
+            qty={qtyOf(p.id)}
             onAdd={onAdd}
-            onRemove={onRemove}
+            onSetQty={onSetQty}
           />
         ))}
       </div>

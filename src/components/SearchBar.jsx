@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 
-export default function SearchBar({ products, selectedIds, onAdd }) {
+export default function SearchBar({ products, qtyOf, onAdd }) {
   const [query, setQuery] = useState('')
   const [open, setOpen] = useState(false)
   const [highlight, setHighlight] = useState(0)
@@ -10,7 +10,6 @@ export default function SearchBar({ products, selectedIds, onAdd }) {
     const q = query.trim().toLowerCase()
     if (!q) return []
     return products
-      .filter(p => !selectedIds.includes(p.id))
       .filter(p => {
         const haystack = [
           p.name,
@@ -25,7 +24,7 @@ export default function SearchBar({ products, selectedIds, onAdd }) {
         return haystack.includes(q)
       })
       .slice(0, 8)
-  }, [query, products, selectedIds])
+  }, [query, products])
 
   useEffect(() => {
     function onClick(e) {
@@ -75,27 +74,33 @@ export default function SearchBar({ products, selectedIds, onAdd }) {
       </div>
       {open && matches.length > 0 && (
         <ul className="search-dropdown" role="listbox">
-          {matches.map((p, i) => (
-            <li
-              key={p.id}
-              role="option"
-              aria-selected={i === highlight}
-              className={'search-option' + (i === highlight ? ' is-active' : '')}
-              onMouseEnter={() => setHighlight(i)}
-              onMouseDown={e => { e.preventDefault(); pick(p) }}
-            >
-              <span className="search-thumb" style={{ background: p.color }}>
-                {p.imageUrl
-                  ? <img src={p.imageUrl} alt="" loading="lazy" />
-                  : p.image}
-              </span>
-              <div className="search-meta">
-                <div className="search-name">{p.name}</div>
-                <div className="search-sub">{p.brand} · {p.subcategory}</div>
-              </div>
-              <span className="search-price">${p.price.toLocaleString('es-AR')}</span>
-            </li>
-          ))}
+          {matches.map((p, i) => {
+            const qty = qtyOf?.(p.id) ?? 0
+            return (
+              <li
+                key={p.id}
+                role="option"
+                aria-selected={i === highlight}
+                className={'search-option' + (i === highlight ? ' is-active' : '')}
+                onMouseEnter={() => setHighlight(i)}
+                onMouseDown={e => { e.preventDefault(); pick(p) }}
+              >
+                <span className="search-thumb" style={{ background: p.color }}>
+                  {p.imageUrl
+                    ? <img src={p.imageUrl} alt="" loading="lazy" />
+                    : p.image}
+                </span>
+                <div className="search-meta">
+                  <div className="search-name">
+                    {p.name}
+                    {qty > 0 && <span className="search-incart">en bolsa ×{qty}</span>}
+                  </div>
+                  <div className="search-sub">{p.brand} · {p.subcategory}</div>
+                </div>
+                <span className="search-price">${p.price.toLocaleString('es-AR')}</span>
+              </li>
+            )
+          })}
         </ul>
       )}
       {open && query && matches.length === 0 && (
