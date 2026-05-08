@@ -23,7 +23,7 @@ function loadGis() {
   return gisLoadPromise
 }
 
-export default function SignInModal({ isOpen, onClose, onGoogleCredential, onDemoSignIn }) {
+export default function SignInModal({ isOpen, onClose, onGoogleCredential, onDemoSignIn, gateForCheckout = false }) {
   const btnRef = useRef(null)
   const [demoEmail, setDemoEmail] = useState('')
   const [error, setError] = useState(null)
@@ -89,10 +89,14 @@ export default function SignInModal({ isOpen, onClose, onGoogleCredential, onDem
       <div className="modal-card">
         <button className="modal-close" onClick={onClose} aria-label="Cerrar">×</button>
         <div className="modal-head">
-          <div className="modal-eyebrow">ROMAbeauty</div>
-          <h2 className="modal-title">Iniciá sesión</h2>
+          <div className="modal-eyebrow">{gateForCheckout ? 'Falta un paso' : 'ROMAbeauty'}</div>
+          <h2 className="modal-title">
+            {gateForCheckout ? 'Iniciá sesión para finalizar tu compra' : 'Iniciá sesión'}
+          </h2>
           <p className="modal-sub">
-            Para guardar tus pedidos y reclamar tu <strong>10% de bienvenida</strong>.
+            {gateForCheckout
+              ? <>Necesitamos saber a quién enviarle el pedido. Apenas entrás te llevamos al checkout.</>
+              : <>Para guardar tus pedidos y reclamar tu <strong>10% de bienvenida</strong>.</>}
           </p>
         </div>
 

@@ -31,6 +31,7 @@ export default function App() {
   const [signInOpen, setSignInOpen] = useState(false)
   const [promoOpen, setPromoOpen] = useState(false)
   const [justSignedIn, setJustSignedIn] = useState(false)
+  const [pendingCheckout, setPendingCheckout] = useState(false)
 
   useEffect(() => {
     if (justSignedIn && user && !discount.isUsed) {
@@ -67,12 +68,22 @@ export default function App() {
 
   function goToCheckout() {
     setDrawerOpen(false)
+    if (!user) {
+      setPendingCheckout(true)
+      setSignInOpen(true)
+      return
+    }
     navigate('/checkout')
   }
 
   function buyNow(id) {
     add(id)
     setDrawerOpen(false)
+    if (!user) {
+      setPendingCheckout(true)
+      setSignInOpen(true)
+      return
+    }
     navigate('/checkout')
   }
 
@@ -101,6 +112,10 @@ export default function App() {
     if (u) {
       setSignInOpen(false)
       setJustSignedIn(true)
+      if (pendingCheckout) {
+        setPendingCheckout(false)
+        navigate('/checkout')
+      }
     }
   }
 
@@ -109,7 +124,16 @@ export default function App() {
     if (u) {
       setSignInOpen(false)
       setJustSignedIn(true)
+      if (pendingCheckout) {
+        setPendingCheckout(false)
+        navigate('/checkout')
+      }
     }
+  }
+
+  function closeSignIn() {
+    setSignInOpen(false)
+    setPendingCheckout(false)
   }
 
   function handleClaim() {
@@ -147,7 +171,8 @@ export default function App() {
     <>
       <SignInModal
         isOpen={signInOpen}
-        onClose={() => setSignInOpen(false)}
+        onClose={closeSignIn}
+        gateForCheckout={pendingCheckout}
         onGoogleCredential={handleGoogleCredential}
         onDemoSignIn={handleDemoSignIn}
       />

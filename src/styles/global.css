@@ -2441,6 +2441,29 @@ ul, ol { list-style: none; }
   white-space: nowrap;
 }
 
+/* ---------- Checkout sign-in gate ---------- */
+.checkout-gate-icon {
+  font-size: 44px;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+.checkout-gate-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.checkout-back-btn--ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+.checkout-back-btn--ghost:hover {
+  background: var(--bg-soft);
+  border-color: var(--accent);
+}
+
 /* ---------- Mobile auth ---------- */
 @media (max-width: 640px) {
   .auth-btn-name { display: none; }

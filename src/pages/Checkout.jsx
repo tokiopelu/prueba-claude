@@ -83,18 +83,31 @@ export default function Checkout({ cart, user, discount, onNavigate, onSignIn, o
     )
   }
 
+  if (!user) {
+    return (
+      <main className="container checkout-empty">
+        <div className="checkout-gate-icon" aria-hidden>🔒</div>
+        <h1 className="checkout-title">Iniciá sesión para finalizar tu compra</h1>
+        <p className="checkout-empty-sub">
+          Necesitamos saber a quién enviarle el pedido. Tus productos siguen guardados en el carrito.
+        </p>
+        <div className="checkout-gate-actions">
+          <button className="checkout-back-btn" onClick={onSignIn}>
+            Iniciar sesión
+          </button>
+          <button className="checkout-back-btn checkout-back-btn--ghost" onClick={() => onNavigate('/')}>
+            Volver al catálogo
+          </button>
+        </div>
+      </main>
+    )
+  }
+
   return (
     <main className="container checkout-page">
       <button className="checkout-back" onClick={() => onNavigate('/')}>← Seguir comprando</button>
       <h1 className="checkout-title">Finalizá tu compra</h1>
 
-      {!user && (
-        <button className="checkout-promo-banner" onClick={onSignIn}>
-          <span aria-hidden>🎁</span>
-          <span>Iniciá sesión para usar tu <strong>10% de bienvenida</strong></span>
-          <span className="checkout-promo-cta">Entrar →</span>
-        </button>
-      )}
       {user && discount?.isEligible && (
         <button className="checkout-promo-banner checkout-promo-banner--claim" onClick={onOpenPromo}>
           <span aria-hidden>🎁</span>

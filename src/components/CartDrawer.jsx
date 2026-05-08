@@ -53,9 +53,9 @@ export default function CartDrawer({ cart, discount, user, onSetQty, onRemove, i
           <>
             {!user && (
               <button className="cart-promo-banner" onClick={onSignIn}>
-                <span className="cart-promo-emoji" aria-hidden>🎁</span>
+                <span className="cart-promo-emoji" aria-hidden>🔒</span>
                 <span className="cart-promo-text">
-                  Iniciá sesión y llevate <strong>10% off</strong> de bienvenida
+                  Iniciá sesión para comprar · <strong>10% off</strong> si nos seguís en redes
                 </span>
                 <span className="cart-promo-cta">Entrar →</span>
               </button>
