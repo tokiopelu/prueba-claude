@@ -171,10 +171,10 @@ test.describe('ROMAbeauty checkout-with-login flow', () => {
     await starButtons.nth(3).click()
     await page.locator('.review-form-text').fill('Súper buen producto, lo recomiendo para pelo seco.')
     await page.getByRole('button', { name: /Publicar reseña/i }).click()
-    // Now "Tu reseña" appears
+    // "Tu reseña" snippet appears
     await expect(page.getByText(/Tu reseña/i)).toBeVisible()
-    // The review appears in the list with the text
-    await expect(page.getByText(/Súper buen producto, lo recomiendo/i)).toBeVisible()
+    // Review appears in the public list (not the "Tu reseña" snippet — scope to .reviews-list)
+    await expect(page.locator('.reviews-list .review-text')).toContainText(/Súper buen producto, lo recomiendo/i)
     // Stats show 1 reseña
     await expect(page.getByText(/^1 reseña$/i)).toBeVisible()
   })
