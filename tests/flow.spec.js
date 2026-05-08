@@ -145,6 +145,40 @@ test.describe('ROMAbeauty checkout-with-login flow', () => {
     console.log('Captured subtotal:', subtotalText)
   })
 
+  test('7. Logged-in user can leave a review on a product page and it shows in the list', async ({ page }) => {
+    await page.goto(SITE)
+    // Sign in
+    await page.getByRole('button', { name: /^Iniciar sesión$/i }).click()
+    const signIn = page.getByRole('dialog', { name: /Iniciar sesión/i })
+    await signIn.getByPlaceholder(/tu@email/i).fill(DEMO_EMAIL)
+    await signIn.getByRole('button', { name: /Entrar \(demo\)/i }).click()
+    // Close promo modal if it auto-opens
+    const promo = page.getByRole('dialog', { name: /10% de descuento/i })
+    if (await promo.isVisible({ timeout: 2000 }).catch(() => false)) {
+      await promo.getByRole('button', { name: /Cerrar/i }).click()
+    }
+    // Open the first product detail page
+    await page.getByRole('button', { name: /Sumar al carrito/i }).first().click()
+    const drawer = page.getByRole('dialog', { name: /Tu carrito/i })
+    await drawer.getByRole('button', { name: /Cerrar carrito/i }).click()
+    // Click a product name to navigate
+    await page.locator('.cat-name-btn').first().click()
+    await page.waitForURL(/\/p\//, { timeout: 5000 })
+    // Reviews section visible, empty state shows since this is a fresh user
+    await expect(page.getByRole('heading', { name: /Reseñas de clientes/i })).toBeVisible()
+    // Pick 4 stars in the form
+    const starButtons = page.locator('.star-picker-btn')
+    await starButtons.nth(3).click()
+    await page.locator('.review-form-text').fill('Súper buen producto, lo recomiendo para pelo seco.')
+    await page.getByRole('button', { name: /Publicar reseña/i }).click()
+    // Now "Tu reseña" appears
+    await expect(page.getByText(/Tu reseña/i)).toBeVisible()
+    // The review appears in the list with the text
+    await expect(page.getByText(/Súper buen producto, lo recomiendo/i)).toBeVisible()
+    // Stats show 1 reseña
+    await expect(page.getByText(/^1 reseña$/i)).toBeVisible()
+  })
+
   test('6. After "used this month", dropdown shows the used label', async ({ page }) => {
     // Sign in
     await page.goto(SITE)

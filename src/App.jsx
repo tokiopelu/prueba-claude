@@ -20,6 +20,7 @@ import { useCart, buildCartView } from './lib/cart.js'
 import { useAuth } from './lib/auth.js'
 import { useDiscount } from './lib/discount.js'
 import { useWishlist } from './lib/wishlist.js'
+import { useReviews } from './lib/reviews.js'
 import { useRoute } from './lib/route.js'
 import { useSEO } from './lib/seo.js'
 import { loadAnalytics, trackPageView } from './lib/analytics.js'
@@ -30,6 +31,7 @@ export default function App() {
   const { user, signInWithGoogleCredential, signInDemo, signOut } = useAuth()
   const discount = useDiscount(user)
   const wishlist = useWishlist(user)
+  const reviewsHook = useReviews()
   const { path, navigate } = useRoute()
 
   useEffect(() => {
@@ -243,6 +245,7 @@ export default function App() {
           onBuyNow={buyNow}
           user={user}
           wishlist={wishlist}
+          reviewsHook={reviewsHook}
           onSignIn={openSignIn}
         />
         <CartBar cart={cart} discount={discount} onOpen={() => setDrawerOpen(true)} />

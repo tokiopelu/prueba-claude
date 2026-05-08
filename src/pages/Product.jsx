@@ -4,6 +4,7 @@ import { productMeta } from '../lib/meta.js'
 import { useSEO, buildProductJsonLd } from '../lib/seo.js'
 import Countdown from '../components/Countdown.jsx'
 import WishlistButton from '../components/WishlistButton.jsx'
+import ReviewSection from '../components/ReviewSection.jsx'
 
 function formatARS(n) {
   return n.toLocaleString('es-AR')
@@ -28,7 +29,7 @@ function ProductRelatedCard({ p, onNavigate }) {
   )
 }
 
-export default function Product({ slug, qtyOf, onAdd, onSetQty, onNavigate, onJumpFilter, onBuyNow, user, wishlist, onSignIn }) {
+export default function Product({ slug, qtyOf, onAdd, onSetQty, onNavigate, onJumpFilter, onBuyNow, user, wishlist, reviewsHook, onSignIn }) {
   const product = useMemo(() => products.find(p => p.id === slug), [slug])
   const meta = useMemo(() => (product ? productMeta(product) : null), [product])
   const related = useMemo(() => {
@@ -271,6 +272,16 @@ export default function Product({ slug, qtyOf, onAdd, onSetQty, onNavigate, onJu
               )}
             </div>
           </section>
+        )}
+
+        {reviewsHook && (
+          <ReviewSection
+            productId={product.id}
+            productName={product.name}
+            user={user}
+            reviewsHook={reviewsHook}
+            onSignIn={onSignIn}
+          />
         )}
 
         {related.length > 0 && (
