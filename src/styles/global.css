@@ -90,9 +90,6 @@ ul, ol { list-style: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
 }
 
-/* Cursor component remains in JSX but we hide it; system cursor is back. */
-.cursor-dot { display: none !important; }
-
 /* ---------- Top offers marquee ---------- */
 .top-bar {
   background: var(--wine);
@@ -204,8 +201,8 @@ ul, ol { list-style: none; }
 /* ---------- Hero ---------- */
 .hero {
   background:
-    radial-gradient(1100px 500px at 85% -10%, rgba(184, 80, 49, 0.10), transparent 55%),
-    radial-gradient(900px 400px at -10% 0%, rgba(168, 130, 72, 0.08), transparent 55%),
+    radial-gradient(1100px 500px at 85% -10%, rgba(107, 47, 53, 0.10), transparent 55%),
+    radial-gradient(900px 400px at -10% 0%, rgba(139, 107, 58, 0.10), transparent 55%),
     var(--bg);
   padding: 64px 0 40px;
   border-bottom: 1px solid var(--line);
@@ -551,8 +548,7 @@ ul, ol { list-style: none; }
   .compare-bar-count { width: 24px; height: 24px; font-size: 12px; }
 }
 
-/* ---------- Sidebar / weights (still used inline inside ranking) ---------- */
-.sidebar { display: none; }
+/* ---------- Weights / howto (rendered inline inside ranking) ---------- */
 .weights, .howto {
   background: var(--bg-card);
   border: 1px solid var(--line);
@@ -604,7 +600,7 @@ ul, ol { list-style: none; }
   border-radius: 50%;
   background: var(--accent);
   border: 3px solid var(--bg-card);
-  box-shadow: 0 2px 8px rgba(184, 80, 49, 0.32);
+  box-shadow: 0 2px 8px rgba(139, 107, 58, 0.32);
   cursor: pointer;
 }
 .weight input[type="range"]::-moz-range-thumb {
@@ -915,7 +911,6 @@ ul, ol { list-style: none; }
   border-radius: 999px;
   font-weight: 500;
 }
-.flag--vegan { background: var(--sage-soft); color: var(--sage); }
 .flag--origin { background: var(--bg-soft); color: var(--ink-soft); }
 @media (max-width: 640px) {
   .spec { grid-template-columns: 1fr; gap: 4px; }
