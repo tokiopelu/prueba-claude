@@ -14,9 +14,9 @@ export default function AuthButton({ user, discount, wishlistCount, onSignIn, on
 
   if (!user) {
     return (
-      <button className="auth-btn auth-btn--ghost" onClick={onSignIn}>
+      <button className="auth-btn auth-btn--ghost" onClick={onSignIn} aria-label="Iniciar sesión">
         <span className="auth-btn-icon" aria-hidden>👤</span>
-        <span className="auth-btn-label">Iniciar sesión</span>
+        <span className="auth-btn-label">Entrar</span>
       </button>
     )
   }

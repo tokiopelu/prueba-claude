@@ -233,6 +233,7 @@ export default function App() {
   if (productSlug) {
     return (
       <div className="app">
+        <a href="#main" className="skip-link">Saltar al contenido</a>
         <TopBar />
         <Header {...headerProps} />
         <Product
@@ -337,6 +338,7 @@ export default function App() {
 
   return (
     <div className="app">
+      <a href="#main" className="skip-link">Saltar al contenido</a>
       <TopBar />
       <Header {...headerProps} />
 
@@ -397,7 +399,7 @@ export default function App() {
         </div>
       </section>
 
-      <main className="container main-stack">
+      <main id="main" className="container main-stack">
         {offersFeed.length > 0 && (
           <Catalog
             {...catalogCommonProps}
