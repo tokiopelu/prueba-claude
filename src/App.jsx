@@ -14,6 +14,7 @@ import CheckoutError from './pages/CheckoutError.jsx'
 import CheckoutPending from './pages/CheckoutPending.jsx'
 import Product from './pages/Product.jsx'
 import Wishlist from './pages/Wishlist.jsx'
+import Quiz from './pages/Quiz.jsx'
 import { products, subcategories, brands } from './data/products.js'
 import { productMeta } from './lib/meta.js'
 import { useCart, buildCartView } from './lib/cart.js'
@@ -42,7 +43,10 @@ export default function App() {
     trackPageView(path)
   }, [path])
 
+  // Skip when child component (Product, Quiz) sets its own SEO
+  const childHandlesSEO = path.startsWith('/p/') || path === '/quiz'
   useSEO({
+    skip: childHandlesSEO,
     title: path === '/'
       ? 'cuidado capilar profesional · La Puissance, Fidelité, Opción'
       : path === '/favoritos'
@@ -258,6 +262,21 @@ export default function App() {
     )
   }
 
+  if (path === '/quiz') {
+    return (
+      <div className="app">
+        <a href="#main" className="skip-link">Saltar al contenido</a>
+        <Header {...headerProps} />
+        <Quiz user={user} onAdd={addAndOpen} onNavigate={navigate} onSignIn={openSignIn} />
+        <CartBar cart={cart} discount={discount} onOpen={() => setDrawerOpen(true)} />
+        <CartDrawer {...drawerProps} />
+        <Footer onJumpFilter={jumpFilter} />
+        <WhatsAppFloat />
+        {overlays}
+      </div>
+    )
+  }
+
   if (path === '/favoritos') {
     return (
       <div className="app">
@@ -356,6 +375,12 @@ export default function App() {
               onPick={p => navigate(`/p/${p.id}`)}
             />
           </div>
+
+          <button className="hero-quiz-cta" onClick={() => navigate('/quiz')}>
+            <span aria-hidden>✨</span>
+            <span>¿No sabés por dónde empezar? <strong>Hacé el quiz</strong> y armamos tu rutina ideal</span>
+            <span className="hero-quiz-arrow" aria-hidden>→</span>
+          </button>
 
           <div className="filter-section">
             <div className="filter-bar">

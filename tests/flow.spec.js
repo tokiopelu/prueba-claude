@@ -179,6 +179,31 @@ test.describe('ROMAbeauty checkout-with-login flow', () => {
     await expect(page.getByText(/^1 reseña$/i)).toBeVisible()
   })
 
+  test('8. Quiz flow: 5 answers → 3 recommendations → add all to cart', async ({ page }) => {
+    await page.goto(`${SITE}/quiz`)
+    // Intro
+    await expect(page.getByRole('heading', { name: /Qué productos necesita/i })).toBeVisible()
+    await page.getByRole('button', { name: /Empezar el quiz/i }).click()
+    // Answer all 5 questions by clicking the first option each time
+    for (let i = 0; i < 5; i++) {
+      await page.locator('.quiz-option').first().click()
+      // Wait for auto-advance
+      await page.waitForTimeout(400)
+    }
+    // Results page
+    await expect(page.getByRole('heading', { name: /Una rutina de/i })).toBeVisible()
+    // 3 product cards visible
+    await expect(page.locator('.quiz-rec-card')).toHaveCount(3)
+    // Steps labelled
+    await expect(page.locator('.quiz-rec-step').first()).toContainText(/Paso 1/i)
+    // Add all
+    await page.getByRole('button', { name: /Sumar los 3 al carrito/i }).click()
+    // Cart bar updates with at least 3 items
+    await page.waitForTimeout(400)
+    const cartBarCount = await page.locator('.cart-bar-count').textContent()
+    expect(parseInt(cartBarCount, 10)).toBeGreaterThanOrEqual(3)
+  })
+
   test('6. After "used this month", dropdown shows the used label', async ({ page }) => {
     // Sign in
     await page.goto(SITE)

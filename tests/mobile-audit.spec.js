@@ -63,3 +63,27 @@ test('audit: footer', async ({ page }) => {
   await page.waitForTimeout(800)
   await page.screenshot({ path: 'test-results/audit-footer.png', fullPage: false })
 })
+
+test('audit: quiz intro', async ({ page }) => {
+  await page.goto(`${SITE}/quiz`)
+  await page.waitForTimeout(400)
+  await page.screenshot({ path: 'test-results/audit-quiz-intro.png', fullPage: false })
+})
+
+test('audit: quiz question', async ({ page }) => {
+  await page.goto(`${SITE}/quiz`)
+  await page.getByRole('button', { name: /Empezar el quiz/i }).click()
+  await page.waitForTimeout(400)
+  await page.screenshot({ path: 'test-results/audit-quiz-question.png', fullPage: false })
+})
+
+test('audit: quiz results', async ({ page }) => {
+  await page.goto(`${SITE}/quiz`)
+  await page.getByRole('button', { name: /Empezar el quiz/i }).click()
+  for (let i = 0; i < 5; i++) {
+    await page.locator('.quiz-option').first().click()
+    await page.waitForTimeout(300)
+  }
+  await page.waitForTimeout(400)
+  await page.screenshot({ path: 'test-results/audit-quiz-results.png', fullPage: false })
+})

@@ -43,12 +43,15 @@ function clearJsonLd(id) {
   if (el) el.remove()
 }
 
-export function useSEO({ title, description, image, path, jsonLd }) {
+export function useSEO(opts) {
+  const skip = opts === null || opts === undefined || opts.skip === true
+  const { title, description, image, path, jsonLd } = opts || {}
   const fullTitle = title ? `${title} · ${SITE_NAME}` : `${SITE_NAME} · cuidado capilar profesional`
   const fullImage = image || DEFAULT_IMAGE
   const fullUrl = `${SITE_URL}${path || '/'}`
 
   useEffect(() => {
+    if (skip) return
     document.title = fullTitle
     setMetaTag('description', description)
     setMetaTag('og:title', fullTitle, true)
@@ -68,7 +71,7 @@ export function useSEO({ title, description, image, path, jsonLd }) {
     } else {
       clearJsonLd('seo-route-jsonld')
     }
-  }, [fullTitle, description, fullImage, fullUrl, jsonLd && JSON.stringify(jsonLd)])
+  }, [skip, fullTitle, description, fullImage, fullUrl, jsonLd && JSON.stringify(jsonLd)])
 }
 
 export function buildProductJsonLd(product, meta) {

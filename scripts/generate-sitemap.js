@@ -13,6 +13,7 @@ const today = new Date().toISOString().slice(0, 10)
 
 const urls = [
   { loc: `${SITE_URL}/`, changefreq: 'daily', priority: '1.0' },
+  { loc: `${SITE_URL}/quiz`, changefreq: 'monthly', priority: '0.7' },
   { loc: `${SITE_URL}/favoritos`, changefreq: 'monthly', priority: '0.3' },
   ...products.map(p => ({
     loc: `${SITE_URL}/p/${encodeURIComponent(p.id)}`,
