@@ -4,9 +4,12 @@ function formatARS(n) {
   return n.toLocaleString('es-AR')
 }
 
-export default function CartBar({ cart, onOpen }) {
+export default function CartBar({ cart, discount, onOpen }) {
   if (cart.length === 0) return null
-  const view = buildCartView(cart)
+  const view = buildCartView(cart, {
+    discountActive: discount?.isActive,
+    discountRate: discount?.rate
+  })
   return (
     <button className="cart-bar" onClick={onOpen}>
       <span className="cart-bar-count">{view.itemCount}</span>

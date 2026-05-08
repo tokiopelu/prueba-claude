@@ -13,14 +13,17 @@ function formatARS(n) {
   return n.toLocaleString('es-AR')
 }
 
-export default function Checkout({ cart, onNavigate }) {
-  const view = buildCartView(cart)
+export default function Checkout({ cart, user, discount, onNavigate, onSignIn, onOpenPromo }) {
+  const view = buildCartView(cart, {
+    discountActive: discount?.isActive,
+    discountRate: discount?.rate
+  })
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState(null)
   const [form, setForm] = useState({
-    nombre: '',
-    apellido: '',
-    email: '',
+    nombre: user?.firstName || '',
+    apellido: user?.name?.split(' ').slice(1).join(' ') || '',
+    email: user?.email || '',
     telefono: '',
     calle: '',
     numero: '',
@@ -46,7 +49,13 @@ export default function Checkout({ cart, onNavigate }) {
         body: JSON.stringify({
           cart,
           customer: form,
-          totals: { subtotal: view.subtotal, shipping: view.shipping, total: view.total }
+          totals: {
+            subtotal: view.subtotal,
+            discount: view.discount,
+            discountRate: view.discountRate,
+            shipping: view.shipping,
+            total: view.total
+          }
         })
       })
       if (!res.ok) {
@@ -78,6 +87,21 @@ export default function Checkout({ cart, onNavigate }) {
     <main className="container checkout-page">
       <button className="checkout-back" onClick={() => onNavigate('/')}>← Seguir comprando</button>
       <h1 className="checkout-title">Finalizá tu compra</h1>
+
+      {!user && (
+        <button className="checkout-promo-banner" onClick={onSignIn}>
+          <span aria-hidden>🎁</span>
+          <span>Iniciá sesión para usar tu <strong>10% de bienvenida</strong></span>
+          <span className="checkout-promo-cta">Entrar →</span>
+        </button>
+      )}
+      {user && discount?.isEligible && (
+        <button className="checkout-promo-banner checkout-promo-banner--claim" onClick={onOpenPromo}>
+          <span aria-hidden>🎁</span>
+          <span>Reclamá tu <strong>10% de bienvenida</strong> antes de pagar</span>
+          <span className="checkout-promo-cta">Reclamar →</span>
+        </button>
+      )}
 
       <div className="checkout-grid">
         <form className="checkout-form" onSubmit={onSubmit} noValidate>
@@ -177,6 +201,12 @@ export default function Checkout({ cart, onNavigate }) {
               <span>Subtotal</span>
               <span>${formatARS(view.subtotal)}</span>
             </div>
+            {view.discountActive && (
+              <div className="checkout-summary-row checkout-summary-row--discount">
+                <span>Descuento bienvenida (10%)</span>
+                <span>−${formatARS(view.discount)}</span>
+              </div>
+            )}
             <div className="checkout-summary-row">
               <span>Envío</span>
               <span>{view.shipping === 0 ? 'Gratis' : `$${formatARS(view.shipping)}`}</span>

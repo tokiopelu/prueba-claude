@@ -5,8 +5,11 @@ function formatARS(n) {
   return n.toLocaleString('es-AR')
 }
 
-export default function CartDrawer({ cart, onSetQty, onRemove, isOpen, onClose, onCheckout, onProductClick }) {
-  const view = buildCartView(cart)
+export default function CartDrawer({ cart, discount, user, onSetQty, onRemove, isOpen, onClose, onCheckout, onProductClick, onSignIn, onOpenPromo }) {
+  const view = buildCartView(cart, {
+    discountActive: discount?.isActive,
+    discountRate: discount?.rate
+  })
 
   useEffect(() => {
     if (!isOpen) return
@@ -48,6 +51,24 @@ export default function CartDrawer({ cart, onSetQty, onRemove, isOpen, onClose, 
           </div>
         ) : (
           <>
+            {!user && (
+              <button className="cart-promo-banner" onClick={onSignIn}>
+                <span className="cart-promo-emoji" aria-hidden>🎁</span>
+                <span className="cart-promo-text">
+                  Iniciá sesión y llevate <strong>10% off</strong> de bienvenida
+                </span>
+                <span className="cart-promo-cta">Entrar →</span>
+              </button>
+            )}
+            {user && discount?.isEligible && (
+              <button className="cart-promo-banner cart-promo-banner--claim" onClick={onOpenPromo}>
+                <span className="cart-promo-emoji" aria-hidden>🎁</span>
+                <span className="cart-promo-text">
+                  Tenés <strong>10% off</strong> sin reclamar este mes
+                </span>
+                <span className="cart-promo-cta">Reclamar →</span>
+              </button>
+            )}
             {!view.freeShipping && view.lines.length > 0 && (
               <div className="cart-ship-progress">
                 <div className="cart-ship-text">
@@ -118,6 +139,12 @@ export default function CartDrawer({ cart, onSetQty, onRemove, isOpen, onClose, 
                 <span>Subtotal</span>
                 <span className="cart-num">${formatARS(view.subtotal)}</span>
               </div>
+              {view.discountActive && (
+                <div className="cart-row cart-row--discount">
+                  <span>Descuento bienvenida (10%)</span>
+                  <span className="cart-num">−${formatARS(view.discount)}</span>
+                </div>
+              )}
               <div className="cart-row">
                 <span>Envío</span>
                 <span className="cart-num">

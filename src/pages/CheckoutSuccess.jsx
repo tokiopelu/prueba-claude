@@ -1,13 +1,14 @@
 import { useEffect } from 'react'
 import { getQuery } from '../lib/route.js'
 
-export default function CheckoutSuccess({ onClearCart, onNavigate }) {
+export default function CheckoutSuccess({ onClearCart, onMarkDiscountUsed, onNavigate }) {
   const orderId = getQuery('orderId') || getQuery('payment_id') || '—'
   const isStub = getQuery('stub') === 'true'
 
   useEffect(() => {
     onClearCart()
-  }, [onClearCart])
+    onMarkDiscountUsed?.()
+  }, [onClearCart, onMarkDiscountUsed])
 
   return (
     <main className="container checkout-result">

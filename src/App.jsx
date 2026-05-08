@@ -1,9 +1,12 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import SearchBar from './components/SearchBar.jsx'
 import Catalog from './components/Catalog.jsx'
 import TopBar from './components/TopBar.jsx'
 import CartDrawer from './components/CartDrawer.jsx'
 import CartBar from './components/CartBar.jsx'
+import AuthButton from './components/AuthButton.jsx'
+import SignInModal from './components/SignInModal.jsx'
+import PromoModal from './components/PromoModal.jsx'
 import Checkout from './pages/Checkout.jsx'
 import CheckoutSuccess from './pages/CheckoutSuccess.jsx'
 import CheckoutError from './pages/CheckoutError.jsx'
@@ -12,15 +15,29 @@ import Product from './pages/Product.jsx'
 import { products, subcategories, brands } from './data/products.js'
 import { productMeta } from './lib/meta.js'
 import { useCart, buildCartView } from './lib/cart.js'
+import { useAuth } from './lib/auth.js'
+import { useDiscount } from './lib/discount.js'
 import { useRoute } from './lib/route.js'
 
 export default function App() {
   const cartHook = useCart()
   const { cart, add, remove, setQty, clear, qtyOf } = cartHook
+  const { user, signInWithGoogleCredential, signInDemo, signOut } = useAuth()
+  const discount = useDiscount(user)
   const { path, navigate } = useRoute()
   const [activeSubcategory, setActiveSubcategory] = useState('Todos')
   const [activeBrand, setActiveBrand] = useState('Todas')
   const [drawerOpen, setDrawerOpen] = useState(false)
+  const [signInOpen, setSignInOpen] = useState(false)
+  const [promoOpen, setPromoOpen] = useState(false)
+  const [justSignedIn, setJustSignedIn] = useState(false)
+
+  useEffect(() => {
+    if (justSignedIn && user && !discount.isUsed) {
+      setPromoOpen(true)
+      setJustSignedIn(false)
+    }
+  }, [justSignedIn, user, discount.isUsed])
 
   const catalogFiltered = useMemo(() => {
     return products.filter(p =>
@@ -38,7 +55,10 @@ export default function App() {
       .map(x => x.p)
   }, [catalogFiltered])
 
-  const cartView = buildCartView(cart)
+  const cartView = buildCartView(cart, {
+    discountActive: discount.isActive,
+    discountRate: discount.rate
+  })
 
   function addAndOpen(id) {
     add(id)
@@ -66,13 +86,88 @@ export default function App() {
     }
   }
 
+  function openSignIn() {
+    setDrawerOpen(false)
+    setSignInOpen(true)
+  }
+
+  function openPromo() {
+    setDrawerOpen(false)
+    setPromoOpen(true)
+  }
+
+  function handleGoogleCredential(token) {
+    const u = signInWithGoogleCredential(token)
+    if (u) {
+      setSignInOpen(false)
+      setJustSignedIn(true)
+    }
+  }
+
+  function handleDemoSignIn(email) {
+    const u = signInDemo(email)
+    if (u) {
+      setSignInOpen(false)
+      setJustSignedIn(true)
+    }
+  }
+
+  function handleClaim() {
+    discount.claim()
+  }
+
   const productSlug = path.startsWith('/p/') ? decodeURIComponent(path.slice(3)) : null
+
+  const headerProps = {
+    user,
+    discount,
+    onCartOpen: () => setDrawerOpen(true),
+    cartCount: cartView.itemCount,
+    onLogoClick: () => navigate('/'),
+    onSignIn: openSignIn,
+    onSignOut: signOut,
+    onOpenPromo: openPromo
+  }
+
+  const drawerProps = {
+    cart,
+    discount,
+    user,
+    onSetQty: setQty,
+    onRemove: remove,
+    isOpen: drawerOpen,
+    onClose: () => setDrawerOpen(false),
+    onCheckout: goToCheckout,
+    onProductClick: id => { setDrawerOpen(false); navigate(`/p/${id}`) },
+    onSignIn: openSignIn,
+    onOpenPromo: openPromo
+  }
+
+  const overlays = (
+    <>
+      <SignInModal
+        isOpen={signInOpen}
+        onClose={() => setSignInOpen(false)}
+        onGoogleCredential={handleGoogleCredential}
+        onDemoSignIn={handleDemoSignIn}
+      />
+      <PromoModal
+        isOpen={promoOpen}
+        onClose={() => setPromoOpen(false)}
+        onClaim={handleClaim}
+        isClaimed={discount.isClaimed}
+        isUsed={discount.isUsed}
+        isActive={discount.isActive}
+        monthLabel={discount.monthLabel}
+      />
+    </>
+  )
 
   if (productSlug) {
     return (
       <div className="app">
         <TopBar />
-        <Header onCartOpen={() => setDrawerOpen(true)} cartCount={cartView.itemCount} onLogoClick={() => navigate('/')} />
+        <Header {...headerProps} />
         <Product
           slug={productSlug}
           qtyOf={qtyOf}
@@ -82,17 +177,10 @@ export default function App() {
           onJumpFilter={jumpFilter}
           onBuyNow={buyNow}
         />
-        <CartBar cart={cart} onOpen={() => setDrawerOpen(true)} />
-        <CartDrawer
-          cart={cart}
-          onSetQty={setQty}
-          onRemove={remove}
-          isOpen={drawerOpen}
-          onClose={() => setDrawerOpen(false)}
-          onCheckout={goToCheckout}
-          onProductClick={id => { setDrawerOpen(false); navigate(`/p/${id}`) }}
-        />
+        <CartBar cart={cart} discount={discount} onOpen={() => setDrawerOpen(true)} />
+        <CartDrawer {...drawerProps} />
         <Footer onJumpFilter={jumpFilter} />
+        {overlays}
       </div>
     )
   }
@@ -100,9 +188,17 @@ export default function App() {
   if (path === '/checkout') {
     return (
       <div className="app">
-        <Header onCartOpen={() => setDrawerOpen(true)} cartCount={cartView.itemCount} onLogoClick={() => navigate('/')} />
-        <Checkout cart={cart} onNavigate={navigate} />
+        <Header {...headerProps} />
+        <Checkout
+          cart={cart}
+          user={user}
+          discount={discount}
+          onNavigate={navigate}
+          onSignIn={openSignIn}
+          onOpenPromo={openPromo}
+        />
         <Footer onJumpFilter={jumpFilter} />
+        {overlays}
       </div>
     )
   }
@@ -110,9 +206,14 @@ export default function App() {
   if (path === '/checkout/exito') {
     return (
       <div className="app">
-        <Header onCartOpen={() => setDrawerOpen(true)} cartCount={cartView.itemCount} onLogoClick={() => navigate('/')} />
-        <CheckoutSuccess onClearCart={clear} onNavigate={navigate} />
+        <Header {...headerProps} />
+        <CheckoutSuccess
+          onClearCart={clear}
+          onMarkDiscountUsed={discount.markUsed}
+          onNavigate={navigate}
+        />
         <Footer />
+        {overlays}
       </div>
     )
   }
@@ -120,9 +221,10 @@ export default function App() {
   if (path === '/checkout/error') {
     return (
       <div className="app">
-        <Header onCartOpen={() => setDrawerOpen(true)} cartCount={cartView.itemCount} onLogoClick={() => navigate('/')} />
+        <Header {...headerProps} />
         <CheckoutError onNavigate={navigate} />
         <Footer />
+        {overlays}
       </div>
     )
   }
@@ -130,9 +232,10 @@ export default function App() {
   if (path === '/checkout/pendiente') {
     return (
       <div className="app">
-        <Header onCartOpen={() => setDrawerOpen(true)} cartCount={cartView.itemCount} onLogoClick={() => navigate('/')} />
+        <Header {...headerProps} />
         <CheckoutPending onClearCart={clear} onNavigate={navigate} />
         <Footer />
+        {overlays}
       </div>
     )
   }
@@ -140,7 +243,7 @@ export default function App() {
   return (
     <div className="app">
       <TopBar />
-      <Header onCartOpen={() => setDrawerOpen(true)} cartCount={cartView.itemCount} onLogoClick={() => navigate('/')} />
+      <Header {...headerProps} />
 
       <section className="hero">
         <div className="container hero-inner">
@@ -222,24 +325,17 @@ export default function App() {
         />
       </main>
 
-      <CartBar cart={cart} onOpen={() => setDrawerOpen(true)} />
+      <CartBar cart={cart} discount={discount} onOpen={() => setDrawerOpen(true)} />
 
-      <CartDrawer
-        cart={cart}
-        onSetQty={setQty}
-        onRemove={remove}
-        isOpen={drawerOpen}
-        onClose={() => setDrawerOpen(false)}
-        onCheckout={goToCheckout}
-        onProductClick={id => { setDrawerOpen(false); navigate(`/p/${id}`) }}
-      />
+      <CartDrawer {...drawerProps} />
 
       <Footer onJumpFilter={jumpFilter} />
+      {overlays}
     </div>
   )
 }
 
-function Header({ onCartOpen, cartCount, onLogoClick }) {
+function Header({ user, discount, onCartOpen, cartCount, onLogoClick, onSignIn, onSignOut, onOpenPromo }) {
   return (
     <header className="site-header">
       <div className="container header-row">
@@ -250,11 +346,20 @@ function Header({ onCartOpen, cartCount, onLogoClick }) {
             <span className="brand-name-italic">beauty</span>
           </span>
         </button>
-        <button className="nav-cta" onClick={onCartOpen}>
-          <span className="nav-cta-icon" aria-hidden>🛍</span>
-          <span>Carrito</span>
-          {cartCount > 0 && <span className="nav-cta-count">{cartCount}</span>}
-        </button>
+        <div className="header-actions">
+          <AuthButton
+            user={user}
+            discount={discount}
+            onSignIn={onSignIn}
+            onSignOut={onSignOut}
+            onOpenPromo={onOpenPromo}
+          />
+          <button className="nav-cta" onClick={onCartOpen}>
+            <span className="nav-cta-icon" aria-hidden>🛍</span>
+            <span>Carrito</span>
+            {cartCount > 0 && <span className="nav-cta-count">{cartCount}</span>}
+          </button>
+        </div>
       </div>
     </header>
   )

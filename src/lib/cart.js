@@ -69,7 +69,7 @@ export function useCart() {
   return { cart, add, remove, setQty, clear, qtyOf }
 }
 
-export function buildCartView(cart) {
+export function buildCartView(cart, opts = {}) {
   const lines = cart
     .map(({ id, qty }) => {
       const product = products.find(p => p.id === id)
@@ -89,14 +89,24 @@ export function buildCartView(cart) {
 
   const itemCount = lines.reduce((acc, l) => acc + l.qty, 0)
   const subtotal = lines.reduce((acc, l) => acc + l.lineTotal, 0)
+
+  const discountActive = !!opts.discountActive && lines.length > 0
+  const discountRate = discountActive ? (opts.discountRate || 0) : 0
+  const discount = discountActive ? Math.round(subtotal * discountRate) : 0
+  const subtotalAfterDiscount = subtotal - discount
+
   const freeShipping = subtotal >= FREE_SHIPPING_FROM
   const shipping = lines.length === 0 || freeShipping ? 0 : SHIPPING_COST
-  const total = subtotal + shipping
+  const total = subtotalAfterDiscount + shipping
 
   return {
     lines,
     itemCount,
     subtotal,
+    discount,
+    discountRate,
+    discountActive,
+    subtotalAfterDiscount,
     shipping,
     freeShipping,
     freeShippingFrom: FREE_SHIPPING_FROM,
