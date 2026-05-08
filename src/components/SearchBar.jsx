@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 
-export default function SearchBar({ products, qtyOf, onAdd }) {
+export default function SearchBar({ products, qtyOf, onPick }) {
   const [query, setQuery] = useState('')
   const [open, setOpen] = useState(false)
   const [highlight, setHighlight] = useState(0)
@@ -35,7 +35,7 @@ export default function SearchBar({ products, qtyOf, onAdd }) {
   }, [])
 
   function pick(p) {
-    onAdd(p.id)
+    onPick(p)
     setQuery('')
     setOpen(false)
     setHighlight(0)

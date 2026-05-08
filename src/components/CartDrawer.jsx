@@ -5,7 +5,7 @@ function formatARS(n) {
   return n.toLocaleString('es-AR')
 }
 
-export default function CartDrawer({ cart, onSetQty, onRemove, isOpen, onClose, onCheckout }) {
+export default function CartDrawer({ cart, onSetQty, onRemove, isOpen, onClose, onCheckout, onProductClick }) {
   const view = buildCartView(cart)
 
   useEffect(() => {
@@ -68,14 +68,25 @@ export default function CartDrawer({ cart, onSetQty, onRemove, isOpen, onClose, 
             <ul className="cart-lines">
               {view.lines.map(line => (
                 <li key={line.id} className="cart-line">
-                  <div className="cart-line-img">
+                  <button
+                    type="button"
+                    className="cart-line-img"
+                    onClick={() => onProductClick?.(line.id)}
+                    aria-label={`Ver ${line.product.name}`}
+                  >
                     {line.product.imageUrl
                       ? <img src={line.product.imageUrl} alt={line.product.name} loading="lazy" />
                       : <span>{line.product.image}</span>}
-                  </div>
+                  </button>
                   <div className="cart-line-body">
                     <div className="cart-line-brand">{line.product.brand}</div>
-                    <div className="cart-line-name">{line.product.name}</div>
+                    <button
+                      type="button"
+                      className="cart-line-name"
+                      onClick={() => onProductClick?.(line.id)}
+                    >
+                      {line.product.name}
+                    </button>
                     <div className="cart-line-foot">
                       <div className="cart-qty">
                         <button

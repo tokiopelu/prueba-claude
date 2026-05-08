@@ -8,6 +8,7 @@ import Checkout from './pages/Checkout.jsx'
 import CheckoutSuccess from './pages/CheckoutSuccess.jsx'
 import CheckoutError from './pages/CheckoutError.jsx'
 import CheckoutPending from './pages/CheckoutPending.jsx'
+import Product from './pages/Product.jsx'
 import { products, subcategories, brands } from './data/products.js'
 import { productMeta } from './lib/meta.js'
 import { useCart, buildCartView } from './lib/cart.js'
@@ -49,16 +50,59 @@ export default function App() {
     navigate('/checkout')
   }
 
+  function buyNow(id) {
+    add(id)
+    setDrawerOpen(false)
+    navigate('/checkout')
+  }
+
+  function jumpFilter({ brand, subcategory }) {
+    if (brand) setActiveBrand(brand)
+    if (subcategory) setActiveSubcategory(subcategory)
+    if (path === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    } else {
+      navigate('/')
+    }
+  }
+
+  const productSlug = path.startsWith('/p/') ? decodeURIComponent(path.slice(3)) : null
+
+  if (productSlug) {
+    return (
+      <div className="app">
+        <TopBar />
+        <Header onCartOpen={() => setDrawerOpen(true)} cartCount={cartView.itemCount} onLogoClick={() => navigate('/')} />
+        <Product
+          slug={productSlug}
+          qtyOf={qtyOf}
+          onAdd={addAndOpen}
+          onSetQty={setQty}
+          onNavigate={navigate}
+          onJumpFilter={jumpFilter}
+          onBuyNow={buyNow}
+        />
+        <CartBar cart={cart} onOpen={() => setDrawerOpen(true)} />
+        <CartDrawer
+          cart={cart}
+          onSetQty={setQty}
+          onRemove={remove}
+          isOpen={drawerOpen}
+          onClose={() => setDrawerOpen(false)}
+          onCheckout={goToCheckout}
+          onProductClick={id => { setDrawerOpen(false); navigate(`/p/${id}`) }}
+        />
+        <Footer onJumpFilter={jumpFilter} />
+      </div>
+    )
+  }
+
   if (path === '/checkout') {
     return (
       <div className="app">
         <Header onCartOpen={() => setDrawerOpen(true)} cartCount={cartView.itemCount} onLogoClick={() => navigate('/')} />
         <Checkout cart={cart} onNavigate={navigate} />
-        <Footer onJumpFilter={({ brand, subcategory }) => {
-          if (brand) setActiveBrand(brand)
-          if (subcategory) setActiveSubcategory(subcategory)
-          navigate('/')
-        }} />
+        <Footer onJumpFilter={jumpFilter} />
       </div>
     )
   }
@@ -109,7 +153,7 @@ export default function App() {
             <SearchBar
               products={products}
               qtyOf={qtyOf}
-              onAdd={addAndOpen}
+              onPick={p => navigate(`/p/${p.id}`)}
             />
           </div>
 
@@ -162,6 +206,7 @@ export default function App() {
             qtyOf={qtyOf}
             onAdd={addAndOpen}
             onSetQty={setQty}
+            onProductClick={id => navigate(`/p/${id}`)}
             title={`🔥 Ofertas · ${offersFeed.length} productos en promo`}
             subtitle={<>Promos por tiempo limitado. <strong>¡No te lo pierdas!</strong></>}
           />
@@ -172,6 +217,7 @@ export default function App() {
           qtyOf={qtyOf}
           onAdd={addAndOpen}
           onSetQty={setQty}
+          onProductClick={id => navigate(`/p/${id}`)}
           title={`🛍️ Catálogo · ${catalogFiltered.length} productos`}
         />
       </main>
@@ -185,13 +231,10 @@ export default function App() {
         isOpen={drawerOpen}
         onClose={() => setDrawerOpen(false)}
         onCheckout={goToCheckout}
+        onProductClick={id => { setDrawerOpen(false); navigate(`/p/${id}`) }}
       />
 
-      <Footer onJumpFilter={({ brand, subcategory }) => {
-        if (brand) setActiveBrand(brand)
-        if (subcategory) setActiveSubcategory(subcategory)
-        window.scrollTo({ top: 0, behavior: 'smooth' })
-      }} />
+      <Footer onJumpFilter={jumpFilter} />
     </div>
   )
 }

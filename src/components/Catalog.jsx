@@ -5,7 +5,7 @@ function formatARS(n) {
   return n.toLocaleString('es-AR')
 }
 
-function CatalogCard({ p, index, total, qty, onAdd, onSetQty }) {
+function CatalogCard({ p, index, total, qty, onAdd, onSetQty, onProductClick }) {
   const ref = useReveal()
   const meta = productMeta(p)
   const indexLabel = String(index + 1).padStart(2, '0')
@@ -23,15 +23,28 @@ function CatalogCard({ p, index, total, qty, onAdd, onSetQty }) {
       {meta.urgency && (
         <span className="cat-urgency">{meta.urgency}</span>
       )}
-      <div className="cat-img">
-        {p.imageUrl
-          ? <img src={p.imageUrl} alt={p.name} loading="lazy" />
-          : <span>{p.image}</span>}
-        <span className="cat-brand-badge">{p.brand}</span>
-      </div>
+      <button
+        type="button"
+        className="cat-img-btn"
+        onClick={() => onProductClick(p.id)}
+        aria-label={`Ver ${p.name}`}
+      >
+        <div className="cat-img">
+          {p.imageUrl
+            ? <img src={p.imageUrl} alt={p.name} loading="lazy" />
+            : <span>{p.image}</span>}
+          <span className="cat-brand-badge">{p.brand}</span>
+        </div>
+      </button>
       <div className="cat-body">
         <div className="cat-line">{p.line} · {p.subcategory}</div>
-        <h3 className="cat-name">{p.name}</h3>
+        <button
+          type="button"
+          className="cat-name-btn"
+          onClick={() => onProductClick(p.id)}
+        >
+          <h3 className="cat-name">{p.name}</h3>
+        </button>
 
         <div className="cat-pricing">
           {meta.discount > 0 ? (
@@ -83,7 +96,7 @@ function CatalogCard({ p, index, total, qty, onAdd, onSetQty }) {
   )
 }
 
-export default function Catalog({ products, qtyOf, onAdd, onSetQty, title, subtitle }) {
+export default function Catalog({ products, qtyOf, onAdd, onSetQty, onProductClick, title, subtitle }) {
   if (products.length === 0) {
     return (
       <div className="catalog-empty">
@@ -113,6 +126,7 @@ export default function Catalog({ products, qtyOf, onAdd, onSetQty, title, subti
             qty={qtyOf(p.id)}
             onAdd={onAdd}
             onSetQty={onSetQty}
+            onProductClick={onProductClick}
           />
         ))}
       </div>
