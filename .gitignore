@@ -5,3 +5,6 @@ dist
 .vite
 
 .vercel
+
+test-results
+playwright-report
