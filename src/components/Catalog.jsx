@@ -74,7 +74,7 @@ function CatalogCard({ p, index, total, qty, onAdd, onSetQty, onProductClick }) 
                 aria-label="Quitar uno"
               >−</button>
               <span className="cat-qty-val" aria-live="polite">
-                {qty} <span className="cat-qty-tag">en bolsa</span>
+                {qty} <span className="cat-qty-tag">en carrito</span>
               </span>
               <button
                 className="cat-qty-btn"
@@ -87,7 +87,7 @@ function CatalogCard({ p, index, total, qty, onAdd, onSetQty, onProductClick }) 
               className="cat-btn"
               onClick={() => onAdd(p.id)}
             >
-              Sumar a la bolsa
+              Sumar al carrito
             </button>
           )}
         </div>
@@ -111,7 +111,7 @@ export default function Catalog({ products, qtyOf, onAdd, onSetQty, onProductCli
         <h2>{title || `Catálogo · ${products.length} productos`}</h2>
         <p className="catalog-sub">
           {subtitle || (
-            <>Tocá <strong>Sumar a la bolsa</strong> para empezar tu pedido.</>
+            <>Tocá <strong>Sumar al carrito</strong> para empezar tu pedido.</>
           )}
         </p>
       </div>

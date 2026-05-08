@@ -93,7 +93,7 @@ export default function SearchBar({ products, qtyOf, onPick }) {
                 <div className="search-meta">
                   <div className="search-name">
                     {p.name}
-                    {qty > 0 && <span className="search-incart">en bolsa ×{qty}</span>}
+                    {qty > 0 && <span className="search-incart">en carrito ×{qty}</span>}
                   </div>
                   <div className="search-sub">{p.brand} · {p.subcategory}</div>
                 </div>

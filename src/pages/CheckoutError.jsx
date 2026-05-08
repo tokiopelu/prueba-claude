@@ -5,7 +5,7 @@ export default function CheckoutError({ onNavigate }) {
         <div className="checkout-result-icon">!</div>
         <h1 className="checkout-result-title">No pudimos procesar el pago</h1>
         <p className="checkout-result-sub">
-          El pago fue rechazado o cancelado. Tus productos siguen en la bolsa,
+          El pago fue rechazado o cancelado. Tus productos siguen en el carrito,
           podés reintentar el checkout cuando quieras.
         </p>
         <div className="checkout-result-actions">

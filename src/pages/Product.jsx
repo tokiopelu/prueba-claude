@@ -122,7 +122,7 @@ export default function Product({ slug, qtyOf, onAdd, onSetQty, onNavigate, onJu
                     aria-label="Quitar uno"
                   >−</button>
                   <span className="cat-qty-val">
-                    {qty} <span className="cat-qty-tag">en bolsa</span>
+                    {qty} <span className="cat-qty-tag">en carrito</span>
                   </span>
                   <button
                     className="cat-qty-btn"
@@ -132,7 +132,7 @@ export default function Product({ slug, qtyOf, onAdd, onSetQty, onNavigate, onJu
                 </div>
               ) : (
                 <button className="product-add-btn" onClick={() => onAdd(product.id)}>
-                  Sumar a la bolsa
+                  Sumar al carrito
                 </button>
               )}
               <button className="product-buy-btn" onClick={() => onBuyNow(product.id)}>

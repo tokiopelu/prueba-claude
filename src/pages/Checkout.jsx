@@ -65,7 +65,7 @@ export default function Checkout({ cart, onNavigate }) {
   if (cart.length === 0) {
     return (
       <main className="container checkout-empty">
-        <h1 className="checkout-title">Tu bolsa está vacía</h1>
+        <h1 className="checkout-title">Tu carrito está vacío</h1>
         <p className="checkout-empty-sub">Sumá productos al catálogo antes de continuar.</p>
         <button className="checkout-back-btn" onClick={() => onNavigate('/')}>
           Volver al catálogo

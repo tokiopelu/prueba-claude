@@ -252,7 +252,7 @@ function Header({ onCartOpen, cartCount, onLogoClick }) {
         </button>
         <button className="nav-cta" onClick={onCartOpen}>
           <span className="nav-cta-icon" aria-hidden>🛍</span>
-          <span>Bolsa</span>
+          <span>Carrito</span>
           {cartCount > 0 && <span className="nav-cta-count">{cartCount}</span>}
         </button>
       </div>

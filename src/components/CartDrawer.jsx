@@ -25,22 +25,22 @@ export default function CartDrawer({ cart, onSetQty, onRemove, isOpen, onClose, 
   return (
     <div className={'cart-drawer-root' + (isOpen ? ' is-open' : '')} aria-hidden={!isOpen}>
       <div className="cart-drawer-backdrop" onClick={onClose} />
-      <aside className="cart-drawer" role="dialog" aria-label="Tu bolsa">
+      <aside className="cart-drawer" role="dialog" aria-label="Tu carrito">
         <header className="cart-drawer-head">
           <div>
-            <div className="cart-drawer-eyebrow">Tu bolsa</div>
+            <div className="cart-drawer-eyebrow">Tu carrito</div>
             <h3 className="cart-drawer-title">
               {view.itemCount === 0
                 ? 'Vacía por ahora'
                 : `${view.itemCount} ${view.itemCount === 1 ? 'producto' : 'productos'}`}
             </h3>
           </div>
-          <button className="cart-drawer-close" onClick={onClose} aria-label="Cerrar bolsa">×</button>
+          <button className="cart-drawer-close" onClick={onClose} aria-label="Cerrar carrito">×</button>
         </header>
 
         {view.lines.length === 0 ? (
           <div className="cart-empty">
-            <p className="cart-empty-title">Tu bolsa está vacía.</p>
+            <p className="cart-empty-title">Tu carrito está vacío.</p>
             <p className="cart-empty-sub">
               Sumá productos del catálogo para empezar.
             </p>
