@@ -7,24 +7,52 @@ import CartBar from './components/CartBar.jsx'
 import AuthButton from './components/AuthButton.jsx'
 import SignInModal from './components/SignInModal.jsx'
 import PromoModal from './components/PromoModal.jsx'
+import WhatsAppFloat from './components/WhatsAppFloat.jsx'
 import Checkout from './pages/Checkout.jsx'
 import CheckoutSuccess from './pages/CheckoutSuccess.jsx'
 import CheckoutError from './pages/CheckoutError.jsx'
 import CheckoutPending from './pages/CheckoutPending.jsx'
 import Product from './pages/Product.jsx'
+import Wishlist from './pages/Wishlist.jsx'
 import { products, subcategories, brands } from './data/products.js'
 import { productMeta } from './lib/meta.js'
 import { useCart, buildCartView } from './lib/cart.js'
 import { useAuth } from './lib/auth.js'
 import { useDiscount } from './lib/discount.js'
+import { useWishlist } from './lib/wishlist.js'
 import { useRoute } from './lib/route.js'
+import { useSEO } from './lib/seo.js'
+import { loadAnalytics, trackPageView } from './lib/analytics.js'
 
 export default function App() {
   const cartHook = useCart()
   const { cart, add, remove, setQty, clear, qtyOf } = cartHook
   const { user, signInWithGoogleCredential, signInDemo, signOut } = useAuth()
   const discount = useDiscount(user)
+  const wishlist = useWishlist(user)
   const { path, navigate } = useRoute()
+
+  useEffect(() => {
+    loadAnalytics()
+  }, [])
+
+  useEffect(() => {
+    trackPageView(path)
+  }, [path])
+
+  useSEO({
+    title: path === '/'
+      ? 'cuidado capilar profesional · La Puissance, Fidelité, Opción'
+      : path === '/favoritos'
+        ? 'Tus favoritos'
+        : path.startsWith('/checkout')
+          ? 'Finalizá tu compra'
+          : null,
+    description: path === '/'
+      ? 'Curaduría argentina de productos profesionales para el pelo. Champús, mascarillas, aceites y tratamientos. Envío a todo el país, 3 cuotas sin interés.'
+      : 'Cuidado capilar profesional, envío a todo el país.',
+    path
+  })
   const [activeSubcategory, setActiveSubcategory] = useState('Todos')
   const [activeBrand, setActiveBrand] = useState('Todas')
   const [drawerOpen, setDrawerOpen] = useState(false)
@@ -145,12 +173,14 @@ export default function App() {
   const headerProps = {
     user,
     discount,
+    wishlistCount: wishlist.count,
     onCartOpen: () => setDrawerOpen(true),
     cartCount: cartView.itemCount,
     onLogoClick: () => navigate('/'),
     onSignIn: openSignIn,
     onSignOut: signOut,
-    onOpenPromo: openPromo
+    onOpenPromo: openPromo,
+    onOpenWishlist: () => navigate('/favoritos')
   }
 
   const drawerProps = {
@@ -165,6 +195,16 @@ export default function App() {
     onProductClick: id => { setDrawerOpen(false); navigate(`/p/${id}`) },
     onSignIn: openSignIn,
     onOpenPromo: openPromo
+  }
+
+  const catalogCommonProps = {
+    qtyOf,
+    onAdd: addAndOpen,
+    onSetQty: setQty,
+    onProductClick: id => navigate(`/p/${id}`),
+    user,
+    wishlist,
+    onSignIn: openSignIn
   }
 
   const overlays = (
@@ -201,10 +241,37 @@ export default function App() {
           onNavigate={navigate}
           onJumpFilter={jumpFilter}
           onBuyNow={buyNow}
+          user={user}
+          wishlist={wishlist}
+          onSignIn={openSignIn}
         />
         <CartBar cart={cart} discount={discount} onOpen={() => setDrawerOpen(true)} />
         <CartDrawer {...drawerProps} />
         <Footer onJumpFilter={jumpFilter} />
+        <WhatsAppFloat />
+        {overlays}
+      </div>
+    )
+  }
+
+  if (path === '/favoritos') {
+    return (
+      <div className="app">
+        <Header {...headerProps} />
+        <Wishlist
+          user={user}
+          items={wishlist.items}
+          qtyOf={qtyOf}
+          onAdd={addAndOpen}
+          onSetQty={setQty}
+          onProductClick={id => navigate(`/p/${id}`)}
+          onSignIn={openSignIn}
+          onNavigate={navigate}
+        />
+        <CartBar cart={cart} discount={discount} onOpen={() => setDrawerOpen(true)} />
+        <CartDrawer {...drawerProps} />
+        <Footer onJumpFilter={jumpFilter} />
+        <WhatsAppFloat />
         {overlays}
       </div>
     )
@@ -330,22 +397,16 @@ export default function App() {
       <main className="container main-stack">
         {offersFeed.length > 0 && (
           <Catalog
+            {...catalogCommonProps}
             products={offersFeed}
-            qtyOf={qtyOf}
-            onAdd={addAndOpen}
-            onSetQty={setQty}
-            onProductClick={id => navigate(`/p/${id}`)}
             title={`🔥 Ofertas · ${offersFeed.length} productos en promo`}
             subtitle={<>Promos por tiempo limitado. <strong>¡No te lo pierdas!</strong></>}
           />
         )}
 
         <Catalog
+          {...catalogCommonProps}
           products={catalogFiltered}
-          qtyOf={qtyOf}
-          onAdd={addAndOpen}
-          onSetQty={setQty}
-          onProductClick={id => navigate(`/p/${id}`)}
           title={`🛍️ Catálogo · ${catalogFiltered.length} productos`}
         />
       </main>
@@ -355,12 +416,13 @@ export default function App() {
       <CartDrawer {...drawerProps} />
 
       <Footer onJumpFilter={jumpFilter} />
+      <WhatsAppFloat />
       {overlays}
     </div>
   )
 }
 
-function Header({ user, discount, onCartOpen, cartCount, onLogoClick, onSignIn, onSignOut, onOpenPromo }) {
+function Header({ user, discount, wishlistCount, onCartOpen, cartCount, onLogoClick, onSignIn, onSignOut, onOpenPromo, onOpenWishlist }) {
   return (
     <header className="site-header">
       <div className="container header-row">
@@ -375,9 +437,11 @@ function Header({ user, discount, onCartOpen, cartCount, onLogoClick, onSignIn, 
           <AuthButton
             user={user}
             discount={discount}
+            wishlistCount={wishlistCount}
             onSignIn={onSignIn}
             onSignOut={onSignOut}
             onOpenPromo={onOpenPromo}
+            onOpenWishlist={onOpenWishlist}
           />
           <button className="nav-cta" onClick={onCartOpen}>
             <span className="nav-cta-icon" aria-hidden>🛍</span>
@@ -412,7 +476,7 @@ function Footer({ onJumpFilter }) {
               <span className="footer-dot">·</span>
               <a href="#" aria-label="TikTok">TikTok</a>
               <span className="footer-dot">·</span>
-              <a href="#" aria-label="WhatsApp">WhatsApp</a>
+              <a href="https://wa.me/5491100000000" target="_blank" rel="noreferrer noopener" aria-label="WhatsApp">WhatsApp</a>
             </div>
           </div>
 

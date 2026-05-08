@@ -15,6 +15,24 @@ const URGENCY = [
   'Más vendido'
 ]
 
+// Promo windows are anchored to the start of each ISO week (Monday 00:00 local)
+// so all clients see the same countdown. Each on-sale product gets either a
+// 3-day or 7-day window based on its hash.
+function currentPromoEnd(h) {
+  const now = new Date()
+  const day = now.getDay() // 0=Sun..6=Sat
+  const daysSinceMonday = (day + 6) % 7
+  const monday = new Date(now)
+  monday.setHours(0, 0, 0, 0)
+  monday.setDate(monday.getDate() - daysSinceMonday)
+  // 3-day windows end Wednesday 23:59:59; 7-day windows end Sunday 23:59:59
+  const isShort = h % 2 === 0
+  const end = new Date(monday)
+  end.setDate(monday.getDate() + (isShort ? 3 : 7))
+  end.setHours(23, 59, 59, 999)
+  return end.getTime()
+}
+
 export function productMeta(p) {
   const h = hash(p.id)
 
@@ -34,11 +52,14 @@ export function productMeta(p) {
     : p.price
   const installmentValue = Math.round(finalPrice / installmentMonths / 100) * 100
 
+  const promoEndsAt = discount > 0 ? currentPromoEnd(h) : null
+
   return {
     discount,
     urgency,
     finalPrice,
     installmentMonths,
-    installmentValue
+    installmentValue,
+    promoEndsAt
   }
 }

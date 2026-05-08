@@ -1,6 +1,9 @@
 import { useMemo } from 'react'
 import { products } from '../data/products.js'
 import { productMeta } from '../lib/meta.js'
+import { useSEO, buildProductJsonLd } from '../lib/seo.js'
+import Countdown from '../components/Countdown.jsx'
+import WishlistButton from '../components/WishlistButton.jsx'
 
 function formatARS(n) {
   return n.toLocaleString('es-AR')
@@ -25,8 +28,9 @@ function ProductRelatedCard({ p, onNavigate }) {
   )
 }
 
-export default function Product({ slug, qtyOf, onAdd, onSetQty, onNavigate, onJumpFilter, onBuyNow }) {
+export default function Product({ slug, qtyOf, onAdd, onSetQty, onNavigate, onJumpFilter, onBuyNow, user, wishlist, onSignIn }) {
   const product = useMemo(() => products.find(p => p.id === slug), [slug])
+  const meta = useMemo(() => (product ? productMeta(product) : null), [product])
   const related = useMemo(() => {
     if (!product) return []
     return products
@@ -36,6 +40,22 @@ export default function Product({ slug, qtyOf, onAdd, onSetQty, onNavigate, onJu
       )
       .slice(0, 4)
   }, [product])
+
+  const seoTitle = product
+    ? `${product.name} · ${product.brand}`
+    : 'Producto no encontrado'
+  const seoDescription = product
+    ? `${product.description?.slice(0, 155) || ''}`
+    : null
+  const seoJsonLd = product && meta ? buildProductJsonLd(product, meta) : null
+
+  useSEO({
+    title: seoTitle,
+    description: seoDescription,
+    image: product?.imageUrl,
+    path: product ? `/p/${product.id}` : '/',
+    jsonLd: seoJsonLd
+  })
 
   if (!product) {
     return (
@@ -47,10 +67,10 @@ export default function Product({ slug, qtyOf, onAdd, onSetQty, onNavigate, onJu
     )
   }
 
-  const meta = productMeta(product)
   const qty = qtyOf(product.id)
   const inCart = qty > 0
   const c = product.characteristics || {}
+  const isFavorite = wishlist?.has(product.id) || false
 
   return (
     <main className="product-page">
@@ -82,7 +102,17 @@ export default function Product({ slug, qtyOf, onAdd, onSetQty, onNavigate, onJu
               <span className="product-brand">{product.brand}</span>
               <span className="product-line">· {product.line}</span>
             </div>
-            <h1 className="product-name">{product.name}</h1>
+            <div className="product-name-row">
+              <h1 className="product-name">{product.name}</h1>
+              <WishlistButton
+                productId={product.id}
+                isFavorite={isFavorite}
+                isLoggedIn={!!user}
+                onToggle={wishlist?.toggle}
+                onSignIn={onSignIn}
+                size="lg"
+              />
+            </div>
 
             <div className="product-rating">
               <span className="product-stars" aria-label={`${product.rating} de 5`}>
@@ -109,6 +139,12 @@ export default function Product({ slug, qtyOf, onAdd, onSetQty, onNavigate, onJu
 
             {meta.urgency && (
               <div className="product-urgency">⏳ {meta.urgency}</div>
+            )}
+
+            {meta.promoEndsAt && (
+              <div className="product-countdown">
+                <Countdown endsAt={meta.promoEndsAt} label="🔥 Oferta termina en" />
+              </div>
             )}
 
             <p className="product-description">{product.description}</p>

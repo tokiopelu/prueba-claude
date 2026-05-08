@@ -1,16 +1,19 @@
 import { useReveal } from '../lib/reveal.js'
 import { productMeta } from '../lib/meta.js'
+import Countdown from './Countdown.jsx'
+import WishlistButton from './WishlistButton.jsx'
 
 function formatARS(n) {
   return n.toLocaleString('es-AR')
 }
 
-function CatalogCard({ p, index, total, qty, onAdd, onSetQty, onProductClick }) {
+function CatalogCard({ p, index, total, qty, onAdd, onSetQty, onProductClick, user, wishlist, onSignIn }) {
   const ref = useReveal()
   const meta = productMeta(p)
   const indexLabel = String(index + 1).padStart(2, '0')
   const totalLabel = String(total).padStart(2, '0')
   const inCart = qty > 0
+  const isFavorite = wishlist?.has(p.id) || false
   return (
     <article
       ref={ref}
@@ -23,6 +26,15 @@ function CatalogCard({ p, index, total, qty, onAdd, onSetQty, onProductClick }) 
       {meta.urgency && (
         <span className="cat-urgency">{meta.urgency}</span>
       )}
+      <div className="cat-wish">
+        <WishlistButton
+          productId={p.id}
+          isFavorite={isFavorite}
+          isLoggedIn={!!user}
+          onToggle={wishlist?.toggle}
+          onSignIn={onSignIn}
+        />
+      </div>
       <button
         type="button"
         className="cat-img-btn"
@@ -60,6 +72,10 @@ function CatalogCard({ p, index, total, qty, onAdd, onSetQty, onProductClick }) 
           {meta.installmentMonths}× ${formatARS(meta.installmentValue)} sin interés
         </div>
 
+        {meta.promoEndsAt && (
+          <Countdown endsAt={meta.promoEndsAt} label="Termina en" />
+        )}
+
         <div className="cat-meta">
           <span className="cat-rating">★ {p.rating.toFixed(1)} <span className="cat-rating-count">({p.reviews.toLocaleString('es-AR')})</span></span>
           <span className="cat-size">{p.characteristics?.size}</span>
@@ -96,7 +112,7 @@ function CatalogCard({ p, index, total, qty, onAdd, onSetQty, onProductClick }) 
   )
 }
 
-export default function Catalog({ products, qtyOf, onAdd, onSetQty, onProductClick, title, subtitle }) {
+export default function Catalog({ products, qtyOf, onAdd, onSetQty, onProductClick, title, subtitle, user, wishlist, onSignIn }) {
   if (products.length === 0) {
     return (
       <div className="catalog-empty">
@@ -127,6 +143,9 @@ export default function Catalog({ products, qtyOf, onAdd, onSetQty, onProductCli
             onAdd={onAdd}
             onSetQty={onSetQty}
             onProductClick={onProductClick}
+            user={user}
+            wishlist={wishlist}
+            onSignIn={onSignIn}
           />
         ))}
       </div>

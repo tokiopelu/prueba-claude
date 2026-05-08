@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-export default function AuthButton({ user, discount, onSignIn, onSignOut, onOpenPromo }) {
+export default function AuthButton({ user, discount, wishlistCount, onSignIn, onSignOut, onOpenPromo, onOpenWishlist }) {
   const [open, setOpen] = useState(false)
   const wrapRef = useRef(null)
 
@@ -55,6 +55,14 @@ export default function AuthButton({ user, discount, onSignIn, onSignOut, onOpen
           >
             <span className="auth-menu-emoji" aria-hidden>🎁</span>
             <span>{promoLabel}</span>
+          </button>
+          <button
+            className="auth-menu-item"
+            onClick={() => { setOpen(false); onOpenWishlist?.() }}
+            role="menuitem"
+          >
+            <span className="auth-menu-emoji" aria-hidden>♡</span>
+            <span>Mis favoritos{wishlistCount > 0 ? ` (${wishlistCount})` : ''}</span>
           </button>
           <button
             className="auth-menu-item"
