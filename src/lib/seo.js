@@ -46,7 +46,7 @@ function clearJsonLd(id) {
 export function useSEO(opts) {
   const skip = opts === null || opts === undefined || opts.skip === true
   const { title, description, image, path, jsonLd } = opts || {}
-  const fullTitle = title ? `${title} · ${SITE_NAME}` : `${SITE_NAME} · cuidado capilar profesional`
+  const fullTitle = title ? `${SITE_NAME} · ${title}` : `${SITE_NAME} · cuidado capilar profesional`
   const fullImage = image || DEFAULT_IMAGE
   const fullUrl = `${SITE_URL}${path || '/'}`
 
