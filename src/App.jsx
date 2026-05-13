@@ -365,7 +365,14 @@ export default function App() {
         <div className="container hero-inner">
           <div className="hero-eyebrow">Cuidado capilar profesional · {products.length} productos seleccionados</div>
           <h1 className="hero-title">
-            La belleza, en su forma <em>más cuidada</em>.
+            <a
+              className="hero-title-link"
+              href={`https://wa.me/5491100000000?text=${encodeURIComponent('Hola ROMAbeauty! Quiero hacer una consulta con un estilista.')}`}
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              Somos estilistas, <em>hacenos tu consulta</em>.
+            </a>
           </h1>
 
           <div className="search-shell">
