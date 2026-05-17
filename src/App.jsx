@@ -5,7 +5,8 @@ import TopBar from './components/TopBar.jsx'
 import CartDrawer from './components/CartDrawer.jsx'
 import CartBar from './components/CartBar.jsx'
 import AuthButton from './components/AuthButton.jsx'
-import CategoriesDropdown from './components/CategoriesDropdown.jsx'
+import CategoriesNav from './components/CategoriesNav.jsx'
+import { NAV_GROUPS, findGroupForSubcategory } from './lib/nav.js'
 import SignInModal from './components/SignInModal.jsx'
 import PromoModal from './components/PromoModal.jsx'
 import WhatsAppFloat from './components/WhatsAppFloat.jsx'
@@ -16,7 +17,7 @@ import CheckoutPending from './pages/CheckoutPending.jsx'
 import Product from './pages/Product.jsx'
 import Wishlist from './pages/Wishlist.jsx'
 import Quiz from './pages/Quiz.jsx'
-import { products, subcategories, brands } from './data/products.js'
+import { products, brands } from './data/products.js'
 import { productMeta } from './lib/meta.js'
 import { useCart, buildCartView } from './lib/cart.js'
 import { useAuth } from './lib/auth.js'
@@ -60,7 +61,7 @@ export default function App() {
       : 'Cuidado capilar profesional, envío a todo el país.',
     path
   })
-  const [activeSubcategory, setActiveSubcategory] = useState('Todos')
+  const [activeNavGroup, setActiveNavGroup] = useState('Todos')
   const [activeBrand, setActiveBrand] = useState('Todas')
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [signInOpen, setSignInOpen] = useState(false)
@@ -76,11 +77,13 @@ export default function App() {
   }, [justSignedIn, user, discount.isUsed])
 
   const catalogFiltered = useMemo(() => {
+    const group = NAV_GROUPS.find(g => g.label === activeNavGroup)
+    const allowSubs = group ? group.subcategories : null
     return products.filter(p =>
-      (activeSubcategory === 'Todos' || p.subcategory === activeSubcategory) &&
+      (!allowSubs || allowSubs.includes(p.subcategory)) &&
       (activeBrand === 'Todas' || p.brand === activeBrand)
     )
-  }, [activeSubcategory, activeBrand])
+  }, [activeNavGroup, activeBrand])
 
   const offersFeed = useMemo(() => {
     return catalogFiltered
@@ -122,9 +125,13 @@ export default function App() {
     navigate('/checkout')
   }
 
-  function jumpFilter({ brand, subcategory }) {
+  function jumpFilter({ brand, subcategory, group }) {
     if (brand) setActiveBrand(brand)
-    if (subcategory) setActiveSubcategory(subcategory)
+    if (group) setActiveNavGroup(group)
+    if (subcategory) {
+      const g = findGroupForSubcategory(subcategory)
+      setActiveNavGroup(g ? g.label : 'Todos')
+    }
     if (path === '/') {
       window.scrollTo({ top: 0, behavior: 'smooth' })
     } else {
@@ -188,8 +195,8 @@ export default function App() {
     onSignOut: signOut,
     onOpenPromo: openPromo,
     onOpenWishlist: () => navigate('/favoritos'),
-    onPickSubcategory: s => jumpFilter({ subcategory: s }),
-    onPickBrand: b => jumpFilter({ brand: b })
+    activeNavGroup,
+    onPickNavGroup: g => jumpFilter({ group: g })
   }
 
   const drawerProps = {
@@ -411,25 +418,6 @@ export default function App() {
             </div>
           </div>
 
-          <div className="filter-section filter-section--types">
-            <div className="filter-bar">
-              <button
-                className={'pill' + (activeSubcategory === 'Todos' ? ' is-on' : '')}
-                onClick={() => setActiveSubcategory('Todos')}
-              >
-                Todos
-              </button>
-              {subcategories.map(c => (
-                <button
-                  key={c}
-                  className={'pill' + (activeSubcategory === c ? ' is-on' : '')}
-                  onClick={() => setActiveSubcategory(c)}
-                >
-                  {c}
-                </button>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
 
@@ -461,7 +449,7 @@ export default function App() {
   )
 }
 
-function Header({ user, discount, wishlistCount, onCartOpen, cartCount, onLogoClick, onSignIn, onSignOut, onOpenPromo, onOpenWishlist, onPickSubcategory, onPickBrand }) {
+function Header({ user, discount, wishlistCount, onCartOpen, cartCount, onLogoClick, onSignIn, onSignOut, onOpenPromo, onOpenWishlist, activeNavGroup, onPickNavGroup }) {
   return (
     <header className="site-header">
       <div className="container header-row">
@@ -471,12 +459,6 @@ function Header({ user, discount, wishlistCount, onCartOpen, cartCount, onLogoCl
             <span className="brand-name-italic">hair</span>
           </span>
         </button>
-        <CategoriesDropdown
-          subcategories={subcategories}
-          brands={brands}
-          onPickSubcategory={onPickSubcategory}
-          onPickBrand={onPickBrand}
-        />
         <div className="header-actions">
           <AuthButton
             user={user}
@@ -493,6 +475,7 @@ function Header({ user, discount, wishlistCount, onCartOpen, cartCount, onLogoCl
           </button>
         </div>
       </div>
+      <CategoriesNav activeGroup={activeNavGroup} onPickGroup={onPickNavGroup} />
     </header>
   )
 }
@@ -544,13 +527,13 @@ function Footer({ onJumpFilter }) {
           <div className="footer-col">
             <h4 className="footer-h">Categorías</h4>
             <ul className="footer-list">
-              {subcategories.slice(0, 7).map(c => (
-                <li key={c}>
+              {NAV_GROUPS.map(g => (
+                <li key={g.label}>
                   <button
                     className="footer-link"
-                    onClick={() => onJumpFilter?.({ subcategory: c })}
+                    onClick={() => onJumpFilter?.({ group: g.label })}
                   >
-                    {c}
+                    {g.label}
                   </button>
                 </li>
               ))}
