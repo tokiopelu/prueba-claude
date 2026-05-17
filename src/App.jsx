@@ -464,7 +464,6 @@ function Header({ user, discount, wishlistCount, onCartOpen, cartCount, onLogoCl
     <header className="site-header">
       <div className="container header-row">
         <button className="brand brand--btn" onClick={onLogoClick}>
-          <span className="brand-mark">R</span>
           <span className="brand-name">
             <span className="brand-name-mark">ROMA</span>
             <span className="brand-name-italic">beauty</span>
@@ -498,7 +497,6 @@ function Footer({ onJumpFilter }) {
         <div className="footer-grid">
           <div className="footer-col footer-col--brand">
             <div className="brand">
-              <span className="brand-mark">R</span>
               <span className="brand-name">
                 <span className="brand-name-mark">ROMA</span>
                 <span className="brand-name-italic">beauty</span>
