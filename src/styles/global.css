@@ -224,32 +224,34 @@ ul, ol { list-style: none; }
 .hero-eyebrow {
   font-family: var(--serif);
   font-style: italic;
-  font-weight: 400;
-  font-size: clamp(18px, 2.2vw, 24px);
-  letter-spacing: 0.03em;
-  margin-bottom: 20px;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144, 'SOFT' 50;
+  font-size: clamp(36px, 6vw, 68px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  margin-bottom: 18px;
   display: inline-flex;
   align-items: center;
-  gap: 14px;
+  gap: 18px;
   color: var(--accent-deep);
 }
 .hero-eyebrow::before {
   content: "";
-  width: 40px;
+  width: 56px;
   height: 1px;
   background: var(--accent);
   flex-shrink: 0;
 }
 .hero-title {
   font-family: var(--serif);
-  font-weight: 500;
-  font-variation-settings: 'opsz' 144, 'SOFT' 50;
-  font-size: clamp(28px, 4.5vw, 52px);
-  line-height: 1.05;
-  letter-spacing: -0.025em;
+  font-weight: 400;
+  font-variation-settings: 'opsz' 96, 'SOFT' 50;
+  font-size: clamp(18px, 2.4vw, 26px);
+  line-height: 1.3;
+  letter-spacing: 0;
   margin: 0 0 28px;
   color: var(--ink);
-  max-width: 22ch;
+  max-width: 32ch;
 }
 .hero-title em {
   font-style: italic;
