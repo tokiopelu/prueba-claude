@@ -225,17 +225,17 @@ ul, ol { list-style: none; }
   font-family: var(--serif);
   font-style: italic;
   font-weight: 400;
-  font-size: 14px;
-  letter-spacing: 0.04em;
-  margin-bottom: 24px;
+  font-size: clamp(18px, 2.2vw, 24px);
+  letter-spacing: 0.03em;
+  margin-bottom: 20px;
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   color: var(--accent-deep);
 }
 .hero-eyebrow::before {
   content: "";
-  width: 32px;
+  width: 40px;
   height: 1px;
   background: var(--accent);
   flex-shrink: 0;
@@ -244,12 +244,12 @@ ul, ol { list-style: none; }
   font-family: var(--serif);
   font-weight: 500;
   font-variation-settings: 'opsz' 144, 'SOFT' 50;
-  font-size: clamp(40px, 7vw, 80px);
-  line-height: 0.98;
-  letter-spacing: -0.035em;
+  font-size: clamp(28px, 4.5vw, 52px);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
   margin: 0 0 28px;
   color: var(--ink);
-  max-width: 18ch;
+  max-width: 22ch;
 }
 .hero-title em {
   font-style: italic;

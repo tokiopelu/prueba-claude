@@ -381,7 +381,7 @@ export default function App() {
               target="_blank"
               rel="noreferrer noopener"
             >
-              Somos estilistas, <em>hacenos tu consulta</em>.
+              Somos estilistas, <em>hacenos tu consulta aquí</em>.
             </a>
           </h1>
 
