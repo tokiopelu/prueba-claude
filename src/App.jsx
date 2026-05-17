@@ -459,6 +459,7 @@ function Header({ user, discount, wishlistCount, onCartOpen, cartCount, onLogoCl
             <span className="brand-name-italic">hair</span>
           </span>
         </button>
+        <CategoriesNav activeGroup={activeNavGroup} onPickGroup={onPickNavGroup} />
         <div className="header-actions">
           <AuthButton
             user={user}
@@ -475,7 +476,6 @@ function Header({ user, discount, wishlistCount, onCartOpen, cartCount, onLogoCl
           </button>
         </div>
       </div>
-      <CategoriesNav activeGroup={activeNavGroup} onPickGroup={onPickNavGroup} />
     </header>
   )
 }
