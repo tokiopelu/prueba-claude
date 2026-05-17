@@ -373,7 +373,7 @@ export default function App() {
 
       <section className="hero">
         <div className="container hero-inner">
-          <div className="hero-eyebrow">Cuidado capilar profesional · {products.length} productos seleccionados</div>
+          <div className="hero-eyebrow">Cuidado capilar profesional</div>
           <h1 className="hero-title">
             <a
               className="hero-title-link"
