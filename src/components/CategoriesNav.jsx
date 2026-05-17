@@ -4,6 +4,7 @@ import { NAV_GROUPS } from '../lib/nav.js'
 export default function CategoriesNav({ activeGroup, onPickGroup }) {
   const [open, setOpen] = useState(false)
   const wrapRef = useRef(null)
+  const closeTimer = useRef(null)
 
   useEffect(() => {
     function onClick(e) {
@@ -20,25 +21,43 @@ export default function CategoriesNav({ activeGroup, onPickGroup }) {
     }
   }, [])
 
+  function openNow() {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current)
+      closeTimer.current = null
+    }
+    setOpen(true)
+  }
+
+  function scheduleClose() {
+    closeTimer.current = setTimeout(() => setOpen(false), 120)
+  }
+
   function pick(label) {
     setOpen(false)
     onPickGroup(label)
   }
 
-  const triggerLabel = activeGroup && activeGroup !== 'Todos'
-    ? activeGroup
-    : 'Menú'
-
   return (
-    <div className="cat-menu" ref={wrapRef}>
+    <div
+      className="cat-menu"
+      ref={wrapRef}
+      onMouseEnter={openNow}
+      onMouseLeave={scheduleClose}
+    >
       <button
         className={'cat-menu-btn' + (open ? ' is-open' : '')}
         onClick={() => setOpen(o => !o)}
+        onFocus={openNow}
         aria-haspopup="menu"
         aria-expanded={open}
+        aria-label="Abrir menú de categorías"
       >
-        <span>{triggerLabel}</span>
-        <span className="cat-menu-caret" aria-hidden>▾</span>
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden>
+          <circle cx="5" cy="12" r="2" fill="currentColor" />
+          <circle cx="12" cy="12" r="2" fill="currentColor" />
+          <circle cx="19" cy="12" r="2" fill="currentColor" />
+        </svg>
       </button>
       {open && (
         <div className="cat-menu-panel" role="menu">
