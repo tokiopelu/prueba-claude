@@ -2143,9 +2143,13 @@ ul, ol { list-style: none; }
 .auth-menu-emoji { font-size: 14px; line-height: 1; }
 
 /* ---------- Categories dropdown (3-dot icon, hover-reveal) ---------- */
+.header-left {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
 .cat-menu {
   position: relative;
-  margin-left: 20px;
   display: inline-flex;
   align-items: center;
 }
@@ -2212,7 +2216,7 @@ ul, ol { list-style: none; }
 }
 
 @media (max-width: 720px) {
-  .cat-menu { margin-left: 8px; }
+  .header-left { gap: 6px; }
   .cat-menu-panel {
     min-width: 180px;
     max-width: calc(100vw - 32px);

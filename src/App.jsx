@@ -453,13 +453,15 @@ function Header({ user, discount, wishlistCount, onCartOpen, cartCount, onLogoCl
   return (
     <header className="site-header">
       <div className="container header-row">
-        <button className="brand brand--btn" onClick={onLogoClick}>
-          <span className="brand-name">
-            <span className="brand-name-mark">ROMA</span>
-            <span className="brand-name-italic">hair</span>
-          </span>
-        </button>
-        <CategoriesNav activeGroup={activeNavGroup} onPickGroup={onPickNavGroup} />
+        <div className="header-left">
+          <button className="brand brand--btn" onClick={onLogoClick}>
+            <span className="brand-name">
+              <span className="brand-name-mark">ROMA</span>
+              <span className="brand-name-italic">hair</span>
+            </span>
+          </button>
+          <CategoriesNav activeGroup={activeNavGroup} onPickGroup={onPickNavGroup} />
+        </div>
         <div className="header-actions">
           <AuthButton
             user={user}
