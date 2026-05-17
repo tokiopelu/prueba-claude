@@ -15,7 +15,7 @@ export default function Quiz({ user, onAdd, onNavigate, onSignIn }) {
 
   useSEO({
     title: 'Quiz · ¿qué productos para el pelo necesitás?',
-    description: 'Hacé el quiz de cuidado capilar y recibí 3 recomendaciones personalizadas según tu tipo de pelo, textura, daño y presupuesto. La curaduría argentina de ROMAbeauty.',
+    description: 'Hacé el quiz de cuidado capilar y recibí 3 recomendaciones personalizadas según tu tipo de pelo, textura, daño y presupuesto. La curaduría argentina de ROMAhair.',
     path: '/quiz'
   })
 
@@ -140,7 +140,6 @@ export default function Quiz({ user, onAdd, onNavigate, onSignIn }) {
                 onClick={() => selectOption(currentQuestion.id, opt.value)}
                 aria-pressed={selected === opt.value}
               >
-                <span className="quiz-option-emoji" aria-hidden>{opt.emoji}</span>
                 <span className="quiz-option-body">
                   <span className="quiz-option-label">{opt.label}</span>
                   {opt.description && (
@@ -166,7 +165,7 @@ export default function Quiz({ user, onAdd, onNavigate, onSignIn }) {
     <main className="container quiz-page">
       <div className="quiz-results">
         <div className="quiz-results-head">
-          <div className="quiz-intro-eyebrow">Tu rutina ROMAbeauty</div>
+          <div className="quiz-intro-eyebrow">Tu rutina ROMAhair</div>
           <h1 className="quiz-results-title">
             Una rutina de <em>3 productos</em> para vos
           </h1>
@@ -243,14 +242,14 @@ export default function Quiz({ user, onAdd, onNavigate, onSignIn }) {
             <div className="quiz-email-capture">
               {emailSubmitted ? (
                 <div className="quiz-email-thanks">
-                  ✓ Listo. Te llegaría un email con tu rutina y un cupón de bienvenida.
+                  Listo. Te llegaría un email con tu rutina y un cupón de bienvenida.
                   <span className="quiz-email-fine">
                     (Cuando conectemos el servicio de email — por ahora guardamos tu interés.)
                   </span>
                 </div>
               ) : (
                 <form className="quiz-email-form" onSubmit={submitEmail}>
-                  <div className="quiz-email-h">📧 Recibí tu rutina por email</div>
+                  <div className="quiz-email-h">Recibí tu rutina por email</div>
                   <p className="quiz-email-sub">
                     Te mandamos los 3 productos + un <strong>cupón de 10% off</strong> para tu primera compra.
                   </p>

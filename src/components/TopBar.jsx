@@ -1,12 +1,12 @@
 const OFFERS = [
-  '🚚 Envío gratis a todo el país desde $80.000',
-  '💳 3 cuotas sin interés con todas las tarjetas',
-  '🔥 20% off en La Puissance · Línea Extra Cell Plex',
-  '✨ 15% off en kits Hydrashine Complex',
-  '⏳ Fidelité Caviar Mythical · 2x1 en máscaras seleccionadas',
-  '🎁 Synergy Blend de Opción · Combo Argán & CBD con regalo',
-  '⚡ Despacho express en CABA y GBA en 24 hs',
-  '💌 Suscribite y llevate 10% off en tu primera compra'
+  'Envío gratis a todo el país desde $80.000',
+  '3 cuotas sin interés con todas las tarjetas',
+  '20% off en La Puissance · Línea Extra Cell Plex',
+  '15% off en kits Hydrashine Complex',
+  'Fidelité Caviar Mythical · 2x1 en máscaras seleccionadas',
+  'Synergy Blend de Opción · Combo Argán & CBD con regalo',
+  'Despacho express en CABA y GBA en 24 hs',
+  'Suscribite y llevate 10% off en tu primera compra'
 ]
 
 export default function TopBar() {

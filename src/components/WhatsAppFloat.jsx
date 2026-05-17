@@ -1,6 +1,6 @@
 // TODO: replace placeholder with real WhatsApp Business number
 const WHATSAPP_NUMBER = '5491100000000'
-const WHATSAPP_MESSAGE = encodeURIComponent('Hola ROMAbeauty! Tengo una consulta sobre un producto.')
+const WHATSAPP_MESSAGE = encodeURIComponent('Hola ROMAhair! Tengo una consulta sobre un producto.')
 
 export default function WhatsAppFloat() {
   return (

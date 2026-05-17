@@ -5,6 +5,7 @@ import TopBar from './components/TopBar.jsx'
 import CartDrawer from './components/CartDrawer.jsx'
 import CartBar from './components/CartBar.jsx'
 import AuthButton from './components/AuthButton.jsx'
+import CategoriesDropdown from './components/CategoriesDropdown.jsx'
 import SignInModal from './components/SignInModal.jsx'
 import PromoModal from './components/PromoModal.jsx'
 import WhatsAppFloat from './components/WhatsAppFloat.jsx'
@@ -186,7 +187,9 @@ export default function App() {
     onSignIn: openSignIn,
     onSignOut: signOut,
     onOpenPromo: openPromo,
-    onOpenWishlist: () => navigate('/favoritos')
+    onOpenWishlist: () => navigate('/favoritos'),
+    onPickSubcategory: s => jumpFilter({ subcategory: s }),
+    onPickBrand: b => jumpFilter({ brand: b })
   }
 
   const drawerProps = {
@@ -367,7 +370,7 @@ export default function App() {
           <h1 className="hero-title">
             <a
               className="hero-title-link"
-              href={`https://wa.me/5491100000000?text=${encodeURIComponent('Hola ROMAbeauty! Quiero hacer una consulta con un estilista.')}`}
+              href={`https://wa.me/5491100000000?text=${encodeURIComponent('Hola ROMAhair! Quiero hacer una consulta con un estilista.')}`}
               target="_blank"
               rel="noreferrer noopener"
             >
@@ -384,7 +387,6 @@ export default function App() {
           </div>
 
           <button className="hero-quiz-cta" onClick={() => navigate('/quiz')}>
-            <span aria-hidden>✨</span>
             <span>¿No sabés por dónde empezar? <strong>Hacé el quiz</strong> y armamos tu rutina ideal</span>
             <span className="hero-quiz-arrow" aria-hidden>→</span>
           </button>
@@ -436,7 +438,7 @@ export default function App() {
           <Catalog
             {...catalogCommonProps}
             products={offersFeed}
-            title={`🔥 Ofertas · ${offersFeed.length} productos en promo`}
+            title={`Ofertas · ${offersFeed.length} productos en promo`}
             subtitle={<>Promos por tiempo limitado. <strong>¡No te lo pierdas!</strong></>}
           />
         )}
@@ -444,7 +446,7 @@ export default function App() {
         <Catalog
           {...catalogCommonProps}
           products={catalogFiltered}
-          title={`🛍️ Catálogo · ${catalogFiltered.length} productos`}
+          title={`Catálogo · ${catalogFiltered.length} productos`}
         />
       </main>
 
@@ -459,16 +461,22 @@ export default function App() {
   )
 }
 
-function Header({ user, discount, wishlistCount, onCartOpen, cartCount, onLogoClick, onSignIn, onSignOut, onOpenPromo, onOpenWishlist }) {
+function Header({ user, discount, wishlistCount, onCartOpen, cartCount, onLogoClick, onSignIn, onSignOut, onOpenPromo, onOpenWishlist, onPickSubcategory, onPickBrand }) {
   return (
     <header className="site-header">
       <div className="container header-row">
         <button className="brand brand--btn" onClick={onLogoClick}>
           <span className="brand-name">
             <span className="brand-name-mark">ROMA</span>
-            <span className="brand-name-italic">beauty</span>
+            <span className="brand-name-italic">hair</span>
           </span>
         </button>
+        <CategoriesDropdown
+          subcategories={subcategories}
+          brands={brands}
+          onPickSubcategory={onPickSubcategory}
+          onPickBrand={onPickBrand}
+        />
         <div className="header-actions">
           <AuthButton
             user={user}
@@ -480,7 +488,6 @@ function Header({ user, discount, wishlistCount, onCartOpen, cartCount, onLogoCl
             onOpenWishlist={onOpenWishlist}
           />
           <button className="nav-cta" onClick={onCartOpen}>
-            <span className="nav-cta-icon" aria-hidden>🛍</span>
             <span>Carrito</span>
             {cartCount > 0 && <span className="nav-cta-count">{cartCount}</span>}
           </button>
@@ -499,7 +506,7 @@ function Footer({ onJumpFilter }) {
             <div className="brand">
               <span className="brand-name">
                 <span className="brand-name-mark">ROMA</span>
-                <span className="brand-name-italic">beauty</span>
+                <span className="brand-name-italic">hair</span>
               </span>
             </div>
             <p className="footer-tag">
@@ -576,7 +583,7 @@ function Footer({ onJumpFilter }) {
         </div>
 
         <div className="footer-bottom">
-          <p>© {new Date().getFullYear()} ROMAbeauty · Todos los derechos reservados.</p>
+          <p>© {new Date().getFullYear()} ROMAhair · Todos los derechos reservados.</p>
           <p className="footer-credit">
             Imágenes oficiales: lapuissance.com.ar · fidelite.com.ar · opcionsalon.com.ar — Precios mayo 2026
           </p>

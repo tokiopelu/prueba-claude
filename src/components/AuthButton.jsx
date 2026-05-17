@@ -15,7 +15,6 @@ export default function AuthButton({ user, discount, wishlistCount, onSignIn, on
   if (!user) {
     return (
       <button className="auth-btn auth-btn--ghost" onClick={onSignIn} aria-label="Iniciar sesión">
-        <span className="auth-btn-icon" aria-hidden>👤</span>
         <span className="auth-btn-label">Entrar</span>
       </button>
     )
@@ -25,7 +24,7 @@ export default function AuthButton({ user, discount, wishlistCount, onSignIn, on
   const promoLabel = discount?.isUsed
     ? '10% ya usado este mes'
     : discount?.isActive
-      ? '✓ 10% activo'
+      ? '10% activo'
       : 'Reclamar mi 10%'
 
   return (
@@ -53,7 +52,6 @@ export default function AuthButton({ user, discount, wishlistCount, onSignIn, on
             onClick={() => { setOpen(false); onOpenPromo() }}
             role="menuitem"
           >
-            <span className="auth-menu-emoji" aria-hidden>🎁</span>
             <span>{promoLabel}</span>
           </button>
           <button
@@ -61,7 +59,6 @@ export default function AuthButton({ user, discount, wishlistCount, onSignIn, on
             onClick={() => { setOpen(false); onOpenWishlist?.() }}
             role="menuitem"
           >
-            <span className="auth-menu-emoji" aria-hidden>♡</span>
             <span>Mis favoritos{wishlistCount > 0 ? ` (${wishlistCount})` : ''}</span>
           </button>
           <button

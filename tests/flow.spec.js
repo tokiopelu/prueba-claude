@@ -1,9 +1,9 @@
 import { test, expect } from '@playwright/test'
 
-const SITE = process.env.SITE_URL || 'https://romabeauty.vercel.app'
-const DEMO_EMAIL = `test+${Date.now()}@romabeauty.test`
+const SITE = process.env.SITE_URL || 'https://romahair.vercel.app'
+const DEMO_EMAIL = `test+${Date.now()}@romahair.test`
 
-test.describe('ROMAbeauty checkout-with-login flow', () => {
+test.describe('ROMAhair checkout-with-login flow', () => {
   test.beforeEach(async ({ page, context }) => {
     await context.clearCookies()
     // Clear localStorage once via a real page visit. Don't use addInitScript

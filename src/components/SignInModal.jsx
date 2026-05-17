@@ -89,7 +89,7 @@ export default function SignInModal({ isOpen, onClose, onGoogleCredential, onDem
       <div className="modal-card">
         <button className="modal-close" onClick={onClose} aria-label="Cerrar">×</button>
         <div className="modal-head">
-          <div className="modal-eyebrow">{gateForCheckout ? 'Falta un paso' : 'ROMAbeauty'}</div>
+          <div className="modal-eyebrow">{gateForCheckout ? 'Falta un paso' : 'ROMAhair'}</div>
           <h2 className="modal-title">
             {gateForCheckout ? 'Iniciá sesión para finalizar tu compra' : 'Iniciá sesión'}
           </h2>

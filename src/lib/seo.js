@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
-const SITE_URL = 'https://romabeauty.vercel.app'
-const SITE_NAME = 'ROMAbeauty'
+const SITE_URL = 'https://romahair.vercel.app'
+const SITE_NAME = 'ROMAhair'
 const DEFAULT_IMAGE = `${SITE_URL}/og-default.jpg`
 
 function setMetaTag(key, value, isProperty = false) {

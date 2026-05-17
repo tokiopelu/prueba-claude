@@ -53,7 +53,6 @@ export default function CartDrawer({ cart, discount, user, onSetQty, onRemove, i
           <>
             {!user && (
               <button className="cart-promo-banner" onClick={onSignIn}>
-                <span className="cart-promo-emoji" aria-hidden>🔒</span>
                 <span className="cart-promo-text">
                   Iniciá sesión para comprar · <strong>10% off</strong> si nos seguís en redes
                 </span>
@@ -62,7 +61,6 @@ export default function CartDrawer({ cart, discount, user, onSetQty, onRemove, i
             )}
             {user && discount?.isEligible && (
               <button className="cart-promo-banner cart-promo-banner--claim" onClick={onOpenPromo}>
-                <span className="cart-promo-emoji" aria-hidden>🎁</span>
                 <span className="cart-promo-text">
                   Tenés <strong>10% off</strong> sin reclamar este mes
                 </span>
@@ -83,7 +81,7 @@ export default function CartDrawer({ cart, discount, user, onSetQty, onRemove, i
               </div>
             )}
             {view.freeShipping && (
-              <div className="cart-ship-won">✓ Envío gratis incluido</div>
+              <div className="cart-ship-won">Envío gratis incluido</div>
             )}
 
             <ul className="cart-lines">

@@ -4,7 +4,7 @@ import { resolve, dirname } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
-const SITE_URL = 'https://romabeauty.vercel.app'
+const SITE_URL = 'https://romahair.vercel.app'
 
 const productsPath = resolve(__dirname, '../src/data/products.js')
 const { products } = await import(pathToFileURL(productsPath).href)

@@ -139,12 +139,12 @@ export default function Product({ slug, qtyOf, onAdd, onSetQty, onNavigate, onJu
             </div>
 
             {meta.urgency && (
-              <div className="product-urgency">⏳ {meta.urgency}</div>
+              <div className="product-urgency">{meta.urgency}</div>
             )}
 
             {meta.promoEndsAt && (
               <div className="product-countdown">
-                <Countdown endsAt={meta.promoEndsAt} label="🔥 Oferta termina en" />
+                <Countdown endsAt={meta.promoEndsAt} label="Oferta termina en" />
               </div>
             )}
 
@@ -178,9 +178,9 @@ export default function Product({ slug, qtyOf, onAdd, onSetQty, onNavigate, onJu
             </div>
 
             <ul className="product-perks">
-              <li>📦 Envío gratis en pedidos +$80.000</li>
-              <li>💳 Hasta 3 cuotas sin interés</li>
-              <li>↺ Cambios sin costo en 30 días</li>
+              <li>Envío gratis en pedidos +$80.000</li>
+              <li>Hasta 3 cuotas sin interés</li>
+              <li>Cambios sin costo en 30 días</li>
             </ul>
           </div>
         </article>

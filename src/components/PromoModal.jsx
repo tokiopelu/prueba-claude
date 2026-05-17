@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
 
 const SOCIALS = [
-  { name: 'Instagram', emoji: '📸', href: 'https://www.instagram.com/' },
-  { name: 'TikTok', emoji: '🎵', href: 'https://www.tiktok.com/' },
-  { name: 'WhatsApp', emoji: '💬', href: 'https://wa.me/' }
+  { name: 'Instagram', href: 'https://www.instagram.com/' },
+  { name: 'TikTok', href: 'https://www.tiktok.com/' },
+  { name: 'WhatsApp', href: 'https://wa.me/' }
 ]
 
 export default function PromoModal({ isOpen, onClose, onClaim, isClaimed, isUsed, isActive, monthLabel }) {
@@ -26,7 +26,6 @@ export default function PromoModal({ isOpen, onClose, onClaim, isClaimed, isUsed
       <div className="modal-backdrop" onClick={onClose} />
       <div className="modal-card modal-card--promo">
         <button className="modal-close" onClick={onClose} aria-label="Cerrar">×</button>
-        <div className="promo-icon" aria-hidden>🎁</div>
         <div className="modal-head">
           <div className="modal-eyebrow">Promo de bienvenida</div>
           <h2 className="modal-title">10% off en tu primera compra del mes</h2>
@@ -40,8 +39,7 @@ export default function PromoModal({ isOpen, onClose, onClaim, isClaimed, isUsed
           {SOCIALS.map(s => (
             <li key={s.name}>
               <a className="promo-social" href={s.href} target="_blank" rel="noreferrer noopener">
-                <span className="promo-social-emoji" aria-hidden>{s.emoji}</span>
-                <span className="promo-social-name">@romabeauty en {s.name}</span>
+                <span className="promo-social-name">@romahair en {s.name}</span>
                 <span className="promo-social-cta">Seguir →</span>
               </a>
             </li>
@@ -54,11 +52,11 @@ export default function PromoModal({ isOpen, onClose, onClaim, isClaimed, isUsed
           </div>
         ) : isActive ? (
           <div className="promo-state promo-state--active">
-            ✓ Tu 10% está activo y se aplica automáticamente al checkout.
+            Tu 10% está activo y se aplica automáticamente al checkout.
           </div>
         ) : isClaimed ? (
           <div className="promo-state promo-state--active">
-            ✓ Cupón reclamado. Se aplica automáticamente al checkout.
+            Cupón reclamado. Se aplica automáticamente al checkout.
           </div>
         ) : (
           <button className="promo-claim-btn" onClick={onClaim}>
@@ -67,7 +65,7 @@ export default function PromoModal({ isOpen, onClose, onClaim, isClaimed, isUsed
         )}
 
         <p className="modal-fine">
-          Confiamos en vos: no verificamos los follows. Si abusás, nos rompés el corazón 💔
+          Confiamos en vos: no verificamos los follows. Si abusás, nos rompés el corazón.
         </p>
       </div>
     </div>

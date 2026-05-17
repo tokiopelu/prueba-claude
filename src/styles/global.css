@@ -298,7 +298,7 @@ ul, ol { list-style: none; }
 }
 .search-input {
   flex: 1;
-  padding: 17px 24px 17px 14px;
+  padding: 17px 24px 17px 22px;
   border: 0;
   background: transparent;
   outline: none;
@@ -2141,6 +2141,82 @@ ul, ol { list-style: none; }
 .auth-menu-item:hover { background: var(--bg-soft); }
 .auth-menu-item--promo { color: var(--accent-deep); font-weight: 600; }
 .auth-menu-emoji { font-size: 14px; line-height: 1; }
+
+/* ---------- Categories dropdown (header) ---------- */
+.cat-dd {
+  position: relative;
+  margin-left: 28px;
+}
+.cat-dd-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  color: var(--ink);
+  border: 0;
+  padding: 8px 4px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: color 0.2s ease;
+}
+.cat-dd-btn:hover { color: var(--accent-deep); }
+.cat-dd-btn[aria-expanded="true"] { color: var(--accent-deep); }
+.cat-dd-caret { font-size: 10px; opacity: 0.6; }
+.cat-dd-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  min-width: 460px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 14px;
+  z-index: 110;
+}
+.cat-dd-col { display: flex; flex-direction: column; }
+.cat-dd-h {
+  font-family: var(--serif);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  padding: 4px 12px 8px;
+  border-bottom: 1px solid var(--line-soft);
+  margin-bottom: 4px;
+}
+.cat-dd-item {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.cat-dd-item:hover { background: var(--bg-soft); color: var(--accent-deep); }
+
+@media (max-width: 720px) {
+  .cat-dd { margin-left: 12px; }
+  .cat-dd-menu {
+    grid-template-columns: 1fr;
+    min-width: 220px;
+    max-width: calc(100vw - 32px);
+    left: -40px;
+  }
+}
 
 /* ---------- Modal (centered) ---------- */
 .modal-root {

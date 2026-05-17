@@ -1,8 +1,8 @@
-# ROMAbeauty
+# ROMAhair
 
 E-commerce SPA de productos de cuidado capilar (Argentina, ARS). Catálogo curado de tres marcas: La Puissance, Fidelité, Opción.
 
-Producción: https://romabeauty.vercel.app
+Producción: https://romahair.vercel.app
 
 ## Stack
 
@@ -79,7 +79,7 @@ vercel inspect <url>      # Estado de un deploy
 
 ## Pendientes conocidos
 
-- **Activar Google sign-in**: crear OAuth Client ID en console.cloud.google.com (origins: `https://romabeauty.vercel.app`, `https://romabeauty-tokiopelu2020-7530s-projects.vercel.app`, `http://localhost:5173`), setear `VITE_GOOGLE_CLIENT_ID` en Vercel, rebuild.
+- **Activar Google sign-in**: crear OAuth Client ID en console.cloud.google.com (origins: `https://romahair.vercel.app`, `https://romahair-tokiopelu2020-7530s-projects.vercel.app`, `http://localhost:5173`), setear `VITE_GOOGLE_CLIENT_ID` en Vercel, rebuild.
 - **Activar Mercado Pago**: crear app en mercadopago.com.ar/developers, setear `MP_ACCESS_TOKEN` en Vercel, instalar `mercadopago` y reemplazar el stub en `api/checkout.js`.
 - Email de confirmación post-orden (no hay service de email cableado).
 - Historial de órdenes por usuario (no hay persistencia backend hoy).

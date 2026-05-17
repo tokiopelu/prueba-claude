@@ -1,6 +1,6 @@
 import { test } from '@playwright/test'
 
-const SITE = process.env.SITE_URL || 'https://romabeauty.vercel.app'
+const SITE = process.env.SITE_URL || 'https://romahair.vercel.app'
 
 // Mobile viewport on chromium (avoids needing webkit install)
 test.use({

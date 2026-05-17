@@ -7,11 +7,11 @@ export const QUESTIONS = [
     question: '¿Cómo está tu pelo?',
     subtitle: 'Esto nos ayuda a elegir productos que respeten tu base.',
     options: [
-      { value: 'graso', label: 'Graso', emoji: '💧', description: 'Se ensucia rápido, raíz pesada' },
-      { value: 'mixto', label: 'Mixto', emoji: '🪞', description: 'Raíz grasa, puntas secas' },
-      { value: 'normal', label: 'Normal', emoji: '✨', description: 'Equilibrado, sin extremos' },
-      { value: 'seco', label: 'Seco', emoji: '🌾', description: 'Falto de brillo, áspero al tacto' },
-      { value: 'muy_seco', label: 'Muy seco', emoji: '🏜️', description: 'Puntas abiertas, sediento' }
+      { value: 'graso', label: 'Graso', description: 'Se ensucia rápido, raíz pesada' },
+      { value: 'mixto', label: 'Mixto', description: 'Raíz grasa, puntas secas' },
+      { value: 'normal', label: 'Normal', description: 'Equilibrado, sin extremos' },
+      { value: 'seco', label: 'Seco', description: 'Falto de brillo, áspero al tacto' },
+      { value: 'muy_seco', label: 'Muy seco', description: 'Puntas abiertas, sediento' }
     ]
   },
   {
@@ -19,10 +19,10 @@ export const QUESTIONS = [
     question: '¿Qué textura tiene?',
     subtitle: 'Algunas fórmulas funcionan mejor según la curvatura.',
     options: [
-      { value: 'liso', label: 'Liso', emoji: '〰️', description: 'Sin movimiento natural' },
-      { value: 'ondulado', label: 'Ondulado', emoji: '🌊', description: 'Forma S suave' },
-      { value: 'rizado', label: 'Rizado', emoji: '🌀', description: 'Rulos definidos' },
-      { value: 'muy_rizado', label: 'Muy rizado / afro', emoji: '🪡', description: 'Espirales cerradas' }
+      { value: 'liso', label: 'Liso', description: 'Sin movimiento natural' },
+      { value: 'ondulado', label: 'Ondulado', description: 'Forma S suave' },
+      { value: 'rizado', label: 'Rizado', description: 'Rulos definidos' },
+      { value: 'muy_rizado', label: 'Muy rizado / afro', description: 'Espirales cerradas' }
     ]
   },
   {
@@ -30,21 +30,21 @@ export const QUESTIONS = [
     question: '¿Cuál es tu mayor preocupación?',
     subtitle: 'Elegí la que más te molesta hoy.',
     options: [
-      { value: 'frizz', label: 'Frizz', emoji: '⚡', description: 'Encrespamiento, anti-volumen no deseado' },
-      { value: 'damage', label: 'Daño y puntas', emoji: '✂️', description: 'Pelo quebradizo, puntas abiertas' },
-      { value: 'shine', label: 'Falta de brillo', emoji: '💫', description: 'Pelo opaco, sin luz' },
-      { value: 'volume', label: 'Falta de volumen', emoji: '🎈', description: 'Pelo aplastado o muy fino' },
-      { value: 'color', label: 'Cuidado del color', emoji: '🎨', description: 'Mantener tinte vibrante' },
-      { value: 'hydration', label: 'Hidratación profunda', emoji: '💧', description: 'Pelo deshidratado o áspero' }
+      { value: 'frizz', label: 'Frizz', description: 'Encrespamiento, anti-volumen no deseado' },
+      { value: 'damage', label: 'Daño y puntas', description: 'Pelo quebradizo, puntas abiertas' },
+      { value: 'shine', label: 'Falta de brillo', description: 'Pelo opaco, sin luz' },
+      { value: 'volume', label: 'Falta de volumen', description: 'Pelo aplastado o muy fino' },
+      { value: 'color', label: 'Cuidado del color', description: 'Mantener tinte vibrante' },
+      { value: 'hydration', label: 'Hidratación profunda', description: 'Pelo deshidratado o áspero' }
     ]
   },
   {
     id: 'colored',
     question: '¿Tu pelo está teñido o decolorado?',
     options: [
-      { value: 'frequent', label: 'Sí, me retoco seguido', emoji: '🌟', description: 'Color intenso, tratamiento frecuente' },
-      { value: 'occasional', label: 'Sí, esporádico', emoji: '🌙', description: 'Cambios de color ocasionales' },
-      { value: 'no', label: 'No, color natural', emoji: '🌿', description: 'Sin químicos de color' }
+      { value: 'frequent', label: 'Sí, me retoco seguido', description: 'Color intenso, tratamiento frecuente' },
+      { value: 'occasional', label: 'Sí, esporádico', description: 'Cambios de color ocasionales' },
+      { value: 'no', label: 'No, color natural', description: 'Sin químicos de color' }
     ]
   },
   {
@@ -52,9 +52,9 @@ export const QUESTIONS = [
     question: '¿Cuál es tu presupuesto mensual para el pelo?',
     subtitle: 'Recomendamos productos en tu rango.',
     options: [
-      { value: 'budget', label: 'Hasta $20.000', emoji: '🪙', description: 'Eficiente y accesible' },
-      { value: 'medium', label: 'Hasta $50.000', emoji: '💵', description: 'Calidad sin estridencias' },
-      { value: 'premium', label: 'Sin límite', emoji: '👑', description: 'Lo mejor del catálogo' }
+      { value: 'budget', label: 'Hasta $20.000', description: 'Eficiente y accesible' },
+      { value: 'medium', label: 'Hasta $50.000', description: 'Calidad sin estridencias' },
+      { value: 'premium', label: 'Sin límite', description: 'Lo mejor del catálogo' }
     ]
   }
 ]

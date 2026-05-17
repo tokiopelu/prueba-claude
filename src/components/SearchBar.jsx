@@ -60,7 +60,6 @@ export default function SearchBar({ products, qtyOf, onPick }) {
   return (
     <div className="search" ref={wrapRef}>
       <div className="search-input-wrap">
-        <span className="search-icon" aria-hidden>🔍</span>
         <input
           type="text"
           className="search-input"

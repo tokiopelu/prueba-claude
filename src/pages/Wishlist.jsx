@@ -4,7 +4,6 @@ export default function Wishlist({ user, items, qtyOf, onAdd, onSetQty, onProduc
   if (!user) {
     return (
       <main className="container checkout-empty">
-        <div className="checkout-gate-icon" aria-hidden>🔒</div>
         <h1 className="checkout-title">Iniciá sesión para ver tus favoritos</h1>
         <p className="checkout-empty-sub">
           Guardá tus productos preferidos para volver a comprarlos en cualquier momento.
@@ -22,7 +21,6 @@ export default function Wishlist({ user, items, qtyOf, onAdd, onSetQty, onProduc
   if (items.length === 0) {
     return (
       <main className="container checkout-empty">
-        <div className="checkout-gate-icon" aria-hidden>♡</div>
         <h1 className="checkout-title">Todavía no tenés favoritos</h1>
         <p className="checkout-empty-sub">
           Tocá el corazón en cualquier producto del catálogo para guardarlo acá.
@@ -42,7 +40,7 @@ export default function Wishlist({ user, items, qtyOf, onAdd, onSetQty, onProduc
         onAdd={onAdd}
         onSetQty={onSetQty}
         onProductClick={onProductClick}
-        title={`♡ Tus favoritos · ${items.length} ${items.length === 1 ? 'producto' : 'productos'}`}
+        title={`Tus favoritos · ${items.length} ${items.length === 1 ? 'producto' : 'productos'}`}
         subtitle={<>Productos que guardaste para más tarde.</>}
       />
     </main>

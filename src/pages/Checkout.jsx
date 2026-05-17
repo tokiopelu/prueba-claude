@@ -86,7 +86,6 @@ export default function Checkout({ cart, user, discount, onNavigate, onSignIn, o
   if (!user) {
     return (
       <main className="container checkout-empty">
-        <div className="checkout-gate-icon" aria-hidden>🔒</div>
         <h1 className="checkout-title">Iniciá sesión para finalizar tu compra</h1>
         <p className="checkout-empty-sub">
           Necesitamos saber a quién enviarle el pedido. Tus productos siguen guardados en el carrito.
@@ -110,7 +109,6 @@ export default function Checkout({ cart, user, discount, onNavigate, onSignIn, o
 
       {user && discount?.isEligible && (
         <button className="checkout-promo-banner checkout-promo-banner--claim" onClick={onOpenPromo}>
-          <span aria-hidden>🎁</span>
           <span>Reclamá tu <strong>10% de bienvenida</strong> antes de pagar</span>
           <span className="checkout-promo-cta">Reclamar →</span>
         </button>

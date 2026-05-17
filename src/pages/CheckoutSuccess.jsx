@@ -13,7 +13,6 @@ export default function CheckoutSuccess({ onClearCart, onMarkDiscountUsed, onNav
   return (
     <main className="container checkout-result">
       <div className="checkout-result-card checkout-result-card--success">
-        <div className="checkout-result-icon">✓</div>
         <h1 className="checkout-result-title">¡Gracias por tu compra!</h1>
         <p className="checkout-result-sub">
           Recibimos tu pedido. Te vamos a escribir por email con el detalle del envío.
