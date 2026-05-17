@@ -94,4 +94,7 @@ vercel inspect <url>      # Estado de un deploy
 
 ## Versiones
 
-Tags semver. `v0.1.0` = primer flujo completo de compra (catálogo + auth + carrito + promo + checkout stub). Ver GitHub Releases para notas de cada versión.
+Tags semver. Ver GitHub Releases para notas detalladas de cada versión.
+
+- **`v0.1.0`** — Primer flujo completo de compra (catálogo + auth + carrito + promo + checkout stub).
+- **`v0.2.0`** — Rebrand ROMAbeauty → ROMAhair (visible + proyecto Vercel renombrado). Header con menú hamburger desplegable (6 categorías agrupadas: Shampoo, Acondicionador, Tratamientos, Tinturas, Styling, Herramientas). Limpieza visual: sin emojis decorativos en chrome, sin R circular en logo. Hero re-jerarquizado: "Cuidado capilar profesional" headline grande italic en bronce, "Somos estilistas, hacenos tu consulta aquí" como sub-line clickeable a WhatsApp.
