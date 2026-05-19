@@ -17,7 +17,7 @@ import CheckoutPending from './pages/CheckoutPending.jsx'
 import Product from './pages/Product.jsx'
 import Wishlist from './pages/Wishlist.jsx'
 import Quiz from './pages/Quiz.jsx'
-import { products, brands } from './data/products.js'
+import { products } from './data/products.js'
 import { productMeta } from './lib/meta.js'
 import { useCart, buildCartView } from './lib/cart.js'
 import { useAuth } from './lib/auth.js'
@@ -397,26 +397,6 @@ export default function App() {
             <span>¿No sabés por dónde empezar? Hacé el quiz y armamos tu rutina ideal</span>
             <span className="hero-quiz-arrow" aria-hidden>→</span>
           </button>
-
-          <div className="filter-section">
-            <div className="filter-bar">
-              <button
-                className={'pill pill--brand' + (activeBrand === 'Todas' ? ' is-on' : '')}
-                onClick={() => setActiveBrand('Todas')}
-              >
-                Todas las marcas
-              </button>
-              {brands.map(b => (
-                <button
-                  key={b}
-                  className={'pill pill--brand' + (activeBrand === b ? ' is-on' : '')}
-                  onClick={() => setActiveBrand(b)}
-                >
-                  {b}
-                </button>
-              ))}
-            </div>
-          </div>
 
         </div>
       </section>
