@@ -547,26 +547,6 @@ function Footer({ onJumpFilter }) {
             </ul>
           </div>
 
-          <div className="footer-col footer-col--news">
-            <h4 className="footer-h">Recibí ofertas</h4>
-            <form
-              className="footer-news"
-              onSubmit={e => { e.preventDefault(); alert('¡Gracias! Te vamos a escribir pronto.') }}
-            >
-              <input
-                type="email"
-                required
-                placeholder="Tu email"
-                className="footer-news-input"
-              />
-              <button type="submit" className="footer-news-btn">Suscribirme</button>
-            </form>
-            <ul className="footer-perks">
-              <li>· Envío gratis +$80.000</li>
-              <li>· 3 cuotas sin interés</li>
-              <li>· Cambios sin costo en 30 días</li>
-            </ul>
-          </div>
         </div>
 
         <div className="footer-bottom">
