@@ -428,6 +428,7 @@ export default function App() {
             products={offersFeed}
             title={`Promociones · ${offersFeed.length} productos en promo`}
             subtitle={<>Promos por tiempo limitado. <strong>¡No te lo pierdas!</strong></>}
+            mode="marquee"
           />
         )}
 

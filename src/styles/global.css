@@ -480,6 +480,43 @@ ul, ol { list-style: none; }
   gap: 16px;
 }
 
+/* Marquee variant — horizontal auto-scroll for promotions strip */
+.catalog-marquee {
+  overflow: hidden;
+  position: relative;
+  margin: 0 calc(var(--container-pad, 24px) * -1);
+  padding: 4px 0;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 60px, #000 calc(100% - 60px), transparent 100%);
+          mask-image: linear-gradient(to right, transparent 0, #000 60px, #000 calc(100% - 60px), transparent 100%);
+}
+.catalog-marquee-track {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  padding: 0 24px;
+  animation: catalog-marquee-scroll 50s linear infinite;
+}
+.catalog-marquee:hover .catalog-marquee-track,
+.catalog-marquee:focus-within .catalog-marquee-track {
+  animation-play-state: paused;
+}
+.catalog-marquee .cat-card {
+  width: 260px;
+  flex-shrink: 0;
+}
+@keyframes catalog-marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-50% - 8px)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .catalog-marquee-track { animation: none; }
+  .catalog-marquee {
+    overflow-x: auto;
+    -webkit-mask-image: none;
+            mask-image: none;
+  }
+}
+
 .cat-card {
   background: var(--bg-card);
   border: 1px solid var(--line);

@@ -112,7 +112,7 @@ function CatalogCard({ p, index, total, qty, onAdd, onSetQty, onProductClick, us
   )
 }
 
-export default function Catalog({ products, qtyOf, onAdd, onSetQty, onProductClick, title, subtitle, user, wishlist, onSignIn }) {
+export default function Catalog({ products, qtyOf, onAdd, onSetQty, onProductClick, title, subtitle, user, wishlist, onSignIn, mode }) {
   if (products.length === 0) {
     return (
       <div className="catalog-empty">
@@ -121,8 +121,25 @@ export default function Catalog({ products, qtyOf, onAdd, onSetQty, onProductCli
     )
   }
 
+  const isMarquee = mode === 'marquee'
+  const renderCard = (p, i, total, keyPrefix = '') => (
+    <CatalogCard
+      key={keyPrefix + p.id}
+      p={p}
+      index={i % products.length}
+      total={total}
+      qty={qtyOf(p.id)}
+      onAdd={onAdd}
+      onSetQty={onSetQty}
+      onProductClick={onProductClick}
+      user={user}
+      wishlist={wishlist}
+      onSignIn={onSignIn}
+    />
+  )
+
   return (
-    <div className="catalog">
+    <div className={'catalog' + (isMarquee ? ' catalog--marquee' : '')}>
       <div className="catalog-head">
         <h2>{title || `Catálogo · ${products.length} productos`}</h2>
         <p className="catalog-sub">
@@ -132,23 +149,18 @@ export default function Catalog({ products, qtyOf, onAdd, onSetQty, onProductCli
         </p>
       </div>
 
-      <div className="catalog-grid">
-        {products.map((p, i) => (
-          <CatalogCard
-            key={p.id}
-            p={p}
-            index={i}
-            total={products.length}
-            qty={qtyOf(p.id)}
-            onAdd={onAdd}
-            onSetQty={onSetQty}
-            onProductClick={onProductClick}
-            user={user}
-            wishlist={wishlist}
-            onSignIn={onSignIn}
-          />
-        ))}
-      </div>
+      {isMarquee ? (
+        <div className="catalog-marquee" aria-label="Carrusel de promociones">
+          <div className="catalog-marquee-track">
+            {products.map((p, i) => renderCard(p, i, products.length, 'a-'))}
+            {products.map((p, i) => renderCard(p, i, products.length, 'b-'))}
+          </div>
+        </div>
+      ) : (
+        <div className="catalog-grid">
+          {products.map((p, i) => renderCard(p, i, products.length))}
+        </div>
+      )}
     </div>
   )
 }
