@@ -426,7 +426,7 @@ export default function App() {
           <Catalog
             {...catalogCommonProps}
             products={offersFeed}
-            title={`Ofertas · ${offersFeed.length} productos en promo`}
+            title={`Promociones · ${offersFeed.length} productos en promo`}
             subtitle={<>Promos por tiempo limitado. <strong>¡No te lo pierdas!</strong></>}
           />
         )}
