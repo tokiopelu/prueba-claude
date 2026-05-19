@@ -394,7 +394,7 @@ export default function App() {
           </div>
 
           <button className="hero-quiz-cta" onClick={() => navigate('/quiz')}>
-            <span>¿No sabés por dónde empezar? <strong>Hacé el quiz</strong> y armamos tu rutina ideal</span>
+            <span>¿No sabés por dónde empezar? Hacé el quiz y armamos tu rutina ideal</span>
             <span className="hero-quiz-arrow" aria-hidden>→</span>
           </button>
 

@@ -3171,18 +3171,19 @@ a:focus-visible {
 .hero-quiz-cta {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin: 18px auto 0;
-  padding: 14px 22px;
+  gap: 10px;
+  margin: 14px auto 0;
+  padding: 9px 16px;
   background: linear-gradient(135deg, var(--accent-tint), #faecd1);
   border: 1px solid var(--accent-soft);
   border-radius: 999px;
   cursor: pointer;
   text-align: left;
   font-family: var(--sans);
-  font-size: 14px;
+  font-size: 12px;
+  font-weight: 400;
   color: var(--accent-deep);
-  max-width: 640px;
+  max-width: 460px;
   width: 100%;
   transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
 }
@@ -3191,14 +3192,13 @@ a:focus-visible {
   box-shadow: var(--shadow-md);
   border-color: var(--accent);
 }
-.hero-quiz-cta strong { color: var(--wine); }
 .hero-quiz-arrow {
   margin-left: auto;
-  font-weight: 700;
-  font-size: 18px;
+  font-weight: 500;
+  font-size: 14px;
 }
 @media (max-width: 480px) {
-  .hero-quiz-cta { font-size: 13px; padding: 12px 16px; gap: 8px; }
+  .hero-quiz-cta { font-size: 11px; padding: 8px 12px; gap: 8px; }
 }
 
 /* ---------- Quiz page ---------- */
