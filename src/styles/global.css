@@ -237,13 +237,6 @@ ul, ol { list-style: none; }
   gap: 18px;
   color: var(--accent-deep);
 }
-.hero-eyebrow::before {
-  content: "";
-  width: 56px;
-  height: 1px;
-  background: var(--accent);
-  flex-shrink: 0;
-}
 .hero-title {
   font-family: var(--serif);
   font-weight: 400;
