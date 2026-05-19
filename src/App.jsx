@@ -549,9 +549,6 @@ function Footer({ onJumpFilter }) {
 
           <div className="footer-col footer-col--news">
             <h4 className="footer-h">Recibí ofertas</h4>
-            <p className="footer-news-sub">
-              10% off en tu primera compra y novedades semanales de las tres marcas.
-            </p>
             <form
               className="footer-news"
               onSubmit={e => { e.preventDefault(); alert('¡Gracias! Te vamos a escribir pronto.') }}
