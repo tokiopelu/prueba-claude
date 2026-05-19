@@ -473,6 +473,10 @@ function Header({ user, discount, wishlistCount, onCartOpen, cartCount, onLogoCl
             onOpenWishlist={onOpenWishlist}
           />
           <button className="nav-cta" onClick={onCartOpen}>
+            <svg className="nav-cta-svg" viewBox="0 0 24 24" width="16" height="16" aria-hidden>
+              <path d="M5 8h14l-1.2 11a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8L5 8z" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+              <path d="M9 8V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
             <span>Carrito</span>
             {cartCount > 0 && <span className="nav-cta-count">{cartCount}</span>}
           </button>

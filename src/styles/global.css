@@ -196,6 +196,8 @@ ul, ol { list-style: none; }
 }
 .nav-cta:hover { background: var(--accent); transform: translateY(-1px); }
 .nav-cta-icon { font-size: 15px; line-height: 1; }
+.nav-cta-svg { display: inline-block; flex-shrink: 0; opacity: 0.9; margin-right: 2px; }
+.nav-cta:hover .nav-cta-svg { opacity: 1; }
 .nav-cta-count {
   background: var(--accent);
   color: #fff;
@@ -2063,6 +2065,8 @@ ul, ol { list-style: none; }
   transform: translateY(-1px);
 }
 .auth-btn-icon { font-size: 14px; line-height: 1; }
+.auth-btn-svg { display: inline-block; flex-shrink: 0; opacity: 0.85; }
+.auth-btn:hover .auth-btn-svg { opacity: 1; }
 .auth-btn-name {
   font-weight: 600;
   letter-spacing: -0.01em;
