@@ -432,11 +432,13 @@ export default function App() {
           />
         )}
 
-        <Catalog
-          {...catalogCommonProps}
-          products={catalogFiltered}
-          title={`Catálogo · ${catalogFiltered.length} productos`}
-        />
+        {(activeNavGroup !== 'Todos' || activeBrand !== 'Todas') && (
+          <Catalog
+            {...catalogCommonProps}
+            products={catalogFiltered}
+            title={`${activeNavGroup !== 'Todos' ? activeNavGroup : 'Catálogo'} · ${catalogFiltered.length} productos`}
+          />
+        )}
       </main>
 
       <CartBar cart={cart} discount={discount} onOpen={() => setDrawerOpen(true)} />
@@ -510,41 +512,6 @@ function Footer({ onJumpFilter }) {
               <span className="footer-dot">·</span>
               <a href="https://wa.me/5491100000000" target="_blank" rel="noreferrer noopener" aria-label="WhatsApp">WhatsApp</a>
             </div>
-          </div>
-
-          <div className="footer-col">
-            <h4 className="footer-h">Marcas</h4>
-            <ul className="footer-list">
-              {brands.map(b => {
-                const count = products.filter(p => p.brand === b).length
-                return (
-                  <li key={b}>
-                    <button
-                      className="footer-link"
-                      onClick={() => onJumpFilter?.({ brand: b })}
-                    >
-                      {b} <span className="footer-count">{count}</span>
-                    </button>
-                  </li>
-                )
-              })}
-            </ul>
-          </div>
-
-          <div className="footer-col">
-            <h4 className="footer-h">Categorías</h4>
-            <ul className="footer-list">
-              {NAV_GROUPS.map(g => (
-                <li key={g.label}>
-                  <button
-                    className="footer-link"
-                    onClick={() => onJumpFilter?.({ group: g.label })}
-                  >
-                    {g.label}
-                  </button>
-                </li>
-              ))}
-            </ul>
           </div>
 
         </div>
